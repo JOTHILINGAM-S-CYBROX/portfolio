@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JOTHILINGAM S — Digital Craftsmanship · Portfolio 2026</title>
+  <link rel="icon" type="image/png" href="assets/sj.png" />
+  <link rel="apple-touch-icon" href="assets/sj.png" />
+
+  <!-- Social / Open Graph Meta Tags -->
+  <meta property="og:title" content="JOTHILINGAM S — Digital Craftsmanship · Portfolio 2026" />
+  <meta property="og:description"
+    content="Portfolio of Jothilingam S — Full-Stack Web Application Developer & Cloud Professional." />
+  <meta property="og:image" content="assets/Jothi.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Editorial Typography: Playfair Display + Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            display: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            bgMain: '#F4F5F0',
+            bgSecondary: '#EAEDE6',
+            surface: '#FFFFFF',
+            sageLight: '#E3EAE3',
+            heading: '#263746',
+            bodyColor: '#68736C',
+            mutedColor: '#89918A',
+            accentPrimary: '#668B83',
+            primaryDark: '#496D65',
+            gold: '#C1A66B',
+            borderLine: '#DDE2D9',
+          },
+          borderRadius: {
+            card: '14px',
+            button: '6px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --color-bg: #F4F5F0;
+      --color-bg-secondary: #EAEDE6;
+      --color-surface: #FFFFFF;
+      --color-sage-light: #E3EAE3;
+      --color-heading: #263746;
+      --color-body: #68736C;
+      --color-muted: #89918A;
+      --color-primary: #668B83;
+      --color-primary-dark: #496D65;
+      --color-gold: #C1A66B;
+      --color-border: #DDE2D9;
+      --radius-card: 14px;
+      --radius-button: 6px;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-body);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    img, svg {
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--color-heading);
+    }
+
+    /* Natural, Understated Editorial Reveal */
+    .editorial-reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .editorial-reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Editorial Card Styling */
+    .editorial-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+
+    .editorial-card:hover {
+      border-color: #668B83;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -12px rgba(38, 55, 70, 0.08);
+    }
+
+    /* Subtle image container zoom */
+    .project-image-box {
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .project-image-box img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .editorial-card:hover .project-image-box img {
+      transform: scale(1.025);
+    }
+
+    /* Custom thin gold divider */
+    .gold-divider {
+      height: 1px;
+      background: var(--color-gold);
+      opacity: 0.45;
+    }
+
+    /* Hero Profile Photograph 45-Degree Diagonal Light Flash Sweep */
+    .portrait-shine {
+      position: relative;
+      overflow: hidden;
+      contain: paint;
+    }
+
+    .portrait-shine::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0) 38%,
+        rgba(255, 255, 255, 0.04) 43%,
+        rgba(255, 255, 255, 0.18) 47%,
+        rgba(255, 255, 255, 0.38) 50%,
+        rgba(255, 255, 255, 0.18) 53%,
+        rgba(255, 255, 255, 0.04) 57%,
+        rgba(255, 255, 255, 0) 62%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: translate3d(-100%, -100%, 0) rotate(45deg);
+      filter: blur(2px);
+      animation: portraitShineSweep 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes portraitShineSweep {
+      0%, 45% {
+        opacity: 0;
+        transform: translate3d(-100%, -100%, 0) rotate(45deg);
+      }
+      50% {
+        opacity: 0.5;
+        transform: translate3d(-60%, -60%, 0) rotate(45deg);
+      }
+      55% {
+        opacity: 1;
+        transform: translate3d(-35%, -35%, 0) rotate(45deg);
+      }
+      82% {
+        opacity: 1;
+        transform: translate3d(45%, 45%, 0) rotate(45deg);
+      }
+      88% {
+        opacity: 0.4;
+        transform: translate3d(70%, 70%, 0) rotate(45deg);
+      }
+      93%, 100% {
+        opacity: 0;
+        transform: translate3d(-100%, -100%, 0) rotate(45deg);
+      }
+    }
+
+    /* Site Intro Monogram Screen */
+    #siteIntro {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background-color: #263746;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s;
+    }
+
+    #siteIntro.intro-hidden {
+      opacity: 0;
+      transform: scale(1.04);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-emblem-wrap {
+      animation: introEmblemPop 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes introEmblemPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(14px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .intro-shine {
+      position: absolute;
+      top: -60%;
+      left: -60%;
+      width: 220%;
+      height: 220%;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 40%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.1) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(45deg);
+      animation: introShineSweep 1.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes introShineSweep {
+      0% {
+        transform: translate3d(-100%, -100%, 0) rotate(45deg);
+      }
+      100% {
+        transform: translate3d(100%, 100%, 0) rotate(45deg);
+      }
+    }
+
+    .intro-text-reveal {
+      animation: introTextFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    @keyframes introTextFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Accessibility: Respect Reduced Motion Preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .portrait-shine::after,
+      .intro-shine {
+        animation: none !important;
+        opacity: 0 !important;
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-[#668B83] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- SITE INTRO: Luxury Editorial Monogram Reveal              -->
+  <!-- ======================================================== -->
+  <div id="siteIntro" class="fixed inset-0 z-[99999] bg-[#263746] flex flex-col items-center justify-center select-none overflow-hidden cursor-pointer" onclick="dismissIntro()">
+    
+    <!-- Ambient background radial glow -->
+    <div class="absolute w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] rounded-full bg-[#496D65]/25 blur-[120px] pointer-events-none"></div>
+
+    <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-md pointer-events-auto">
+      
+      <!-- Monogram Emblem with Concentric Gold Orbit Rings -->
+      <div class="relative mb-7 intro-emblem-wrap">
+        
+        <!-- Outer Rotating Dashed Gold Ring -->
+        <div class="absolute -inset-3.5 rounded-full border border-dashed border-[#C1A66B]/40 animate-spin" style="animation-duration: 14s;"></div>
+        <!-- Inner Counter-Rotating Thin Ring -->
+        <div class="absolute -inset-1.5 rounded-full border border-[#C1A66B]/50 animate-spin" style="animation-duration: 9s; animation-direction: reverse;"></div>
+
+        <!-- Emblem Disk with Diagonal Sheen -->
+        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-[#C1A66B] via-[#E3EAE3] to-[#496D65] shadow-[0_0_35px_rgba(193,166,107,0.3)] relative overflow-hidden flex items-center justify-center">
+          <img src="assets/sj.png" alt="SJ Monogram Logo"
+            class="w-full h-full object-contain rounded-full bg-white filter drop-shadow-sm" />
+          <div class="intro-shine"></div>
+        </div>
+      </div>
+
+      <!-- Brand Typography -->
+      <div class="space-y-2 intro-text-reveal">
+        <h1 class="font-sans font-bold text-base sm:text-lg uppercase text-white tracking-[0.32em] drop-shadow-xs">
+          JOTHILINGAM S
+        </h1>
+        <div class="flex items-center justify-center gap-2">
+          <span class="w-4 h-px bg-[#C1A66B]"></span>
+          <p class="font-mono text-[9px] sm:text-[10px] font-semibold tracking-[0.25em] text-[#C1A66B] uppercase">
+            DIGITAL CRAFTSMANSHIP · 2026
+          </p>
+          <span class="w-4 h-px bg-[#C1A66B]"></span>
+        </div>
+        <p class="text-[10px] sm:text-[11px] text-[#89918A] tracking-wider uppercase font-medium">
+          Full-Stack Architecture & Cloud Systems
+        </p>
+      </div>
+
+      <!-- Minimal Gold Loading Bar -->
+      <div class="w-36 sm:w-44 h-[2px] bg-[#3a4e5f] rounded-full overflow-hidden mt-6 relative">
+        <div id="introProgress" class="h-full bg-gradient-to-r from-[#C1A66B] via-[#E3EAE3] to-[#C1A66B] w-0 transition-all duration-[1300ms] ease-out"></div>
+      </div>
+
+      <!-- Click to Skip Hint -->
+      <span class="mt-7 text-[10px] font-mono tracking-widest text-[#89918A]/75 hover:text-[#C1A66B] uppercase transition-colors">
+        Click or tap to enter →
+      </span>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- NAVBAR: Ivory background, thin border, active indicator  -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-50 bg-[#F4F5F0]/95 backdrop-blur-sm border-b border-[#DDE2D9] transition-all">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
+
+      <!-- Brand Logotype -->
+      <a href="#hero" class="flex items-center gap-2.5 sm:gap-3.5 group min-w-0">
+        <img src="assets/sj.png" alt="SJ Logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full object-contain filter drop-shadow-xs group-hover:scale-105 transition-all"
+          onerror="this.src='assets/Jothi.png'" />
+        <div class="flex flex-col min-w-0">
+          <span
+            class="font-sans font-bold text-xs sm:text-sm tracking-wider sm:tracking-widest uppercase text-[#263746] group-hover:text-[#496D65] transition-colors truncate">
+            JOTHILINGAM S
+          </span>
+          <span class="text-[9px] sm:text-[10px] font-medium tracking-wide sm:tracking-wider text-[#89918A] uppercase truncate">
+            · DESIGN · DEVELOPMENT · CLOUD
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-[11px] font-semibold tracking-wider uppercase text-[#68736C]">
+        <a href="#about" class="nav-link hover:text-[#263746] transition-colors py-1 relative">About</a>
+        <a href="#skills" class="nav-link hover:text-[#263746] transition-colors py-1 relative">Capabilities</a>
+        <a href="#projects" class="nav-link hover:text-[#263746] transition-colors py-1 relative">Selected Works</a>
+        <a href="#journey" class="nav-link hover:text-[#263746] transition-colors py-1 relative">Journey</a>
+        <a href="#contact" class="nav-link hover:text-[#263746] transition-colors py-1 relative">Contact</a>
+      </nav>
+
+      <!-- CTA & Socials -->
+      <div class="hidden sm:flex items-center gap-3 shrink-0">
+        <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
+          class="p-2.5 rounded-[6px] border border-[#DDE2D9] text-[#263746] hover:text-[#496D65] hover:border-[#496D65] transition-colors"
+          title="GitHub - JOTHILINGAM-S-CYBROX" aria-label="GitHub Profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+            <path d="M9 18c-4.51 2-5-2-7-2"></path>
+          </svg>
+        </a>
+        <a href="#contact"
+          class="px-5 py-2.5 rounded-[6px] bg-[#496D65] text-white text-xs font-semibold tracking-wide hover:bg-[#3d5c55] transition-colors inline-flex items-center gap-2">
+          <span>Get in Touch</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="menuBtn" class="md:hidden p-2 text-[#263746] shrink-0" aria-label="Toggle Navigation">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu"
+      class="hidden md:hidden bg-[#F4F5F0] border-b border-[#DDE2D9] px-4 sm:px-6 py-4 space-y-3.5 text-xs font-semibold tracking-wider uppercase text-[#68736C]">
+      <a href="#about" class="block hover:text-[#263746] mobile-link py-1">About</a>
+      <a href="#skills" class="block hover:text-[#263746] mobile-link py-1">Capabilities</a>
+      <a href="#projects" class="block hover:text-[#263746] mobile-link py-1">Selected Works</a>
+      <a href="#journey" class="block hover:text-[#263746] mobile-link py-1">Journey</a>
+      <a href="#contact" class="block text-[#496D65] mobile-link font-bold py-1">Contact</a>
+      <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
+        class="hover:text-[#263746] mobile-link flex items-center gap-2 pt-2 border-t border-[#DDE2D9]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+          <path d="M9 18c-4.51 2-5-2-7-2"></path>
+        </svg>
+        <span>GitHub Profile</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 01. HERO / HOME                                          -->
+  <!-- ======================================================== -->
+  <section id="hero" class="pt-6 pb-12 sm:pb-16 md:pt-8 md:pb-24 bg-[#F4F5F0] overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Eyebrow with gold numbering -->
+      <div class="editorial-reveal flex items-center gap-2.5 sm:gap-3 mb-4 flex-wrap">
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">01 / PORTFOLIO 2026</span>
+        <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">DIGITAL CRAFTSMANSHIP</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+
+        <!-- Left: Editorial Headline & Bio -->
+        <div class="lg:col-span-7 editorial-reveal">
+
+          <h1
+            class="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-[#263746] leading-[1.18] sm:leading-[1.15] tracking-tight break-words">
+            Thoughtful Design.<br />
+            <span class="italic font-normal text-[#496D65]">Intelligent</span> Engineering.
+          </h1>
+
+          <p class="mt-4 sm:mt-6 text-xs sm:text-base font-normal text-[#68736C] leading-relaxed max-w-xl">
+            Full-stack focused technology professional building responsive front-end interfaces and scalable back-end
+            services. Engineering web applications end-to-end using React, modern JavaScript frameworks, and robust AWS
+            cloud architectures.
+          </p>
+
+          <!-- Subtle Availability Indicator (Subtle sage, no blinking dots) -->
+          <div
+            class="mt-5 sm:mt-6 inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E3EAE3] border border-[#DDE2D9] max-w-full">
+            <span class="w-2 h-2 rounded-full bg-[#668B83] shrink-0"></span>
+            <span class="text-[11px] sm:text-xs font-medium text-[#496D65] truncate">Available for Full-time Roles & Select Projects</span>
+          </div>
+
+          <!-- Action CTAs -->
+          <div class="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+            <!-- Primary CTA: Forest slate -->
+            <a href="#projects"
+              class="w-full sm:w-auto justify-center px-6 py-3 rounded-[6px] bg-[#496D65] text-white text-xs font-semibold tracking-wide hover:bg-[#3d5c55] transition-colors inline-flex items-center gap-2 text-center">
+              <span>View Selected Works</span>
+              <i data-lucide="arrow-down-right" class="w-4 h-4 text-[#C1A66B]"></i>
+            </a>
+
+            <!-- Secondary CTA: Transparent with gold border -->
+            <a href="#contact"
+              class="w-full sm:w-auto justify-center px-6 py-3 rounded-[6px] bg-transparent border border-[#C1A66B] text-[#263746] text-xs font-semibold tracking-wide hover:bg-[#C1A66B]/10 transition-colors inline-flex items-center gap-2 text-center">
+              <span>Contact Jothilingam</span>
+              <i data-lucide="mail" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+            </a>
+
+            <!-- Tertiary CTA: GitHub Profile -->
+            <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
+              class="w-full sm:w-auto justify-center px-5 py-3 rounded-[6px] bg-[#FFFFFF] border border-[#DDE2D9] text-[#263746] text-xs font-semibold tracking-wide hover:border-[#496D65] hover:text-[#496D65] transition-colors inline-flex items-center gap-2 shadow-xs text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                <path d="M9 18c-4.51 2-5-2-7-2"></path>
+              </svg>
+              <span>GitHub</span>
+              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#89918A]"></i>
+            </a>
+          </div>
+
+          <!-- Quick Metadata Strip -->
+          <div class="mt-8 sm:mt-12 pt-5 sm:pt-6 border-t border-[#DDE2D9] grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 text-xs">
+            <div>
+              <span class="block text-[10px] uppercase font-semibold text-[#89918A] tracking-wider">Location</span>
+              <span class="font-medium text-[#263746] mt-0.5 block">Coimbatore, Tamil Nadu</span>
+            </div>
+            <div>
+              <span class="block text-[10px] uppercase font-semibold text-[#89918A] tracking-wider">Focus</span>
+              <span class="font-medium text-[#263746] mt-0.5 block">Full-Stack & Cloud</span>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <span class="block text-[10px] uppercase font-semibold text-[#89918A] tracking-wider">Degree</span>
+              <span class="font-medium text-[#263746] mt-0.5 block">B.Tech IT (CGPA 7.5)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Editorial Portrait Card with Upload Preview -->
+        <div class="lg:col-span-5 editorial-reveal flex justify-center w-full">
+          <div class="w-full max-w-xs sm:max-w-sm">
+            <div class="editorial-card p-4 sm:p-5 relative group">
+
+              <!-- Clean Image Container (4:5 Editorial Ratio) with Diagonal Light Sweep -->
+              <div
+                class="portrait-shine relative w-full aspect-[4/5] rounded-[10px] overflow-hidden bg-[#EAEDE6] border border-[#DDE2D9]">
+                <img id="userAvatar" src="assets/Jothi.png" alt="Jothilingam S"
+                  class="w-full h-full object-cover object-center filter contrast-[0.98]"
+                  onerror="this.src='https://placehold.co/500x625/EAEDE6/263746?text=Jothilingam+S'" />
+              </div>
+
+              <!-- Editorial Portrait Footer -->
+              <div class="mt-4 flex items-center justify-between text-xs">
+                <div>
+                  <h3 class="font-bold text-[#263746]">JOTHILINGAM S</h3>
+                  <p class="text-[11px] text-[#89918A]">Full-Stack & Cloud Professional</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-[10px] font-mono uppercase text-[#C1A66B]">FIG. 01</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 02. ABOUT ME & PHILOSOPHY (Secondary Bg #EAEDE6)        -->
+  <!-- ======================================================== -->
+  <section id="about" class="py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Eyebrow -->
+      <div class="editorial-reveal flex items-center gap-2.5 sm:gap-3 mb-6 flex-wrap">
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">02 / PHILOSOPHY & JOURNEY</span>
+        <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">ABOUT ME</span>
+      </div>
+
+      <!-- Two-column Editorial Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16">
+
+        <!-- Column 1: Large Editorial Display Quote -->
+        <div class="lg:col-span-5 editorial-reveal">
+          <h2 class="font-display text-2xl sm:text-4xl lg:text-5xl font-normal text-[#263746] leading-[1.25] sm:leading-[1.2]">
+            Creating with intention. Engineering for scale.
+          </h2>
+          <p class="mt-4 sm:mt-6 text-xs sm:text-sm text-[#68736C] leading-relaxed">
+            Technology is most powerful when intuitive design converges with dependable backend systems. My approach
+            combines thoughtful architectural planning with clean, maintainable code.
+          </p>
+
+          <div class="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-[#DDE2D9]">
+            <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B] block mb-2">DEVELOPMENT
+              CREED</span>
+            <p class="font-display italic text-[#496D65] text-sm sm:text-base">
+              "Building meaningful digital products through technology, creativity, and precision."
+            </p>
+          </div>
+        </div>
+
+        <!-- Column 2: Detailed Professional Background & Competencies -->
+        <div class="lg:col-span-7 editorial-reveal space-y-5 sm:space-y-6">
+          <p class="text-xs sm:text-base font-normal text-[#68736C] leading-relaxed">
+            Full-stack focused technology professional with hands-on experience building responsive front-end interfaces
+            and scalable back-end services and APIs. Skilled in designing and deploying web applications end-to-end
+            using React and Next.js on the front end, alongside Node.js, Express.js, Laravel, FastAPI, and Flask on the
+            back end, with MySQL for reliable data storage.
+          </p>
+
+          <p class="text-xs sm:text-sm font-normal text-[#68736C] leading-relaxed">
+            Comfortable translating complex business and client requirements into working software, integrating
+            third-party services, and collaborating closely with designers and product teams. Possesses hands-on working
+            knowledge of AWS cloud infrastructure, continuous deployment, and proactive system monitoring.
+          </p>
+
+          <!-- Core Competencies Grid -->
+          <div class="pt-4 sm:pt-6">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-[#263746] mb-3 sm:mb-4">Core Competencies</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
+
+              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span class="font-medium text-[#263746]">Full-Stack Web Application Development</span>
+              </div>
+
+              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span class="font-medium text-[#263746]">Front-End Engineering & Responsive UI</span>
+              </div>
+
+              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span class="font-medium text-[#263746]">Back-End Architecture & REST APIs</span>
+              </div>
+
+              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span class="font-medium text-[#263746]">Database Design & Data Management</span>
+              </div>
+
+              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5 sm:col-span-2">
+                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span class="font-medium text-[#263746]">Cloud Deployment, Monitoring & Performance Optimization</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 03. SKILLS & TECHNOLOGIES (#F4F5F0)                     -->
+  <!-- ======================================================== -->
+  <section id="skills" class="py-16 sm:py-24 md:py-32 bg-[#F4F5F0]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Eyebrow -->
+      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">03 / CAPABILITIES</span>
+          <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">TOOLCHAINS</span>
+        </div>
+        <span class="text-[10px] sm:text-xs font-mono text-[#89918A]">AUTHENTIC SPECIFICATION</span>
+      </div>
+
+      <div class="editorial-reveal max-w-2xl mb-8 sm:mb-12">
+        <h2 class="font-display text-2xl sm:text-4xl font-normal text-[#263746]">
+          Skills & Technologies
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-[#68736C]">
+          Systematic overview of development proficiencies, programming languages, and cloud platforms.
+        </p>
+      </div>
+
+      <!-- Capabilities Grid (Clean White Cards, 14px radius, 1px solid #DDE2D9) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+
+        <!-- 1. Front-End -->
+        <div class="editorial-card p-5 sm:p-6 editorial-reveal">
+          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="layout" class="w-4 h-4 text-[#496D65]"></i>
+              <h3 class="font-bold text-sm text-[#263746]">Front-End Engineering</h3>
+            </div>
+            <span class="text-[10px] font-mono text-[#C1A66B]">01</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">React</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Next.js</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">JavaScript</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">HTML5</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">CSS3</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Tailwind CSS</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">MUI v5</span>
+          </div>
+        </div>
+
+        <!-- 2. Back-End & Stacks -->
+        <div class="editorial-card p-5 sm:p-6 editorial-reveal">
+          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="server" class="w-4 h-4 text-[#496D65]"></i>
+              <h3 class="font-bold text-sm text-[#263746]">Back-End & Stacks</h3>
+            </div>
+            <span class="text-[10px] font-mono text-[#C1A66B]">02</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <span
+              class="px-2.5 sm:px-3 py-1 bg-[#E3EAE3] text-[#496D65] border border-[#668B83]/30 text-xs font-semibold rounded-[4px]">MERN
+              Stack</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Node.js</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Express.js</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Laravel (PHP)</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">FastAPI</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Flask</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Python</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">REST API
+              Integration</span>
+          </div>
+        </div>
+
+        <!-- 3. Database -->
+        <div class="editorial-card p-5 sm:p-6 editorial-reveal">
+          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="database" class="w-4 h-4 text-[#496D65]"></i>
+              <h3 class="font-bold text-sm text-[#263746]">Database Systems</h3>
+            </div>
+            <span class="text-[10px] font-mono text-[#C1A66B]">03</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">MySQL</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Relational Schema
+              Design</span>
+          </div>
+        </div>
+
+        <!-- 4. Cloud: AWS -->
+        <div class="editorial-card p-5 sm:p-6 editorial-reveal md:col-span-2 lg:col-span-2">
+          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="cloud" class="w-4 h-4 text-[#496D65]"></i>
+              <h3 class="font-bold text-sm text-[#263746]">Cloud: Amazon Web Services (AWS)</h3>
+            </div>
+            <span class="text-[10px] font-mono text-[#C1A66B]">04</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">EC2</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">S3</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">VPC</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">IAM</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">RDS</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Route 53</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">CloudWatch</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Elastic
+              Beanstalk</span>
+          </div>
+        </div>
+
+        <!-- 5. DevOps & AI Tools -->
+        <div class="editorial-card p-5 sm:p-6 editorial-reveal">
+          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="cpu" class="w-4 h-4 text-[#496D65]"></i>
+              <h3 class="font-bold text-sm text-[#263746]">DevOps & AI Tools</h3>
+            </div>
+            <span class="text-[10px] font-mono text-[#C1A66B]">05</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Git</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">GitHub</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Docker</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Linux</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">LangChain</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Gemini API</span>
+            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">RAG Pipelines</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 04. SELECTED PROJECTS (#EAEDE6)                          -->
+  <!-- ======================================================== -->
+  <section id="projects" class="py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Eyebrow -->
+      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">04 / SELECTED WORKS</span>
+          <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">PORTFOLIO</span>
+        </div>
+        <span class="text-[10px] sm:text-xs font-mono text-[#89918A]">PRODUCTION & CLOUD</span>
+      </div>
+
+      <div class="editorial-reveal max-w-2xl mb-8 sm:mb-12">
+        <h2 class="font-display text-2xl sm:text-4xl font-normal text-[#263746]">
+          Featured Projects & Architectures
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-[#68736C]">
+          Client solutions and robust AWS cloud implementations delivered with high performance.
+        </p>
+      </div>
+
+      <!-- Asymmetric Editorial Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+
+        <!-- Project 0: CollectEasy (Featured FinTech Case Study) -->
+        <div onclick="openProjectModal('collecteasy')"
+          class="editorial-card p-5 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-2 cursor-pointer group hover:border-[#496D65] hover:shadow-xl transition-all duration-300 relative"
+          role="button" tabindex="0" aria-haspopup="dialog" aria-label="View CollectEasy project details"
+          onkeydown="if(event.key === 'Enter' || event.key === ' ') { openProjectModal('collecteasy'); event.preventDefault(); }">
+
+          <div>
+            <!-- Visual Header Box -->
+            <div
+              class="project-image-box aspect-auto min-h-[220px] sm:min-h-0 sm:aspect-[21/8] bg-[#F4F5F0] border border-[#DDE2D9] mb-5 sm:mb-6 flex flex-col justify-between p-4 sm:p-6 relative group-hover:bg-[#E3EAE3]/40 transition-colors">
+              <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B] flex items-center gap-1.5 font-semibold">
+                  <span class="w-2 h-2 rounded-full bg-[#C1A66B] animate-pulse"></span>
+                  FEATURED FLAGSHIP · FINTECH & ENTERPRISE
+                </span>
+                <span class="text-[10px] font-mono px-2.5 sm:px-3 py-1 rounded-full bg-[#496D65]/10 text-[#496D65] font-semibold flex items-center gap-1 group-hover:bg-[#496D65] group-hover:text-white transition-colors">
+                  <span>CLICK TO VIEW DETAILS</span>
+                  <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+                </span>
+              </div>
+
+              <div class="my-auto py-3">
+                <div class="flex items-baseline gap-2 sm:gap-3 flex-wrap">
+                  <h4 class="font-display text-2xl sm:text-3xl lg:text-4xl text-[#263746] font-normal group-hover:text-[#496D65] transition-colors">
+                    CollectEasy
+                  </h4>
+                  <span class="text-xs sm:text-sm font-sans text-[#89918A]">Chit Fund Management & Collection System</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#68736C] mt-2 max-w-2xl line-clamp-3 sm:line-clamp-2">
+                  Comprehensive chit fund platform with centralized admin monitoring, offline-first mobile app for field agents, and idempotent financial processing.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A] pt-3 border-t border-[#DDE2D9]/70 flex-wrap gap-2">
+                <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                  <span class="text-[#263746] font-medium">React 18 · TypeScript</span>
+                  <span>·</span>
+                  <span class="text-[#263746] font-medium">Node.js · Express</span>
+                  <span>·</span>
+                  <span class="text-[#263746] font-medium">MySQL 8</span>
+                  <span>·</span>
+                  <span class="text-[#263746] font-medium">IndexedDB (Offline)</span>
+                </div>
+                <span class="text-[#C1A66B] font-semibold">3 Integrated Modules</span>
+              </div>
+            </div>
+
+            <!-- Details Row -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B] font-semibold block">Category</span>
+                <h3 class="font-display text-xl sm:text-2xl text-[#263746] font-medium mt-0.5">
+                  CollectEasy – Chit Fund Management & Collection System
+                </h3>
+              </div>
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap shrink-0">
+                <span class="px-2.5 py-1 rounded-[4px] bg-[#EAEDE6] border border-[#DDE2D9] text-[#263746] text-[10px] font-mono font-medium">Offline-First</span>
+                <span class="px-2.5 py-1 rounded-[4px] bg-[#EAEDE6] border border-[#DDE2D9] text-[#263746] text-[10px] font-mono font-medium">Idempotent Payments</span>
+                <span class="px-2.5 py-1 rounded-[4px] bg-[#EAEDE6] border border-[#DDE2D9] text-[#263746] text-[10px] font-mono font-medium">Paise Integer Math</span>
+              </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed">
+              Designed and developed CollectEasy, a comprehensive chit fund management platform that digitizes financial operations, customer management, payment collections and administrative reporting across three integrated modules.
+            </p>
+
+            <!-- Key Highlight Callout in Card -->
+            <div class="mt-4 p-3 sm:p-3.5 bg-[#F4F5F0] border-l-2 border-[#C1A66B] rounded-r-[6px] text-xs text-[#496D65]">
+              <strong class="font-semibold text-[#263746]">Project Highlight:</strong> Developed an offline-first financial collection workflow allowing field agents to record payments without active internet and auto-synchronize when connectivity returns.
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Admin Dashboard · Offline Mobile Web App · RESTful Backend API</span>
+            <span class="text-xs font-semibold text-[#496D65] group-hover:text-[#263746] inline-flex items-center gap-1.5 transition-colors self-start sm:self-auto">
+              <span>View Full Project Case Study</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#C1A66B]"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Project 1: SPM Crackers -->
+        <div class="editorial-card p-5 sm:p-7 flex flex-col justify-between editorial-reveal">
+          <div>
+            <!-- Project Preview Visual Box -->
+            <div
+              class="project-image-box aspect-auto min-h-[170px] sm:aspect-[16/10] bg-[#F4F5F0] border border-[#DDE2D9] mb-5 sm:mb-6 flex flex-col justify-between p-4 sm:p-5 relative">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B]">E-COMMERCE SYSTEM</span>
+                <span class="text-[10px] font-mono text-[#68736C]">LIVE PRODUCTION</span>
+              </div>
+              <div class="text-center my-auto py-2">
+                <h4 class="font-display text-2xl text-[#263746] font-normal">SPM Crackers</h4>
+                <p class="text-xs text-[#68736C] mt-1">Retail Web Application & Catalog</p>
+              </div>
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span>spmcrackers.in</span>
+                <span>Full-Stack</span>
+              </div>
+            </div>
+
+            <!-- Details -->
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-display text-xl text-[#263746] font-medium">SPM Crackers</h3>
+              <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
+                class="text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1">
+                <span>spmcrackers.in</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              </a>
+            </div>
+
+            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed mt-3">
+              Developed and deployed a full-stack web application for a fireworks retailer, with a digital product
+              catalog and order management dashboard, focused on product presentation and seamless web functionality.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Full-Stack Web Application</span>
+            <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
+              class="text-xs font-semibold text-[#263746] hover:text-[#496D65]">
+              Visit Live Site →
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: The Grove Restaurant -->
+        <div class="editorial-card p-5 sm:p-7 flex flex-col justify-between editorial-reveal">
+          <div>
+            <!-- Project Preview Visual Box -->
+            <div
+              class="project-image-box aspect-auto min-h-[170px] sm:aspect-[16/10] bg-[#F4F5F0] border border-[#DDE2D9] mb-5 sm:mb-6 flex flex-col justify-between p-4 sm:p-5 relative">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B]">HOSPITALITY WEB</span>
+                <span class="text-[10px] font-mono text-[#68736C]">GCP CLOUD RUN</span>
+              </div>
+              <div class="text-center my-auto py-2">
+                <h4 class="font-display text-2xl text-[#263746] font-normal">The Grove Restaurant</h4>
+                <p class="text-xs text-[#68736C] mt-1">Interactive Menu & Brand Website</p>
+              </div>
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span>thegrove.restaurant</span>
+                <span>Next.js</span>
+              </div>
+            </div>
+
+            <!-- Details -->
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-display text-xl text-[#263746] font-medium">The Grove Restaurant</h3>
+              <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
+                class="text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1">
+                <span>thegrove.restaurant</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              </a>
+            </div>
+
+            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed mt-3">
+              Built and deployed a responsive restaurant website with an intuitive user interface and menu presentation,
+              using Next.js and hosted on GCP Cloud Run.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Next.js · GCP Cloud Run</span>
+            <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
+              class="text-xs font-semibold text-[#263746] hover:text-[#496D65]">
+              Visit Live Site →
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3: Scalable Web Application on AWS -->
+        <div class="editorial-card p-5 sm:p-7 flex flex-col justify-between editorial-reveal">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B]">INFRASTRUCTURE</span>
+              <span class="text-[10px] font-mono text-[#89918A]">AWS CLOUD</span>
+            </div>
+            <h3 class="font-display text-xl text-[#263746] font-medium">
+              Scalable Web Application on AWS
+            </h3>
+            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed mt-3">
+              Designed and deployed a scalable web application infrastructure using AWS EC2, S3, VPC, RDS, Route 53, and
+              CloudWatch.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9]">
+            <span class="text-[11px] font-mono text-[#496D65] break-words">EC2 · S3 · VPC · RDS · Route 53 · CloudWatch</span>
+          </div>
+        </div>
+
+        <!-- Project 4: Highly Available AWS Architecture -->
+        <div class="editorial-card p-5 sm:p-7 flex flex-col justify-between editorial-reveal">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B]">SYSTEM ARCHITECTURE</span>
+              <span class="text-[10px] font-mono text-[#89918A]">HIGH AVAILABILITY</span>
+            </div>
+            <h3 class="font-display text-xl text-[#263746] font-medium">
+              Highly Available AWS Architecture
+            </h3>
+            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed mt-3">
+              Designed a multi-tier AWS architecture using EC2, Load Balancer, Auto Scaling, RDS, and VPC for improved
+              availability and scalability.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9]">
+            <span class="text-[11px] font-mono text-[#496D65] break-words">EC2 · Load Balancer · Auto Scaling · RDS · VPC</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 05. EXPERIENCE & JOURNEY (#F4F5F0)                       -->
+  <!-- ======================================================== -->
+  <section id="journey" class="py-16 sm:py-24 md:py-32 bg-[#F4F5F0]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Eyebrow -->
+      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">05 / EXPERIENCE &
+            EDUCATION</span>
+          <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
+          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">CAREER TIMELINE</span>
+        </div>
+        <span class="text-[10px] sm:text-xs font-mono text-[#89918A]">2022 — 2026</span>
+      </div>
+
+      <div class="editorial-reveal max-w-2xl mb-8 sm:mb-12">
+        <h2 class="font-display text-2xl sm:text-4xl font-normal text-[#263746]">
+          Professional Journey
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-[#68736C]">
+          Industry internship, freelance client deliveries, and formal engineering education.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
+
+        <!-- Vertical Timeline (Left Column) -->
+        <div class="lg:col-span-7 editorial-reveal">
+          <div class="relative ml-2 sm:ml-4 pl-6 sm:pl-8 border-l-2 border-[#DDE2D9] space-y-10 sm:space-y-12">
+
+            <!-- Timeline Item 1: Internship -->
+            <div class="relative">
+              <!-- Gold Marker -->
+              <span
+                class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#FFFFFF] border-2 border-[#C1A66B]"></span>
+
+              <div class="flex items-baseline justify-between flex-wrap gap-2">
+                <h3 class="font-display text-lg sm:text-xl text-[#263746] font-semibold">Web Developer Intern</h3>
+                <span class="text-xs font-mono text-[#C1A66B]">Jan 19, 2026 – May 2, 2026</span>
+              </div>
+              <p class="text-xs font-semibold text-[#496D65] mt-0.5">El Codamics, Coimbatore</p>
+
+              <ul class="mt-4 space-y-2 text-xs sm:text-sm text-[#68736C]">
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
+                  <span>Built and developed the frontend of a CRM system using React.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
+                  <span>Integrated APIs to enable seamless communication between frontend and backend systems.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
+                  <span>Collaborated with the development team to improve user experience and application
+                    performance.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
+                  <span>Worked on CRM development while following structured full-stack development practices.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
+                  <span>Applied technical and problem-solving skills to contribute effectively to project
+                    development.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Timeline Item 2: Freelance Deliveries -->
+            <div class="relative">
+              <!-- Gold Marker -->
+              <span
+                class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#FFFFFF] border-2 border-[#C1A66B]"></span>
+
+              <div class="flex items-baseline justify-between flex-wrap gap-2">
+                <h3 class="font-display text-lg sm:text-xl text-[#263746] font-semibold">Freelance Full-Stack Developer</h3>
+                <span class="text-xs font-mono text-[#89918A]">Production Deliveries</span>
+              </div>
+              <p class="text-xs font-semibold text-[#496D65] mt-0.5">End-to-End Client Solutions</p>
+
+              <p class="mt-3 text-xs sm:text-sm text-[#68736C] leading-relaxed">
+                Delivered full-stack client web applications end-to-end—front-end UI, back-end APIs, database
+                architecture, and cloud deployment—for commercial enterprises including SPM Crackers and The Grove
+                Restaurant.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Academic & Language Sidebar (Right Column) -->
+        <div class="lg:col-span-5 editorial-reveal space-y-4 sm:space-y-6">
+
+          <!-- Education Card -->
+          <div class="editorial-card p-5 sm:p-6">
+            <span class="text-[10px] font-mono uppercase text-[#C1A66B] tracking-wider block mb-2">FORMAL
+              EDUCATION</span>
+            <h3 class="font-display text-lg sm:text-xl text-[#263746] font-medium">B.Tech - Information Technology</h3>
+            <p class="text-xs font-semibold text-[#496D65] mt-1">Nehru Institute of Engineering and Technology,
+              Coimbatore</p>
+
+            <div class="mt-4 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+              <span class="text-[#89918A] font-mono">Nov 2022 – Apr 2026</span>
+              <span class="px-2.5 py-1 bg-[#E3EAE3] text-[#496D65] font-bold rounded-[4px]">CGPA: 7.5 / 10</span>
+            </div>
+          </div>
+
+          <!-- Achievements Summary -->
+          <div class="editorial-card p-5 sm:p-6">
+            <span class="text-[10px] font-mono uppercase text-[#C1A66B] tracking-wider block mb-3">KEY
+              ACHIEVEMENTS</span>
+            <ul class="space-y-2.5 text-xs text-[#68736C]">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span>Delivered full-stack client web applications end-to-end.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span>Contributed to enterprise CRM development at El Codamics.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span>Gained hands-on experience in AWS cloud infrastructure and security.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Languages -->
+          <div class="editorial-card p-4 sm:p-5">
+            <span class="text-[10px] font-mono uppercase text-[#89918A] tracking-wider block mb-2">COMMUNICATION</span>
+            <div class="flex items-center gap-6 text-xs font-semibold text-[#263746]">
+              <span class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#668B83]"></i>
+                English</span>
+              <span class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#668B83]"></i>
+                Tamil</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 06. CONTACT (#EAEDE6)                                    -->
+  <!-- ======================================================== -->
+  <section id="contact" class="py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-t border-[#DDE2D9]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+      <!-- Eyebrow -->
+      <div class="editorial-reveal flex items-center justify-center gap-2.5 sm:gap-3 mb-4 flex-wrap">
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">06 / GET IN TOUCH</span>
+        <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">CONNECT</span>
+      </div>
+
+      <div class="editorial-reveal text-center max-w-xl mx-auto mb-8 sm:mb-12">
+        <h2 class="font-display text-2xl sm:text-4xl lg:text-5xl font-normal text-[#263746] leading-tight">
+          Let’s build something exceptional together.
+        </h2>
+        <p class="mt-3 sm:mt-4 text-xs sm:text-sm text-[#68736C]">
+          Open to full-stack engineering roles, freelance opportunities, and cloud architecture inquiries.
+        </p>
+      </div>
+
+      <!-- Contact Detail Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-10 editorial-reveal">
+
+        <div class="editorial-card p-4 sm:p-5 text-center">
+          <i data-lucide="mail" class="w-5 h-5 text-[#496D65] mx-auto mb-2"></i>
+          <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Email Inquiries</span>
+          <button onclick="copyEmailAddress()"
+            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 break-all cursor-pointer block w-full text-center">
+            jothilingamsivalingamg@gmail.com
+          </button>
+        </div>
+
+        <div class="editorial-card p-4 sm:p-5 text-center">
+          <i data-lucide="phone" class="w-5 h-5 text-[#496D65] mx-auto mb-2"></i>
+          <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Direct Line</span>
+          <a href="tel:+918940066871" class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block">
+            +91 89400 66871
+          </a>
+        </div>
+
+        <div class="editorial-card p-4 sm:p-5 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin w-5 h-5 text-[#496D65] mx-auto mb-2">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+          <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Professional
+            Network</span>
+          <a href="https://linkedin.com/in/jothilingam-s" target="_blank" rel="noopener noreferrer"
+            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block truncate">
+            linkedin.com/in/jothilingam-s
+          </a>
+        </div>
+
+        <div class="editorial-card p-4 sm:p-5 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github w-5 h-5 text-[#496D65] mx-auto mb-2">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+            <path d="M9 18c-4.51 2-5-2-7-2"></path>
+          </svg>
+          <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Code & Projects</span>
+          <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
+            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block truncate" title="JOTHILINGAM-S-CYBROX">
+            github.com/JOTHILINGAM-S-CYBROX
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Minimal Contact Form with Gold / Forest Slate Accent -->
+      <div class="editorial-card p-4 sm:p-8 md:p-10 editorial-reveal">
+        <form id="contactForm" onsubmit="handleContactFormSubmit(event)" class="space-y-4 sm:space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div>
+              <label for="contactName" class="block text-xs font-semibold text-[#263746] mb-1.5">Your Name</label>
+              <input type="text" id="contactName" name="name" required
+                class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-[6px] text-[#263746] focus:outline-none focus:border-[#496D65] transition-colors"
+                placeholder="e.g. Eleanor Vance" />
+            </div>
+            <div>
+              <label for="contactEmail" class="block text-xs font-semibold text-[#263746] mb-1.5">Your Email</label>
+              <input type="email" id="contactEmail" name="email" required
+                class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-[6px] text-[#263746] focus:outline-none focus:border-[#496D65] transition-colors"
+                placeholder="e.g. eleanor@company.com" />
+            </div>
+          </div>
+
+          <div>
+            <label for="contactSubject" class="block text-xs font-semibold text-[#263746] mb-1.5">Subject</label>
+            <input type="text" id="contactSubject" name="subject" required
+              class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-[6px] text-[#263746] focus:outline-none focus:border-[#496D65] transition-colors"
+              placeholder="Full-stack Role / Project Inquiry" />
+          </div>
+
+          <div>
+            <label for="contactMessage" class="block text-xs font-semibold text-[#263746] mb-1.5">Message</label>
+            <textarea id="contactMessage" name="message" rows="4" required
+              class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-[6px] text-[#263746] focus:outline-none focus:border-[#496D65] transition-colors resize-none"
+              placeholder="Provide a brief overview of your inquiry..."></textarea>
+          </div>
+
+          <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+            <button type="submit" id="contactSubmitBtn"
+              class="w-full sm:w-auto px-7 py-3 rounded-[6px] bg-[#496D65] text-white text-xs font-semibold tracking-wider hover:bg-[#3d5c55] transition-colors inline-flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed text-center">
+              <span>Send Message</span>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#C1A66B]"></i>
+            </button>
+            <span class="text-[11px] text-[#89918A] text-center sm:text-left">Direct delivery to jothilingamsivalingamg@gmail.com</span>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- FOOTER                                                   -->
+  <!-- ======================================================== -->
+  <footer class="bg-[#F4F5F0] py-6 sm:py-8 border-t border-[#DDE2D9] text-xs text-[#89918A]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div class="flex items-center gap-3">
+        <img src="assets/sj.png" alt="SJ Logo" class="w-8 h-8 shrink-0 rounded-full object-contain filter drop-shadow-xs" />
+        <div>
+          <p class="font-medium text-[#263746]">JOTHILINGAM S · 2026</p>
+          <p class="text-[11px] text-[#89918A]">Coimbatore, Tamil Nadu, India · Full-Stack & Cloud Professional</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6 text-[11px] font-semibold uppercase tracking-wider text-[#68736C]">
+        <a href="mailto:jothilingamsivalingamg@gmail.com" class="hover:text-[#263746] transition-colors">Email</a>
+        <a href="tel:+918940066871" class="hover:text-[#263746] transition-colors">Phone</a>
+        <a href="https://linkedin.com/in/jothilingam-s" target="_blank" rel="noopener noreferrer"
+          class="hover:text-[#263746] transition-colors">LinkedIn</a>
+        <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
+          class="hover:text-[#263746] transition-colors">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- PROJECT DETAILS MODAL: CollectEasy                       -->
+  <!-- ======================================================== -->
+  <div id="projectModal"
+    class="fixed inset-0 z-50 bg-[#263746]/75 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-4 md:p-6 opacity-0 pointer-events-none transition-opacity duration-300"
+    role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
+
+    <div id="modalDialogCard"
+      class="bg-[#F4F5F0] border border-[#DDE2D9] rounded-[12px] sm:rounded-[14px] w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl transform scale-95 transition-transform duration-300 overflow-hidden">
+
+      <!-- Modal Header (Sticky) -->
+      <div class="px-4 sm:px-6 py-3.5 sm:py-5 bg-[#EAEDE6] border-b border-[#DDE2D9] flex items-start justify-between gap-3 sm:gap-4 shrink-0">
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 mb-1 flex-wrap">
+            <span class="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#C1A66B] font-bold">
+              FINTECH / ENTERPRISE SOFTWARE
+            </span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B] shrink-0"></span>
+            <span class="text-[9px] sm:text-[10px] font-mono text-[#89918A]">FULL-STACK SYSTEM</span>
+          </div>
+          <h2 id="modalProjectTitle" class="font-display text-xl sm:text-2xl md:text-3xl text-[#263746] font-normal leading-tight break-words">
+            CollectEasy – Chit Fund Management & Collection System
+          </h2>
+          <p class="text-xs sm:text-sm text-[#68736C] mt-1">
+            Offline-First Field Mobile App · Centralized Admin Dashboard · RESTful Backend Engine
+          </p>
+        </div>
+
+        <button type="button" onclick="closeProjectModal()"
+          class="p-1.5 sm:p-2 rounded-[6px] text-[#263746] hover:bg-[#DDE2D9] transition-colors shrink-0 cursor-pointer"
+          aria-label="Close Project Details">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Body -->
+      <div class="p-4 sm:p-6 md:p-8 overflow-y-auto space-y-6 sm:space-y-8 text-xs sm:text-sm">
+
+        <!-- Project Highlight Callout -->
+        <div class="p-4 sm:p-5 bg-white border border-[#DDE2D9] border-l-4 border-l-[#C1A66B] rounded-[8px] shadow-xs">
+          <div class="flex items-center gap-2 text-[#C1A66B] font-mono text-[10px] uppercase font-bold tracking-wider mb-2">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Key Project Highlight</span>
+          </div>
+          <p class="text-xs sm:text-sm text-[#263746] font-medium leading-relaxed italic">
+            "Developed an offline-first financial collection workflow that allows field agents to record payments without an active internet connection and synchronize pending transactions when connectivity is restored."
+          </p>
+        </div>
+
+        <!-- Project Overview -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[#263746] mb-3 flex items-center gap-2">
+            <i data-lucide="compass" class="w-4 h-4 text-[#C1A66B]"></i>
+            <span>Project Overview</span>
+          </h3>
+          <p class="text-[#68736C] leading-relaxed">
+            Designed and developed <strong>CollectEasy</strong>, a comprehensive chit fund management platform that digitizes financial operations, customer management, payment collections and administrative reporting.
+          </p>
+          <p class="text-[#68736C] leading-relaxed mt-2.5">
+            The platform consists of three integrated modules: a centralized <strong>Admin Dashboard</strong>, an <strong>Offline-First Mobile Web Application</strong> for field agents, and a <strong>RESTful Backend API</strong>.
+          </p>
+        </div>
+
+        <!-- Key Features across 3 Modules -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[#263746] mb-4 flex items-center gap-2">
+            <i data-lucide="layers" class="w-4 h-4 text-[#C1A66B]"></i>
+            <span>Key Features & Modular Breakdown</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4">
+
+            <!-- Module 1: Admin Dashboard -->
+            <div class="p-4 sm:p-5 bg-white border border-[#DDE2D9] rounded-[10px] flex flex-col">
+              <div class="flex items-center gap-2 mb-3 pb-2.5 border-b border-[#EAEDE6]">
+                <i data-lucide="layout-dashboard" class="w-4 h-4 text-[#C1A66B]"></i>
+                <h4 class="font-bold text-xs text-[#263746] uppercase tracking-wide">1. Centralized Admin Dashboard</h4>
+              </div>
+              <ul class="space-y-2 text-xs text-[#68736C] flex-1">
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B] mt-1.5 shrink-0"></span>
+                  <span>Real-time collection and financial performance monitoring.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B] mt-1.5 shrink-0"></span>
+                  <span>Chit group and subgroup management.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B] mt-1.5 shrink-0"></span>
+                  <span>Customer directory and payment history.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B] mt-1.5 shrink-0"></span>
+                  <span>Defaulter tracking and overdue payment monitoring.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B] mt-1.5 shrink-0"></span>
+                  <span>Audit logs and synchronization monitoring.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B] mt-1.5 shrink-0"></span>
+                  <span>Customizable business and receipt settings.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Module 2: Offline-First Field App -->
+            <div class="p-4 sm:p-5 bg-white border border-[#DDE2D9] rounded-[10px] flex flex-col">
+              <div class="flex items-center gap-2 mb-3 pb-2.5 border-b border-[#EAEDE6]">
+                <i data-lucide="smartphone" class="w-4 h-4 text-[#C1A66B]"></i>
+                <h4 class="font-bold text-xs text-[#263746] uppercase tracking-wide">2. Offline-First Field App</h4>
+              </div>
+              <ul class="space-y-2 text-xs text-[#68736C] flex-1">
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] mt-1.5 shrink-0"></span>
+                  <span>IndexedDB-powered offline data storage.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] mt-1.5 shrink-0"></span>
+                  <span>Customer search by name, phone number and account code.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] mt-1.5 shrink-0"></span>
+                  <span>Cash and UPI collection processing.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] mt-1.5 shrink-0"></span>
+                  <span>Digital receipt generation.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] mt-1.5 shrink-0"></span>
+                  <span>Automatic background synchronization.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] mt-1.5 shrink-0"></span>
+                  <span>Reliable payment recording in low-connectivity environments.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Module 3: Secure Backend & Processing -->
+            <div class="p-4 sm:p-5 bg-white border border-[#DDE2D9] rounded-[10px] flex flex-col">
+              <div class="flex items-center gap-2 mb-3 pb-2.5 border-b border-[#EAEDE6]">
+                <i data-lucide="shield-check" class="w-4 h-4 text-[#C1A66B]"></i>
+                <h4 class="font-bold text-xs text-[#263746] uppercase tracking-wide">3. Secure Backend & Financial Engine</h4>
+              </div>
+              <ul class="space-y-2 text-xs text-[#68736C] flex-1">
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#263746] mt-1.5 shrink-0"></span>
+                  <span>RESTful API architecture using Node.js and Express.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#263746] mt-1.5 shrink-0"></span>
+                  <span>MySQL database integration using connection pooling.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#263746] mt-1.5 shrink-0"></span>
+                  <span>JWT-based authentication and role-based access.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#263746] mt-1.5 shrink-0"></span>
+                  <span>Bcrypt PIN hashing & Zod-based request validation.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#263746] mt-1.5 shrink-0"></span>
+                  <span>UUID-based idempotent payment processing.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#263746] mt-1.5 shrink-0"></span>
+                  <span>Integer-based financial calculations using paise to avoid floating-point rounding errors.</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Technical Architecture -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[#263746] mb-3 flex items-center gap-2">
+            <i data-lucide="cpu" class="w-4 h-4 text-[#C1A66B]"></i>
+            <span>Technical Architecture</span>
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 text-xs">
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px]">
+              <span class="text-[10px] font-mono uppercase text-[#89918A] block">Frontend</span>
+              <span class="font-semibold text-[#263746] mt-1 block">React 18, Vite, TypeScript</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px]">
+              <span class="text-[10px] font-mono uppercase text-[#89918A] block">Backend</span>
+              <span class="font-semibold text-[#263746] mt-1 block">Node.js, Express.js, TypeScript</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px]">
+              <span class="text-[10px] font-mono uppercase text-[#89918A] block">Database</span>
+              <span class="font-semibold text-[#263746] mt-1 block">MySQL 8 (Connection Pooling)</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px]">
+              <span class="text-[10px] font-mono uppercase text-[#89918A] block">Offline Storage</span>
+              <span class="font-semibold text-[#263746] mt-1 block">IndexedDB with idb</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px]">
+              <span class="text-[10px] font-mono uppercase text-[#89918A] block">Authentication</span>
+              <span class="font-semibold text-[#263746] mt-1 block">JWT and bcrypt</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px]">
+              <span class="text-[10px] font-mono uppercase text-[#89918A] block">Validation</span>
+              <span class="font-semibold text-[#263746] mt-1 block">Zod Request Validation</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px]">
+              <span class="text-[10px] font-mono uppercase text-[#89918A] block">Visualization</span>
+              <span class="font-semibold text-[#263746] mt-1 block">Recharts Analytics</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px]">
+              <span class="text-[10px] font-mono uppercase text-[#89918A] block">UI Icons</span>
+              <span class="font-semibold text-[#263746] mt-1 block">Lucide React</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- My Responsibilities -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[#263746] mb-3 flex items-center gap-2">
+            <i data-lucide="briefcase" class="w-4 h-4 text-[#C1A66B]"></i>
+            <span>My Responsibilities</span>
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+              <span class="text-[#263746] font-medium">Full-stack application architecture and development.</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+              <span class="text-[#263746] font-medium">Database schema design and integration.</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+              <span class="text-[#263746] font-medium">Financial transaction processing.</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+              <span class="text-[#263746] font-medium">Offline-first application implementation.</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+              <span class="text-[#263746] font-medium">API development and authentication.</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+              <span class="text-[#263746] font-medium">Admin and field-agent workflow implementation.</span>
+            </div>
+            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5 sm:col-span-2">
+              <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+              <span class="text-[#263746] font-medium">Payment synchronization and duplicate prevention.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer (Sticky) -->
+      <div class="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#EAEDE6] border-t border-[#DDE2D9] flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center sm:justify-start text-center sm:text-left">
+          <span class="text-[11px] font-mono text-[#89918A]">
+            Designed & Built by Jothilingam S
+          </span>
+          <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
+            class="text-[11px] font-mono text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1 font-semibold">
+            <span>GitHub Profile</span>
+            <i data-lucide="arrow-up-right" class="w-3 h-3 text-[#C1A66B]"></i>
+          </a>
+        </div>
+        <div class="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+          <a href="#contact" onclick="closeProjectModal()"
+            class="flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 rounded-[6px] bg-[#496D65] text-white text-xs font-semibold hover:bg-[#3d5c55] transition-colors inline-flex items-center justify-center gap-2 text-center">
+            <span>Inquire About This Project</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+          </a>
+          <button type="button" onclick="closeProjectModal()"
+            class="px-4 py-2.5 rounded-[6px] bg-white border border-[#DDE2D9] text-[#263746] text-xs font-semibold hover:bg-[#F4F5F0] transition-colors cursor-pointer">
+            Close
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Subtle Notification Toast -->
+  <div id="toastNotification"
+    class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-300 bg-[#263746] text-white px-5 py-3 rounded-[6px] text-xs flex items-center gap-2.5 shadow-md pointer-events-none">
+    <i data-lucide="check" class="w-4 h-4 text-[#C1A66B]"></i>
+    <span id="toastMessage">Copied</span>
+  </div>
+
+  <script>
+    // Project Details Modal Controllers
+    function openProjectModal(projectId) {
+      const modal = document.getElementById('projectModal');
+      const dialogCard = document.getElementById('modalDialogCard');
+      if (!modal) return;
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100', 'pointer-events-auto');
+      if (dialogCard) {
+        dialogCard.classList.remove('scale-95');
+        dialogCard.classList.add('scale-100');
+      }
+      document.body.style.overflow = 'hidden';
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('projectModal');
+      const dialogCard = document.getElementById('modalDialogCard');
+      if (!modal) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.classList.remove('opacity-100', 'pointer-events-auto');
+      if (dialogCard) {
+        dialogCard.classList.add('scale-95');
+        dialogCard.classList.remove('scale-100');
+      }
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeProjectModal();
+      }
+    });
+
+    // Close modal when clicking directly on the backdrop
+    document.addEventListener('click', (e) => {
+      const modal = document.getElementById('projectModal');
+      if (modal && e.target === modal) {
+        closeProjectModal();
+      }
+    });
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Site Intro Monogram Screen Controller
+    let introDismissed = false;
+
+    function dismissIntro() {
+      if (introDismissed) return;
+      introDismissed = true;
+      const intro = document.getElementById('siteIntro');
+      if (!intro) return;
+      intro.classList.add('intro-hidden');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 700);
+    }
+
+    // Trigger progress on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const intro = document.getElementById('siteIntro');
+      if (!intro) return;
+      document.body.style.overflow = 'hidden';
+
+      const progress = document.getElementById('introProgress');
+      if (progress) {
+        setTimeout(() => {
+          progress.style.width = '100%';
+        }, 80);
+      }
+
+      // Auto-transition to main site after monogram sequence (~1.5s)
+      setTimeout(() => {
+        dismissIntro();
+      }, 1500);
+    });
+
+    // Dismiss on Enter, Escape, or Space keypress
+    window.addEventListener('keydown', (e) => {
+      if (!introDismissed && (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter')) {
+        dismissIntro();
+      }
+    });
+
+    // Optional replay function (can be invoked anytime)
+    window.replayIntro = function() {
+      const intro = document.getElementById('siteIntro');
+      const progress = document.getElementById('introProgress');
+      if (!intro) return;
+      introDismissed = false;
+      if (progress) progress.style.width = '0%';
+      intro.style.display = 'flex';
+      intro.classList.remove('intro-hidden');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        if (progress) progress.style.width = '100%';
+      }, 80);
+      setTimeout(() => {
+        dismissIntro();
+      }, 1500);
+    };
+
+    // Mobile navigation toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Scroll-triggered subtle editorial reveal (IntersectionObserver)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.08
+    });
+
+    document.querySelectorAll('.editorial-reveal').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Email clipboard utility
+    function copyEmailAddress() {
+      const email = 'jothilingamsivalingamg@gmail.com';
+      const tempArea = document.createElement('textarea');
+      tempArea.value = email;
+      tempArea.setAttribute('readonly', '');
+      tempArea.style.position = 'absolute';
+      tempArea.style.left = '-9999px';
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      try {
+        document.execCommand('copy');
+        displayToast('Email copied to clipboard.');
+      } catch (err) {
+        displayToast('Failed to copy email.');
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    function displayToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMessage').textContent = msg;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-16', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2600);
+    }
+
+    // Serverless Contact Form Dispatcher (/api/contact)
+    async function handleContactFormSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = document.getElementById('contactSubmitBtn');
+      const originalContent = submitBtn.innerHTML;
+
+      const payload = {
+        name: document.getElementById('contactName').value.trim(),
+        email: document.getElementById('contactEmail').value.trim(),
+        subject: document.getElementById('contactSubject').value.trim(),
+        message: document.getElementById('contactMessage').value.trim()
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Sending...</span><svg class="animate-spin w-3.5 h-3.5 text-[#C1A66B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && result.success) {
+          displayToast(result.message || 'Message sent! A confirmation copy has been sent to your email.');
+          form.reset();
+        } else {
+          displayToast(result.message || 'Failed to send message. Please email directly.');
+        }
+      } catch (err) {
+        displayToast('Network error. Deploy to Vercel to test live delivery.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalContent;
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
