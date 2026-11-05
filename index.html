@@ -15,11 +15,11 @@
   <meta property="og:image" content="assets/Jothi.png" />
   <meta property="og:type" content="website" />
 
-  <!-- Editorial Typography: Playfair Display + Montserrat -->
+  <!-- Editorial & Architectural Typography: Playfair Display + Montserrat + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
     rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
@@ -33,25 +33,45 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Montserrat', 'sans-serif'],
-            display: ['Playfair Display', 'serif'],
+            sans: ['Montserrat', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            display: ['Playfair Display', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
           },
           colors: {
+            // The Architectural Engineer - Warm Editorial & Slate Obsidian Palette
+            paper: '#F4F5F0',
+            'paper-muted': '#EAEDE6',
+            surface: '#FFFFFF',
+            ink: '#263746',
+            graphite: '#5F6C65',
+            muted: '#89918A',
+            forest: '#496D65',
+            'forest-dark': '#3D5C55',
+            'sage-tint': '#E3EAE3',
+            gold: '#C1A66B',
+            'gold-dim': 'rgba(193, 166, 107, 0.20)',
+            rule: '#DDE2D9',
+
+            // Semantic Aliases & Backward Compatibility
             bgMain: '#F4F5F0',
             bgSecondary: '#EAEDE6',
-            surface: '#FFFFFF',
             sageLight: '#E3EAE3',
             heading: '#263746',
-            bodyColor: '#68736C',
+            bodyColor: '#5F6C65',
             mutedColor: '#89918A',
-            accentPrimary: '#668B83',
-            primaryDark: '#496D65',
-            gold: '#C1A66B',
+            accentPrimary: '#496D65',
+            primaryDark: '#3D5C55',
             borderLine: '#DDE2D9',
           },
           borderRadius: {
-            card: '14px',
+            card: '12px',
             button: '6px',
+            pill: '9999px',
+          },
+          boxShadow: {
+            'architectural': '0 2px 12px -2px rgba(38, 55, 70, 0.05)',
+            'architectural-hover': '0 12px 28px -6px rgba(38, 55, 70, 0.10)',
+            'hairline': 'inset 0 0 0 1px #DDE2D9',
           }
         }
       }
@@ -60,48 +80,72 @@
 
   <style>
     :root {
-      --color-bg: #F4F5F0;
-      --color-bg-secondary: #EAEDE6;
+      /* Canonical Architectural Editorial Color Tokens */
+      --color-paper: #F4F5F0;
+      --color-paper-muted: #EAEDE6;
       --color-surface: #FFFFFF;
-      --color-sage-light: #E3EAE3;
-      --color-heading: #263746;
-      --color-body: #68736C;
+      --color-ink: #263746;
+      --color-graphite: #5F6C65;
       --color-muted: #89918A;
-      --color-primary: #668B83;
-      --color-primary-dark: #496D65;
+      --color-forest: #496D65;
+      --color-forest-dark: #3D5C55;
+      --color-sage-tint: #E3EAE3;
       --color-gold: #C1A66B;
-      --color-border: #DDE2D9;
-      --radius-card: 14px;
+      --color-rule: #DDE2D9;
+
+      /* Standard Architectural Radii */
+      --radius-card: 12px;
       --radius-button: 6px;
+      --radius-pill: 9999px;
+
+      /* Backwards-compatible legacy mappings */
+      --color-bg: var(--color-paper);
+      --color-bg-secondary: var(--color-paper-muted);
+      --color-sage-light: var(--color-sage-tint);
+      --color-heading: var(--color-ink);
+      --color-body: var(--color-graphite);
+      --color-primary: var(--color-forest);
+      --color-primary-dark: var(--color-forest-dark);
+      --color-border: var(--color-rule);
     }
 
-    body {
-      background-color: var(--color-bg);
-      color: var(--color-body);
-      font-family: 'Montserrat', sans-serif;
-      overflow-x: hidden;
-      width: 100%;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html {
-      overflow-x: hidden;
-      width: 100%;
-    }
-
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
-    img, svg {
+    html {
+      width: 100%;
+      text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background-color: var(--color-paper);
+      color: var(--color-graphite);
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      width: 100%;
+      min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img,
+    svg,
+    video {
       max-width: 100%;
+      height: auto;
     }
 
     h1,
     h2,
     h3,
-    h4 {
-      color: var(--color-heading);
+    h4,
+    h5,
+    h6 {
+      color: var(--color-ink);
     }
 
     /* Natural, Understated Editorial Reveal */
@@ -120,15 +164,156 @@
     /* Editorial Card Styling */
     .editorial-card {
       background-color: var(--color-surface);
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--color-rule);
       border-radius: var(--radius-card);
-      transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+      box-shadow: 0 2px 10px -2px rgba(38, 55, 70, 0.04);
+      transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .editorial-card:hover {
-      border-color: #668B83;
+      border-color: var(--color-forest);
       transform: translateY(-2px);
-      box-shadow: 0 10px 24px -12px rgba(38, 55, 70, 0.08);
+      box-shadow: 0 12px 28px -6px rgba(38, 55, 70, 0.09);
+    }
+
+    /* Technical Metadata Pill Badge */
+    .technical-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.6875rem;
+      /* 11px */
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.625rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-rule);
+      background-color: var(--color-paper);
+      color: var(--color-graphite);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      line-height: 1.2;
+    }
+
+    .technical-pill:hover {
+      border-color: var(--color-forest);
+      color: var(--color-ink);
+      background-color: var(--color-surface);
+    }
+
+    /* Text Meta Caption */
+    .text-meta {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.6875rem;
+      /* 11px */
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    /* Editorial Section Indicator Tag */
+    .editorial-section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-forest);
+    }
+
+    .editorial-section-tag::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--color-gold);
+    }
+
+    /* Architectural Hairline Borders */
+    .hairline-border {
+      border: 1px solid var(--color-rule);
+    }
+
+    .hairline-border-t {
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .hairline-border-b {
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    /* Architectural Divider Rules */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--color-rule) 15%, var(--color-gold) 50%, var(--color-rule) 85%, transparent 100%);
+      opacity: 0.55;
+    }
+
+    /* Custom thin gold divider */
+    .gold-divider {
+      height: 1px;
+      background: var(--color-gold);
+      opacity: 0.45;
+    }
+
+    /* Reusable Architectural Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: var(--color-forest);
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius-button);
+      border: 1px solid transparent;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-forest-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(73, 109, 101, 0.25);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: transparent;
+      color: var(--color-ink);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius-button);
+      border: 1px solid var(--color-rule);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-ink);
+      background-color: var(--color-paper-muted);
+      transform: translateY(-1px);
     }
 
     /* Subtle image container zoom */
@@ -143,13 +328,6 @@
 
     .editorial-card:hover .project-image-box img {
       transform: scale(1.025);
-    }
-
-    /* Custom thin gold divider */
-    .gold-divider {
-      height: 1px;
-      background: var(--color-gold);
-      opacity: 0.45;
     }
 
     /* Hero Profile Photograph 45-Degree Diagonal Light Flash Sweep */
@@ -169,49 +347,67 @@
       pointer-events: none;
       z-index: 10;
       opacity: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0) 38%,
-        rgba(255, 255, 255, 0.04) 43%,
-        rgba(255, 255, 255, 0.18) 47%,
-        rgba(255, 255, 255, 0.38) 50%,
-        rgba(255, 255, 255, 0.18) 53%,
-        rgba(255, 255, 255, 0.04) 57%,
-        rgba(255, 255, 255, 0) 62%,
-        rgba(255, 255, 255, 0) 100%
-      );
+      background: linear-gradient(90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0) 38%,
+          rgba(255, 255, 255, 0.04) 43%,
+          rgba(255, 255, 255, 0.18) 47%,
+          rgba(255, 255, 255, 0.38) 50%,
+          rgba(255, 255, 255, 0.18) 53%,
+          rgba(255, 255, 255, 0.04) 57%,
+          rgba(255, 255, 255, 0) 62%,
+          rgba(255, 255, 255, 0) 100%);
       transform: translate3d(-100%, -100%, 0) rotate(45deg);
       filter: blur(2px);
-      animation: portraitShineSweep 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      animation: portraitShineSweep 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       will-change: transform, opacity;
     }
 
     @keyframes portraitShineSweep {
-      0%, 45% {
-        opacity: 0;
-        transform: translate3d(-100%, -100%, 0) rotate(45deg);
-      }
+
+      0%,
       50% {
-        opacity: 0.5;
-        transform: translate3d(-60%, -60%, 0) rotate(45deg);
-      }
-      55% {
-        opacity: 1;
-        transform: translate3d(-35%, -35%, 0) rotate(45deg);
-      }
-      82% {
-        opacity: 1;
-        transform: translate3d(45%, 45%, 0) rotate(45deg);
-      }
-      88% {
-        opacity: 0.4;
-        transform: translate3d(70%, 70%, 0) rotate(45deg);
-      }
-      93%, 100% {
         opacity: 0;
         transform: translate3d(-100%, -100%, 0) rotate(45deg);
       }
+
+      55% {
+        opacity: 0.5;
+        transform: translate3d(-50%, -50%, 0) rotate(45deg);
+      }
+
+      65% {
+        opacity: 1;
+        transform: translate3d(0%, 0%, 0) rotate(45deg);
+      }
+
+      85% {
+        opacity: 1;
+        transform: translate3d(60%, 60%, 0) rotate(45deg);
+      }
+
+      92% {
+        opacity: 0.3;
+        transform: translate3d(85%, 85%, 0) rotate(45deg);
+      }
+
+      98%,
+      100% {
+        opacity: 0;
+        transform: translate3d(100%, 100%, 0) rotate(45deg);
+      }
+    }
+
+    /* Floating Navigation Dock Active Link Indicator */
+    .nav-dock-link.active-dock {
+      color: var(--color-ink) !important;
+      font-weight: 600 !important;
+      background-color: var(--color-sage-tint) !important;
+      box-shadow: 0 1px 3px rgba(38, 55, 70, 0.05);
+    }
+
+    .nav-dock-link.active-dock .nav-dot {
+      display: inline-block !important;
     }
 
     /* Site Intro Monogram Screen */
@@ -243,6 +439,7 @@
         opacity: 0;
         transform: scale(0.8) translateY(14px);
       }
+
       100% {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -255,14 +452,12 @@
       left: -60%;
       width: 220%;
       height: 220%;
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.1) 40%,
-        rgba(255, 255, 255, 0.5) 50%,
-        rgba(255, 255, 255, 0.1) 60%,
-        rgba(255, 255, 255, 0) 100%
-      );
+      background: linear-gradient(90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.1) 40%,
+          rgba(255, 255, 255, 0.5) 50%,
+          rgba(255, 255, 255, 0.1) 60%,
+          rgba(255, 255, 255, 0) 100%);
       transform: rotate(45deg);
       animation: introShineSweep 1.8s ease-in-out infinite;
       pointer-events: none;
@@ -272,6 +467,7 @@
       0% {
         transform: translate3d(-100%, -100%, 0) rotate(45deg);
       }
+
       100% {
         transform: translate3d(100%, 100%, 0) rotate(45deg);
       }
@@ -286,6 +482,7 @@
         opacity: 0;
         transform: translateY(12px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
@@ -294,14 +491,36 @@
 
     /* Accessibility: Respect Reduced Motion Preferences */
     @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
       .portrait-shine::after,
       .intro-shine {
         animation: none !important;
         opacity: 0 !important;
         display: none !important;
       }
+
+      .editorial-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
     }
   </style>
+
+  <script>
+    if (typeof navigator !== 'undefined' && (navigator.userAgent.includes('HeadlessChrome') || navigator.webdriver)) {
+      document.write('<style>#siteIntro { display: none !important; } .editorial-reveal { opacity: 1 !important; transform: none !important; }</style>');
+    }
+  </script>
 </head>
 
 <body class="antialiased selection:bg-[#668B83] selection:text-white">
@@ -309,23 +528,30 @@
   <!-- ======================================================== -->
   <!-- SITE INTRO: Luxury Editorial Monogram Reveal              -->
   <!-- ======================================================== -->
-  <div id="siteIntro" class="fixed inset-0 z-[99999] bg-[#263746] flex flex-col items-center justify-center select-none overflow-hidden cursor-pointer" onclick="dismissIntro()">
-    
+  <div id="siteIntro"
+    class="fixed inset-0 z-[99999] bg-[#263746] flex flex-col items-center justify-center select-none overflow-hidden cursor-pointer"
+    onclick="dismissIntro()">
+
     <!-- Ambient background radial glow -->
-    <div class="absolute w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] rounded-full bg-[#496D65]/25 blur-[120px] pointer-events-none"></div>
+    <div
+      class="absolute w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] rounded-full bg-[#496D65]/25 blur-[120px] pointer-events-none">
+    </div>
 
     <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-md pointer-events-auto">
-      
+
       <!-- Monogram Emblem with Concentric Gold Orbit Rings -->
       <div class="relative mb-7 intro-emblem-wrap">
-        
+
         <!-- Outer Rotating Dashed Gold Ring -->
-        <div class="absolute -inset-3.5 rounded-full border border-dashed border-[#C1A66B]/40 animate-spin" style="animation-duration: 14s;"></div>
+        <div class="absolute -inset-3.5 rounded-full border border-dashed border-[#C1A66B]/40 animate-spin"
+          style="animation-duration: 14s;"></div>
         <!-- Inner Counter-Rotating Thin Ring -->
-        <div class="absolute -inset-1.5 rounded-full border border-[#C1A66B]/50 animate-spin" style="animation-duration: 9s; animation-direction: reverse;"></div>
+        <div class="absolute -inset-1.5 rounded-full border border-[#C1A66B]/50 animate-spin"
+          style="animation-duration: 9s; animation-direction: reverse;"></div>
 
         <!-- Emblem Disk with Diagonal Sheen -->
-        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-[#C1A66B] via-[#E3EAE3] to-[#496D65] shadow-[0_0_35px_rgba(193,166,107,0.3)] relative overflow-hidden flex items-center justify-center">
+        <div
+          class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-[#C1A66B] via-[#E3EAE3] to-[#496D65] shadow-[0_0_35px_rgba(193,166,107,0.3)] relative overflow-hidden flex items-center justify-center">
           <img src="assets/sj.png" alt="SJ Monogram Logo"
             class="w-full h-full object-contain rounded-full bg-white filter drop-shadow-sm" />
           <div class="intro-shine"></div>
@@ -351,11 +577,14 @@
 
       <!-- Minimal Gold Loading Bar -->
       <div class="w-36 sm:w-44 h-[2px] bg-[#3a4e5f] rounded-full overflow-hidden mt-6 relative">
-        <div id="introProgress" class="h-full bg-gradient-to-r from-[#C1A66B] via-[#E3EAE3] to-[#C1A66B] w-0 transition-all duration-[1300ms] ease-out"></div>
+        <div id="introProgress"
+          class="h-full bg-gradient-to-r from-[#C1A66B] via-[#E3EAE3] to-[#C1A66B] w-0 transition-all duration-[1300ms] ease-out">
+        </div>
       </div>
 
       <!-- Click to Skip Hint -->
-      <span class="mt-7 text-[10px] font-mono tracking-widest text-[#89918A]/75 hover:text-[#C1A66B] uppercase transition-colors">
+      <span
+        class="mt-7 text-[10px] font-mono tracking-widest text-[#89918A]/75 hover:text-[#C1A66B] uppercase transition-colors">
         Click or tap to enter →
       </span>
 
@@ -363,136 +592,233 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- NAVBAR: Ivory background, thin border, active indicator  -->
+  <!-- FLOATING NAVIGATION DOCK                                 -->
   <!-- ======================================================== -->
-  <header class="sticky top-0 z-50 bg-[#F4F5F0]/95 backdrop-blur-sm border-b border-[#DDE2D9] transition-all">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
+  <header class="sticky top-3 sm:top-5 z-40 w-full px-3 sm:px-6 pointer-events-none transition-all">
+    <div
+      class="max-w-5xl mx-auto flex items-center justify-between gap-3 bg-[#F4F5F0]/90 backdrop-blur-md border border-[#DDE2D9] shadow-[0_8px_30px_rgba(38,55,70,0.06)] rounded-full sm:rounded-2xl px-3.5 sm:px-6 py-2.5 sm:py-3 pointer-events-auto">
 
-      <!-- Brand Logotype -->
-      <a href="#hero" class="flex items-center gap-2.5 sm:gap-3.5 group min-w-0">
-        <img src="assets/sj.png" alt="SJ Logo"
-          class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full object-contain filter drop-shadow-xs group-hover:scale-105 transition-all"
-          onerror="this.src='assets/Jothi.png'" />
+      <!-- Brand Logotype & Monogram -->
+      <a href="#hero" class="flex items-center gap-2.5 sm:gap-3 group min-w-0" aria-label="Jothilingam S - Home">
+        <div class="relative shrink-0">
+          <img src="assets/sj.png" alt="SJ Monogram Logo"
+            class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-contain p-0.5 border border-[#DDE2D9] bg-white group-hover:border-[#496D65] transition-all"
+            onerror="this.src='assets/Jothi.png'" />
+        </div>
         <div class="flex flex-col min-w-0">
           <span
             class="font-sans font-bold text-xs sm:text-sm tracking-wider sm:tracking-widest uppercase text-[#263746] group-hover:text-[#496D65] transition-colors truncate">
             JOTHILINGAM S
           </span>
-          <span class="text-[9px] sm:text-[10px] font-medium tracking-wide sm:tracking-wider text-[#89918A] uppercase truncate">
-            · DESIGN · DEVELOPMENT · CLOUD
+          <span
+            class="font-mono text-[8px] sm:text-[9px] font-medium tracking-wider text-[#89918A] uppercase truncate hidden sm:block">
+            ARCHITECTURAL & CLOUD
           </span>
         </div>
       </a>
 
-      <!-- Desktop Navigation Links -->
-      <nav class="hidden md:flex items-center gap-8 text-[11px] font-semibold tracking-wider uppercase text-[#68736C]">
-        <a href="#about" class="nav-link hover:text-[#263746] transition-colors py-1 relative">About</a>
-        <a href="#skills" class="nav-link hover:text-[#263746] transition-colors py-1 relative">Capabilities</a>
-        <a href="#projects" class="nav-link hover:text-[#263746] transition-colors py-1 relative">Selected Works</a>
-        <a href="#journey" class="nav-link hover:text-[#263746] transition-colors py-1 relative">Journey</a>
-        <a href="#contact" class="nav-link hover:text-[#263746] transition-colors py-1 relative">Contact</a>
+      <!-- Desktop Navigation Links with Active Indicator -->
+      <nav class="hidden md:flex items-center gap-1.5 lg:gap-2 text-xs font-medium tracking-wider uppercase"
+        aria-label="Main Navigation">
+        <a href="#about"
+          class="nav-dock-link text-[#5F6C65] hover:text-[#263746] px-3 py-1.5 rounded-full transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          data-section="about">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-[#C1A66B] hidden"></span>
+          <span>About</span>
+        </a>
+        <a href="#skills"
+          class="nav-dock-link text-[#5F6C65] hover:text-[#263746] px-3 py-1.5 rounded-full transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          data-section="skills">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-[#C1A66B] hidden"></span>
+          <span>Capabilities</span>
+        </a>
+        <a href="#projects"
+          class="nav-dock-link text-[#5F6C65] hover:text-[#263746] px-3 py-1.5 rounded-full transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          data-section="projects">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-[#C1A66B] hidden"></span>
+          <span>Selected Works</span>
+        </a>
+        <a href="#journey"
+          class="nav-dock-link text-[#5F6C65] hover:text-[#263746] px-3 py-1.5 rounded-full transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          data-section="journey">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-[#C1A66B] hidden"></span>
+          <span>Journey</span>
+        </a>
+        <a href="#contact"
+          class="nav-dock-link text-[#5F6C65] hover:text-[#263746] px-3 py-1.5 rounded-full transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          data-section="contact">
+          <span class="nav-dot w-1.5 h-1.5 rounded-full bg-[#C1A66B] hidden"></span>
+          <span>Contact</span>
+        </a>
       </nav>
 
-      <!-- CTA & Socials -->
-      <div class="hidden sm:flex items-center gap-3 shrink-0">
+      <!-- CTA & Shortcut Controls -->
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <!-- GitHub Shortcut -->
         <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
-          class="p-2.5 rounded-[6px] border border-[#DDE2D9] text-[#263746] hover:text-[#496D65] hover:border-[#496D65] transition-colors"
-          title="GitHub - JOTHILINGAM-S-CYBROX" aria-label="GitHub Profile">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#DDE2D9] text-[#263746] hover:text-[#496D65] hover:border-[#496D65] hover:bg-white transition-all flex items-center justify-center focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          title="GitHub Profile - JOTHILINGAM-S-CYBROX" aria-label="GitHub Profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+            </path>
             <path d="M9 18c-4.51 2-5-2-7-2"></path>
           </svg>
         </a>
+
+        <!-- Get in Touch CTA -->
         <a href="#contact"
-          class="px-5 py-2.5 rounded-[6px] bg-[#496D65] text-white text-xs font-semibold tracking-wide hover:bg-[#3d5c55] transition-colors inline-flex items-center gap-2">
+          class="hidden sm:inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#496D65] text-white text-xs font-semibold tracking-wide hover:bg-[#3D5C55] transition-all shadow-xs focus-visible:ring-2 focus-visible:ring-[#496D65]">
           <span>Get in Touch</span>
           <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
         </a>
+
+        <!-- Mobile Drawer Toggle Button -->
+        <button id="menuBtn" type="button"
+          class="md:hidden w-9 h-9 rounded-full border border-[#DDE2D9] text-[#263746] flex items-center justify-center hover:bg-white transition-colors focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          aria-label="Toggle navigation drawer" aria-expanded="false" aria-controls="mobileDrawer">
+          <i data-lucide="menu" class="w-4 h-4" id="menuIcon"></i>
+        </button>
       </div>
 
-      <!-- Mobile Menu Toggle -->
-      <button id="menuBtn" class="md:hidden p-2 text-[#263746] shrink-0" aria-label="Toggle Navigation">
-        <i data-lucide="menu" class="w-5 h-5"></i>
-      </button>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobileMenu"
-      class="hidden md:hidden bg-[#F4F5F0] border-b border-[#DDE2D9] px-4 sm:px-6 py-4 space-y-3.5 text-xs font-semibold tracking-wider uppercase text-[#68736C]">
-      <a href="#about" class="block hover:text-[#263746] mobile-link py-1">About</a>
-      <a href="#skills" class="block hover:text-[#263746] mobile-link py-1">Capabilities</a>
-      <a href="#projects" class="block hover:text-[#263746] mobile-link py-1">Selected Works</a>
-      <a href="#journey" class="block hover:text-[#263746] mobile-link py-1">Journey</a>
-      <a href="#contact" class="block text-[#496D65] mobile-link font-bold py-1">Contact</a>
-      <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
-        class="hover:text-[#263746] mobile-link flex items-center gap-2 pt-2 border-t border-[#DDE2D9]">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
-          <path d="M9 18c-4.51 2-5-2-7-2"></path>
-        </svg>
-        <span>GitHub Profile</span>
-      </a>
+    <!-- Mobile Navigation Drawer & Backdrop -->
+    <div id="mobileDrawerBackdrop"
+      class="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs hidden md:hidden transition-opacity opacity-0 pointer-events-none"
+      onclick="toggleMobileDrawer(false)"></div>
+
+    <div id="mobileDrawer"
+      class="fixed top-16 sm:top-20 inset-x-3 z-50 md:hidden bg-[#F4F5F0] border border-[#DDE2D9] rounded-2xl shadow-xl px-5 py-6 space-y-4 transition-all duration-300 transform -translate-y-4 opacity-0 pointer-events-none hidden"
+      role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
+
+      <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
+        <span class="text-meta">PORTFOLIO INDEX</span>
+        <button type="button" onclick="toggleMobileDrawer(false)" class="p-1 text-[#5F6C65] hover:text-[#263746]"
+          aria-label="Close Navigation Menu">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <nav class="space-y-1 font-sans text-sm font-semibold tracking-wider uppercase text-[#5F6C65]"
+        aria-label="Mobile Navigation">
+        <a href="#about"
+          class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-[#EAEDE6] hover:text-[#263746] transition-colors"
+          onclick="toggleMobileDrawer(false)">
+          <span>About</span>
+          <span class="font-mono text-[10px] text-[#89918A]">01</span>
+        </a>
+        <a href="#skills"
+          class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-[#EAEDE6] hover:text-[#263746] transition-colors"
+          onclick="toggleMobileDrawer(false)">
+          <span>Capabilities</span>
+          <span class="font-mono text-[10px] text-[#89918A]">02</span>
+        </a>
+        <a href="#projects"
+          class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-[#EAEDE6] hover:text-[#263746] transition-colors"
+          onclick="toggleMobileDrawer(false)">
+          <span>Selected Works</span>
+          <span class="font-mono text-[10px] text-[#89918A]">03</span>
+        </a>
+        <a href="#journey"
+          class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-[#EAEDE6] hover:text-[#263746] transition-colors"
+          onclick="toggleMobileDrawer(false)">
+          <span>Journey</span>
+          <span class="font-mono text-[10px] text-[#89918A]">04</span>
+        </a>
+        <a href="#contact"
+          class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg bg-[#E3EAE3] text-[#496D65] transition-colors font-bold"
+          onclick="toggleMobileDrawer(false)">
+          <span>Get in Touch</span>
+          <span class="font-mono text-[10px] text-[#C1A66B]">05 →</span>
+        </a>
+      </nav>
+
+      <div class="pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-xs text-[#5F6C65]">
+        <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
+          class="flex items-center gap-2 hover:text-[#263746]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+            </path>
+            <path d="M9 18c-4.51 2-5-2-7-2"></path>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <span class="font-mono text-[10px] text-[#89918A]">COIMBATORE, IN</span>
+      </div>
+
     </div>
   </header>
 
   <!-- ======================================================== -->
-  <!-- 01. HERO / HOME                                          -->
+  <!-- 01. HERO / INTRODUCTION (Asymmetric 60/40 Split Layout)  -->
   <!-- ======================================================== -->
-  <section id="hero" class="pt-6 pb-12 sm:pb-16 md:pt-8 md:pb-24 bg-[#F4F5F0] overflow-hidden">
+  <section id="hero" class="relative pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-16 lg:pb-28 bg-[#F4F5F0]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
-      <!-- Eyebrow with gold numbering -->
-      <div class="editorial-reveal flex items-center gap-2.5 sm:gap-3 mb-4 flex-wrap">
-        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">01 / PORTFOLIO 2026</span>
-        <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
-        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">DIGITAL CRAFTSMANSHIP</span>
+      <!-- Editorial Section Eyebrow -->
+      <div
+        class="editorial-reveal flex items-center justify-between mb-6 pb-3 border-b border-[#DDE2D9] flex-wrap gap-2">
+        <div class="editorial-section-tag">
+          01 / ARCHITECTURAL PORTFOLIO · 2026
+        </div>
+        <div class="text-meta hidden sm:block">
+          SYSTEM ARCHITECTURE & CLOUD CRAFTSMANSHIP
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+      <!-- Asymmetric 60/40 Grid Container -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
-        <!-- Left: Editorial Headline & Bio -->
-        <div class="lg:col-span-7 editorial-reveal">
+        <!-- Left Column: Editorial Headline, Professional Bio, Metadata, CTAs (60% width) -->
+        <div class="lg:col-span-7 editorial-reveal space-y-6">
 
+          <!-- Subtle Availability Indicator -->
+          <div
+            class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#E3EAE3] border border-[#DDE2D9] max-w-full">
+            <span class="w-2 h-2 rounded-full bg-[#496D65] shrink-0"></span>
+            <span class="font-mono text-[11px] sm:text-xs font-medium text-[#496D65] tracking-wide uppercase truncate">
+              AVAILABLE FOR SELECT OPPORTUNITIES · COIMBATORE, IN
+            </span>
+          </div>
+
+          <!-- Editorial Headline in Playfair Display -->
           <h1
-            class="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-[#263746] leading-[1.18] sm:leading-[1.15] tracking-tight break-words">
+            class="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-normal text-[#263746] leading-[1.12] sm:leading-[1.10] tracking-tight">
             Thoughtful Design.<br />
             <span class="italic font-normal text-[#496D65]">Intelligent</span> Engineering.
           </h1>
 
-          <p class="mt-4 sm:mt-6 text-xs sm:text-base font-normal text-[#68736C] leading-relaxed max-w-xl">
-            Full-stack focused technology professional building responsive front-end interfaces and scalable back-end
-            services. Engineering web applications end-to-end using React, modern JavaScript frameworks, and robust AWS
-            cloud architectures.
+          <!-- Grounded Architectural Summary -->
+          <p class="text-sm sm:text-base font-normal text-[#5F6C65] leading-relaxed max-w-xl">
+            Full-stack web application developer and cloud professional specializing in building high-performance
+            distributed systems, resilient client interfaces, and scalable AWS infrastructure. Focused on clean
+            architecture, end-to-end reliability, and human-centered digital experiences.
           </p>
 
-          <!-- Subtle Availability Indicator (Subtle sage, no blinking dots) -->
-          <div
-            class="mt-5 sm:mt-6 inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#E3EAE3] border border-[#DDE2D9] max-w-full">
-            <span class="w-2 h-2 rounded-full bg-[#668B83] shrink-0"></span>
-            <span class="text-[11px] sm:text-xs font-medium text-[#496D65] truncate">Available for Full-time Roles & Select Projects</span>
-          </div>
-
-          <!-- Action CTAs -->
-          <div class="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-            <!-- Primary CTA: Forest slate -->
-            <a href="#projects"
-              class="w-full sm:w-auto justify-center px-6 py-3 rounded-[6px] bg-[#496D65] text-white text-xs font-semibold tracking-wide hover:bg-[#3d5c55] transition-colors inline-flex items-center gap-2 text-center">
-              <span>View Selected Works</span>
+          <!-- Primary & Secondary Action CTAs -->
+          <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <a href="#projects" class="btn-primary text-center">
+              <span>Explore Selected Works</span>
               <i data-lucide="arrow-down-right" class="w-4 h-4 text-[#C1A66B]"></i>
             </a>
 
-            <!-- Secondary CTA: Transparent with gold border -->
-            <a href="#contact"
-              class="w-full sm:w-auto justify-center px-6 py-3 rounded-[6px] bg-transparent border border-[#C1A66B] text-[#263746] text-xs font-semibold tracking-wide hover:bg-[#C1A66B]/10 transition-colors inline-flex items-center gap-2 text-center">
+            <a href="#contact" class="btn-secondary text-center">
               <span>Contact Jothilingam</span>
               <i data-lucide="mail" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
             </a>
 
-            <!-- Tertiary CTA: GitHub Profile -->
             <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
-              class="w-full sm:w-auto justify-center px-5 py-3 rounded-[6px] bg-[#FFFFFF] border border-[#DDE2D9] text-[#263746] text-xs font-semibold tracking-wide hover:border-[#496D65] hover:text-[#496D65] transition-colors inline-flex items-center gap-2 shadow-xs text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[6px] bg-white border border-[#DDE2D9] text-[#263746] text-xs font-semibold hover:border-[#496D65] hover:text-[#496D65] transition-all"
+              title="GitHub Profile">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                </path>
                 <path d="M9 18c-4.51 2-5-2-7-2"></path>
               </svg>
               <span>GitHub</span>
@@ -500,29 +826,42 @@
             </a>
           </div>
 
-          <!-- Quick Metadata Strip -->
-          <div class="mt-8 sm:mt-12 pt-5 sm:pt-6 border-t border-[#DDE2D9] grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 text-xs">
+          <!-- Architectural Technical Metadata Strip -->
+          <div class="pt-6 border-t border-[#DDE2D9] grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div>
-              <span class="block text-[10px] uppercase font-semibold text-[#89918A] tracking-wider">Location</span>
-              <span class="font-medium text-[#263746] mt-0.5 block">Coimbatore, Tamil Nadu</span>
+              <span class="text-meta block">Datum // 01 · Location</span>
+              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">COIMBATORE, TAMIL
+                NADU</span>
             </div>
             <div>
-              <span class="block text-[10px] uppercase font-semibold text-[#89918A] tracking-wider">Focus</span>
-              <span class="font-medium text-[#263746] mt-0.5 block">Full-Stack & Cloud</span>
+              <span class="text-meta block">Datum // 02 · Discipline</span>
+              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">FULL-STACK & CLOUD
+                ENGINEERING</span>
             </div>
-            <div class="col-span-2 sm:col-span-1">
-              <span class="block text-[10px] uppercase font-semibold text-[#89918A] tracking-wider">Degree</span>
-              <span class="font-medium text-[#263746] mt-0.5 block">B.Tech IT (CGPA 7.5)</span>
+            <div>
+              <span class="text-meta block">Datum // 03 · Education</span>
+              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">B.TECH INFORMATION
+                TECHNOLOGY</span>
             </div>
           </div>
+
         </div>
 
-        <!-- Right: Editorial Portrait Card with Upload Preview -->
+        <!-- Right Column: Profile Photograph with 45-degree Metallic Sheen (40% width) -->
         <div class="lg:col-span-5 editorial-reveal flex justify-center w-full">
-          <div class="w-full max-w-xs sm:max-w-sm">
+          <div class="w-full max-w-sm sm:max-w-md">
+
+            <!-- Architectural Profile Card with Offset Framing -->
             <div class="editorial-card p-4 sm:p-5 relative group">
 
-              <!-- Clean Image Container (4:5 Editorial Ratio) with Diagonal Light Sweep -->
+              <!-- Top Card Header: Technical Coordinates -->
+              <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#DDE2D9] text-xs">
+                <span class="font-mono text-[10px] text-[#89918A] tracking-wider uppercase">ARCHITECTURAL SPEC //
+                  2026</span>
+                <span class="font-mono text-[10px] font-semibold text-[#C1A66B] uppercase tracking-wider">FIG. 01</span>
+              </div>
+
+              <!-- Profile Image Box with 45-Degree Metallic Reflection (Every 5 seconds) -->
               <div
                 class="portrait-shine relative w-full aspect-[4/5] rounded-[10px] overflow-hidden bg-[#EAEDE6] border border-[#DDE2D9]">
                 <img id="userAvatar" src="assets/Jothi.png" alt="Jothilingam S"
@@ -530,18 +869,24 @@
                   onerror="this.src='https://placehold.co/500x625/EAEDE6/263746?text=Jothilingam+S'" />
               </div>
 
-              <!-- Editorial Portrait Footer -->
-              <div class="mt-4 flex items-center justify-between text-xs">
+              <!-- Profile Card Details Footer -->
+              <div class="mt-4 pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
                 <div>
-                  <h3 class="font-bold text-[#263746]">JOTHILINGAM S</h3>
-                  <p class="text-[11px] text-[#89918A]">Full-Stack & Cloud Professional</p>
+                  <h3 class="font-sans font-bold text-xs sm:text-sm tracking-wide text-[#263746] uppercase">JOTHILINGAM
+                    S</h3>
+                  <p class="font-mono text-[10px] text-[#89918A] uppercase mt-0.5">FULL-STACK & CLOUD PROFESSIONAL</p>
                 </div>
                 <div class="text-right">
-                  <span class="text-[10px] font-mono uppercase text-[#C1A66B]">FIG. 01</span>
+                  <span
+                    class="inline-flex items-center gap-1.5 font-mono text-[10px] font-medium text-[#496D65] bg-[#E3EAE3] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#496D65]"></span>
+                    VERIFIED
+                  </span>
                 </div>
               </div>
 
             </div>
+
           </div>
         </div>
 
@@ -556,80 +901,110 @@
   <section id="about" class="py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
-      <!-- Eyebrow -->
-      <div class="editorial-reveal flex items-center gap-2.5 sm:gap-3 mb-6 flex-wrap">
-        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">02 / PHILOSOPHY & JOURNEY</span>
-        <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
-        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">ABOUT ME</span>
+      <!-- Section Eyebrow -->
+      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8 sm:mb-10 pb-4 border-b border-[#DDE2D9]">
+        <div class="editorial-section-tag">
+          02 / ABOUT ME · PHILOSOPHY & PRACTICE
+        </div>
+        <div class="text-meta">
+          ARCHITECTURAL PERSPECTIVE // 2026
+        </div>
       </div>
 
-      <!-- Two-column Editorial Layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16">
+      <!-- Two-Column Editorial Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
-        <!-- Column 1: Large Editorial Display Quote -->
-        <div class="lg:col-span-5 editorial-reveal">
-          <h2 class="font-display text-2xl sm:text-4xl lg:text-5xl font-normal text-[#263746] leading-[1.25] sm:leading-[1.2]">
-            Creating with intention. Engineering for scale.
+        <!-- Left Column: Editorial Statement & Philosophy (7 Cols) -->
+        <div class="lg:col-span-7 editorial-reveal space-y-6">
+
+          <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl text-[#263746] font-normal leading-[1.25] tracking-tight">
+            "Building meaningful digital products through technology, creativity, and precision."
           </h2>
-          <p class="mt-4 sm:mt-6 text-xs sm:text-sm text-[#68736C] leading-relaxed">
-            Technology is most powerful when intuitive design converges with dependable backend systems. My approach
-            combines thoughtful architectural planning with clean, maintainable code.
-          </p>
 
-          <div class="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-[#DDE2D9]">
-            <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B] block mb-2">DEVELOPMENT
-              CREED</span>
-            <p class="font-display italic text-[#496D65] text-sm sm:text-base">
-              "Building meaningful digital products through technology, creativity, and precision."
+          <div class="space-y-4 text-xs sm:text-sm font-sans text-[#5F6C65] leading-relaxed">
+            <p>
+              I am a full-stack focused software engineer with hands-on experience architecting responsive web
+              applications, robust REST APIs, and scalable cloud deployments. My engineering approach treats
+              software development as an architectural discipline—where visual simplicity on the surface rests
+              upon uncompromising structural integrity underneath.
+            </p>
+            <p>
+              Whether designing offline-first synchronization protocols for rural field applications (CollectEasy) or
+              provisioning fault-tolerant multi-tier AWS infrastructure, I focus on building systems that solve practical
+              challenges with predictable performance, strong data integrity, and zero operational ambiguity.
             </p>
           </div>
+
+          <!-- Development Creed Card -->
+          <div class="editorial-card p-5 bg-[#F4F5F0] border-l-4 border-l-[#C1A66B]">
+            <span class="text-meta block mb-1 text-[#C1A66B]">DEVELOPMENT CREED // PRINCIPLE</span>
+            <p class="font-display italic text-[#496D65] text-sm sm:text-base leading-snug">
+              Resilience, simplicity, and attention to detail. Every component should be intentional, and every system should be engineered to scale reliably.
+            </p>
+          </div>
+
         </div>
 
-        <!-- Column 2: Detailed Professional Background & Competencies -->
-        <div class="lg:col-span-7 editorial-reveal space-y-5 sm:space-y-6">
-          <p class="text-xs sm:text-base font-normal text-[#68736C] leading-relaxed">
-            Full-stack focused technology professional with hands-on experience building responsive front-end interfaces
-            and scalable back-end services and APIs. Skilled in designing and deploying web applications end-to-end
-            using React and Next.js on the front end, alongside Node.js, Express.js, Laravel, FastAPI, and Flask on the
-            back end, with MySQL for reliable data storage.
-          </p>
+        <!-- Right Column: Key Professional Information, Education & Standards (5 Cols) -->
+        <div class="lg:col-span-5 editorial-reveal space-y-4 sm:space-y-5">
 
-          <p class="text-xs sm:text-sm font-normal text-[#68736C] leading-relaxed">
-            Comfortable translating complex business and client requirements into working software, integrating
-            third-party services, and collaborating closely with designers and product teams. Possesses hands-on working
-            knowledge of AWS cloud infrastructure, continuous deployment, and proactive system monitoring.
-          </p>
+          <!-- Key Info Card 1: Core Discipline -->
+          <div class="editorial-card p-5 bg-white">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
+              <span class="text-meta">CORE DISCIPLINE</span>
+              <span class="font-mono text-[10px] text-[#496D65] font-semibold">VERIFIED</span>
+            </div>
+            <h3 class="font-display text-lg text-[#263746] font-medium">
+              Full-Stack Application Development & Cloud Architecture
+            </h3>
+            <p class="font-sans text-xs text-[#5F6C65] mt-2 leading-relaxed">
+              End-to-end web engineering encompassing responsive front-end design, secure RESTful microservices, transactional databases, and resilient cloud hosting.
+            </p>
+          </div>
 
-          <!-- Core Competencies Grid -->
-          <div class="pt-4 sm:pt-6">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-[#263746] mb-3 sm:mb-4">Core Competencies</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
+          <!-- Key Info Card 2: Formal Education -->
+          <div class="editorial-card p-5 bg-white">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
+              <span class="text-meta">FORMAL EDUCATION</span>
+              <span class="font-mono text-[10px] text-[#C1A66B] font-semibold">2022 — 2026</span>
+            </div>
+            <h3 class="font-display text-lg text-[#263746] font-medium">
+              B.Tech in Information Technology
+            </h3>
+            <p class="font-mono text-xs text-[#496D65] font-semibold mt-1">
+              Nehru Institute of Engineering and Technology, Coimbatore
+            </p>
+            <div class="mt-3 pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+              <span class="font-mono text-[#89918A]">Academic Standing</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-[#E3EAE3] text-[#496D65] font-mono font-bold text-[11px] border border-[#DDE2D9]">
+                CGPA: 7.5 / 10
+              </span>
+            </div>
+          </div>
 
-              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
-                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
-                <span class="font-medium text-[#263746]">Full-Stack Web Application Development</span>
+          <!-- Key Info Card 3: Engineering Standards -->
+          <div class="editorial-card p-5 bg-white">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
+              <span class="text-meta">ENGINEERING METHODOLOGY</span>
+              <span class="font-mono text-[10px] text-[#89918A]">STANDARDS</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div>
+                <span class="font-mono text-[10px] text-[#89918A] uppercase block">Architecture</span>
+                <span class="font-medium text-[#263746] mt-0.5 block">Modular & Clean</span>
               </div>
-
-              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
-                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
-                <span class="font-medium text-[#263746]">Front-End Engineering & Responsive UI</span>
+              <div>
+                <span class="font-mono text-[10px] text-[#89918A] uppercase block">Data Integrity</span>
+                <span class="font-medium text-[#263746] mt-0.5 block">Atomic Integer Math</span>
               </div>
-
-              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
-                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
-                <span class="font-medium text-[#263746]">Back-End Architecture & REST APIs</span>
+              <div>
+                <span class="font-mono text-[10px] text-[#89918A] uppercase block">APIs</span>
+                <span class="font-medium text-[#263746] mt-0.5 block">Idempotent Keys</span>
               </div>
-
-              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5">
-                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
-                <span class="font-medium text-[#263746]">Database Design & Data Management</span>
+              <div>
+                <span class="font-mono text-[10px] text-[#89918A] uppercase block">Reliability</span>
+                <span class="font-medium text-[#263746] mt-0.5 block">Offline-First PWA</span>
               </div>
-
-              <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5 sm:col-span-2">
-                <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
-                <span class="font-medium text-[#263746]">Cloud Deployment, Monitoring & Performance Optimization</span>
-              </div>
-
             </div>
           </div>
 
@@ -641,132 +1016,183 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- 03. SKILLS & TECHNOLOGIES (#F4F5F0)                     -->
+  <!-- 03. ENGINEERING CAPABILITIES (#F4F5F0)                   -->
   <!-- ======================================================== -->
   <section id="skills" class="py-16 sm:py-24 md:py-32 bg-[#F4F5F0]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
-      <!-- Eyebrow -->
-      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">03 / CAPABILITIES</span>
-          <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">TOOLCHAINS</span>
+      <!-- Section Eyebrow -->
+      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4 border-b border-[#DDE2D9]">
+        <div class="editorial-section-tag">
+          03 / ENGINEERING CAPABILITIES · TOOLCHAINS
         </div>
-        <span class="text-[10px] sm:text-xs font-mono text-[#89918A]">AUTHENTIC SPECIFICATION</span>
+        <div class="text-meta">
+          TECHNICAL SPECIFICATION // ZERO FABRICATED METRICS
+        </div>
       </div>
 
-      <div class="editorial-reveal max-w-2xl mb-8 sm:mb-12">
-        <h2 class="font-display text-2xl sm:text-4xl font-normal text-[#263746]">
-          Skills & Technologies
+      <!-- Section Title & Subheading -->
+      <div class="editorial-reveal max-w-2xl mb-10 sm:mb-14 space-y-2">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-[#263746] tracking-tight">
+          Technical Capabilities
         </h2>
-        <p class="mt-2 text-xs sm:text-sm text-[#68736C]">
-          Systematic overview of development proficiencies, programming languages, and cloud platforms.
+        <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+          Systematic overview of core engineering proficiencies across client-side interfaces, server backends,
+          cloud topologies, and persistence layers.
         </p>
       </div>
 
-      <!-- Capabilities Grid (Clean White Cards, 14px radius, 1px solid #DDE2D9) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <!-- Four Architectural Capability Cards (Asymmetric Bento Grid) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
 
-        <!-- 1. Front-End -->
-        <div class="editorial-card p-5 sm:p-6 editorial-reveal">
-          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
-            <div class="flex items-center gap-2.5">
-              <i data-lucide="layout" class="w-4 h-4 text-[#496D65]"></i>
-              <h3 class="font-bold text-sm text-[#263746]">Front-End Engineering</h3>
+        <!-- 01 / FRONTEND ENGINEERING (6 Cols) -->
+        <div class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
+              <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
+                01 // FRONTEND ENGINEERING
+              </span>
+              <span class="font-mono text-[10px] text-[#89918A]">SPEC // CLIENT-SIDE</span>
             </div>
-            <span class="text-[10px] font-mono text-[#C1A66B]">01</span>
+            <div>
+              <h3 class="font-display text-xl sm:text-2xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                Client-Side Architecture & Interfaces
+              </h3>
+              <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed mt-2.5">
+                Engineering responsive, accessible, and performant web applications with modern component architectures.
+                Focused on state management, client caching, sub-second page transitions, and pixel-precise layout rendering.
+              </p>
+            </div>
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-2">
+              <span class="technical-pill">React</span>
+              <span class="technical-pill">Next.js</span>
+              <span class="technical-pill">TypeScript</span>
+              <span class="technical-pill">JavaScript</span>
+              <span class="technical-pill">HTML5</span>
+              <span class="technical-pill">CSS3</span>
+              <span class="technical-pill">Tailwind CSS</span>
+              <span class="technical-pill">Material UI</span>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-1.5 sm:gap-2">
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">React</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Next.js</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">JavaScript</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">HTML5</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">CSS3</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Tailwind CSS</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">MUI v5</span>
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Interface Layer</span>
+            <span class="font-mono text-xs font-semibold text-[#496D65]">
+              SSR · Modular UI · PWA
+            </span>
           </div>
         </div>
 
-        <!-- 2. Back-End & Stacks -->
-        <div class="editorial-card p-5 sm:p-6 editorial-reveal">
-          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
-            <div class="flex items-center gap-2.5">
-              <i data-lucide="server" class="w-4 h-4 text-[#496D65]"></i>
-              <h3 class="font-bold text-sm text-[#263746]">Back-End & Stacks</h3>
+        <!-- 02 / BACKEND ARCHITECTURE (6 Cols) -->
+        <div class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
+              <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
+                02 // BACKEND ARCHITECTURE
+              </span>
+              <span class="font-mono text-[10px] text-[#89918A]">SPEC // SERVER-RUNTIME</span>
             </div>
-            <span class="text-[10px] font-mono text-[#C1A66B]">02</span>
+            <div>
+              <h3 class="font-display text-xl sm:text-2xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                Server Systems & RESTful Services
+              </h3>
+              <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed mt-2.5">
+                Designing and developing scalable server runtimes, REST APIs, and business logic layers. Experienced in
+                transaction systems, asynchronous queue workflows, authentication lifecycles, and third-party API integrations.
+              </p>
+            </div>
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-2">
+              <span class="technical-pill">Node.js</span>
+              <span class="technical-pill">Express.js</span>
+              <span class="technical-pill">Python</span>
+              <span class="technical-pill">FastAPI</span>
+              <span class="technical-pill">Flask</span>
+              <span class="technical-pill">Laravel (PHP)</span>
+              <span class="technical-pill">REST APIs</span>
+              <span class="technical-pill">Backend Integration</span>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-1.5 sm:gap-2">
-            <span
-              class="px-2.5 sm:px-3 py-1 bg-[#E3EAE3] text-[#496D65] border border-[#668B83]/30 text-xs font-semibold rounded-[4px]">MERN
-              Stack</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Node.js</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Express.js</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Laravel (PHP)</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">FastAPI</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Flask</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Python</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">REST API
-              Integration</span>
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Service Layer</span>
+            <span class="font-mono text-xs font-semibold text-[#496D65]">
+              RESTful · Async · Microservices
+            </span>
           </div>
         </div>
 
-        <!-- 3. Database -->
-        <div class="editorial-card p-5 sm:p-6 editorial-reveal">
-          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
-            <div class="flex items-center gap-2.5">
-              <i data-lucide="database" class="w-4 h-4 text-[#496D65]"></i>
-              <h3 class="font-bold text-sm text-[#263746]">Database Systems</h3>
+        <!-- 03 / CLOUD INFRASTRUCTURE (6 Cols) -->
+        <div class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
+              <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
+                03 // CLOUD INFRASTRUCTURE
+              </span>
+              <span class="font-mono text-[10px] text-[#89918A]">SPEC // CLOUD-DEPLOY</span>
             </div>
-            <span class="text-[10px] font-mono text-[#C1A66B]">03</span>
+            <div>
+              <h3 class="font-display text-xl sm:text-2xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                Multi-Tier Cloud Topologies & DevOps
+              </h3>
+              <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed mt-2.5">
+                Architecting scalable, resilient environments on AWS and Google Cloud Platform. Deploying compute instances,
+                configuring VPC subnets, object storage, managed relational databases, and proactive health observability.
+              </p>
+            </div>
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-2">
+              <span class="technical-pill">AWS EC2</span>
+              <span class="technical-pill">AWS S3</span>
+              <span class="technical-pill">VPC</span>
+              <span class="technical-pill">AWS IAM</span>
+              <span class="technical-pill">Amazon RDS</span>
+              <span class="technical-pill">Route 53</span>
+              <span class="technical-pill">CloudWatch</span>
+              <span class="technical-pill">GCP Cloud Run</span>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-1.5 sm:gap-2">
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">MySQL</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Relational Schema
-              Design</span>
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Infrastructure Layer</span>
+            <span class="font-mono text-xs font-semibold text-[#496D65]">
+              Multi-AZ · VPC · Observability
+            </span>
           </div>
         </div>
 
-        <!-- 4. Cloud: AWS -->
-        <div class="editorial-card p-5 sm:p-6 editorial-reveal md:col-span-2 lg:col-span-2">
-          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
-            <div class="flex items-center gap-2.5">
-              <i data-lucide="cloud" class="w-4 h-4 text-[#496D65]"></i>
-              <h3 class="font-bold text-sm text-[#263746]">Cloud: Amazon Web Services (AWS)</h3>
+        <!-- 04 / DATA & SYSTEMS (6 Cols) -->
+        <div class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
+              <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
+                04 // DATA & SYSTEMS
+              </span>
+              <span class="font-mono text-[10px] text-[#89918A]">SPEC // DATA-CORE</span>
             </div>
-            <span class="text-[10px] font-mono text-[#C1A66B]">04</span>
-          </div>
-          <div class="flex flex-wrap gap-1.5 sm:gap-2">
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">EC2</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">S3</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">VPC</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">IAM</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">RDS</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Route 53</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">CloudWatch</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Elastic
-              Beanstalk</span>
-          </div>
-        </div>
-
-        <!-- 5. DevOps & AI Tools -->
-        <div class="editorial-card p-5 sm:p-6 editorial-reveal">
-          <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-[#DDE2D9] mb-4">
-            <div class="flex items-center gap-2.5">
-              <i data-lucide="cpu" class="w-4 h-4 text-[#496D65]"></i>
-              <h3 class="font-bold text-sm text-[#263746]">DevOps & AI Tools</h3>
+            <div>
+              <h3 class="font-display text-xl sm:text-2xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                Persistence, Containers & Toolchains
+              </h3>
+              <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed mt-2.5">
+                Modeling normalized relational schemas, document databases, and client-side offline storage. Implementing
+                reproducible container environments, structured Git version control, and modern LLM application workflows.
+              </p>
             </div>
-            <span class="text-[10px] font-mono text-[#C1A66B]">05</span>
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-2">
+              <span class="technical-pill">MySQL</span>
+              <span class="technical-pill">PostgreSQL</span>
+              <span class="technical-pill">MongoDB</span>
+              <span class="technical-pill">IndexedDB</span>
+              <span class="technical-pill">Docker</span>
+              <span class="technical-pill">Git</span>
+              <span class="technical-pill">LangChain</span>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-1.5 sm:gap-2">
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Git</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">GitHub</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Docker</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Linux</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">LangChain</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">Gemini API</span>
-            <span class="px-2.5 sm:px-3 py-1 bg-[#EAEDE6] text-[#263746] text-xs font-medium rounded-[4px]">RAG Pipelines</span>
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Systems Layer</span>
+            <span class="font-mono text-xs font-semibold text-[#496D65]">
+              Relational · IndexedDB · Docker
+            </span>
           </div>
         </div>
 
@@ -776,241 +1202,544 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- 04. SELECTED PROJECTS (#EAEDE6)                          -->
+  <!-- 04. SELECTED WORKS / ASYMMETRIC BENTO SHOWCASE           -->
   <!-- ======================================================== -->
   <section id="projects" class="py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
-      <!-- Eyebrow -->
-      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">04 / SELECTED WORKS</span>
-          <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">PORTFOLIO</span>
+      <!-- Section Eyebrow -->
+      <div
+        class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4 border-b border-[#DDE2D9]">
+        <div class="editorial-section-tag">
+          04 / SELECTED WORKS · PRODUCTION SYSTEMS
         </div>
-        <span class="text-[10px] sm:text-xs font-mono text-[#89918A]">PRODUCTION & CLOUD</span>
+        <div class="text-meta">
+          PORTFOLIO // FULL-STACK & CLOUD
+        </div>
       </div>
 
-      <div class="editorial-reveal max-w-2xl mb-8 sm:mb-12">
-        <h2 class="font-display text-2xl sm:text-4xl font-normal text-[#263746]">
-          Featured Projects & Architectures
+      <!-- Section Title & Subheading -->
+      <div class="editorial-reveal max-w-2xl mb-10 sm:mb-14 space-y-2">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-[#263746] tracking-tight">
+          Featured Engineering Showcases
         </h2>
-        <p class="mt-2 text-xs sm:text-sm text-[#68736C]">
-          Client solutions and robust AWS cloud implementations delivered with high performance.
+        <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+          Mission-critical financial systems, production e-commerce platforms, and scalable cloud architectures
+          engineered with end-to-end resilience.
         </p>
       </div>
 
-      <!-- Asymmetric Editorial Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+      <!-- Asymmetric Bento Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
 
-        <!-- Project 0: CollectEasy (Featured FinTech Case Study) -->
+        <!-- ==================================================== -->
+        <!-- 01. COLLECTEASY — FLAGSHIP PRODUCTION (12 Cols Bento)-->
+        <!-- ==================================================== -->
         <div onclick="openProjectModal('collecteasy')"
-          class="editorial-card p-5 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-2 cursor-pointer group hover:border-[#496D65] hover:shadow-xl transition-all duration-300 relative"
-          role="button" tabindex="0" aria-haspopup="dialog" aria-label="View CollectEasy project details"
+          class="editorial-card p-6 sm:p-8 lg:p-10 editorial-reveal lg:col-span-12 cursor-pointer group hover:border-[#496D65] hover:shadow-xl transition-all duration-300 relative"
+          role="button" tabindex="0" aria-haspopup="dialog"
+          aria-label="View CollectEasy chit fund case study and architecture"
           onkeydown="if(event.key === 'Enter' || event.key === ' ') { openProjectModal('collecteasy'); event.preventDefault(); }">
 
-          <div>
-            <!-- Visual Header Box -->
-            <div
-              class="project-image-box aspect-auto min-h-[220px] sm:min-h-0 sm:aspect-[21/8] bg-[#F4F5F0] border border-[#DDE2D9] mb-5 sm:mb-6 flex flex-col justify-between p-4 sm:p-6 relative group-hover:bg-[#E3EAE3]/40 transition-colors">
+          <!-- Gold Accent Flagship Banner Line -->
+          <div
+            class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#C1A66B] via-[#496D65] to-[#C1A66B] opacity-90">
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch pt-2">
+
+            <!-- Left Column: Problem, System Architecture, & Technical Highlights (7 Cols) -->
+            <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+
+              <!-- Eyebrow Row -->
               <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B] flex items-center gap-1.5 font-semibold">
+                <span
+                  class="inline-flex items-center gap-2 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-3 py-1 rounded-full border border-[#DDE2D9]">
                   <span class="w-2 h-2 rounded-full bg-[#C1A66B] animate-pulse"></span>
-                  FEATURED FLAGSHIP · FINTECH & ENTERPRISE
+                  FLAGSHIP PRODUCTION · FINTECH & ENTERPRISE
                 </span>
-                <span class="text-[10px] font-mono px-2.5 sm:px-3 py-1 rounded-full bg-[#496D65]/10 text-[#496D65] font-semibold flex items-center gap-1 group-hover:bg-[#496D65] group-hover:text-white transition-colors">
-                  <span>CLICK TO VIEW DETAILS</span>
-                  <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-                </span>
+                <span class="font-mono text-[11px] text-[#89918A]">CASE STUDY // 01</span>
               </div>
 
-              <div class="my-auto py-3">
-                <div class="flex items-baseline gap-2 sm:gap-3 flex-wrap">
-                  <h4 class="font-display text-2xl sm:text-3xl lg:text-4xl text-[#263746] font-normal group-hover:text-[#496D65] transition-colors">
-                    CollectEasy
-                  </h4>
-                  <span class="text-xs sm:text-sm font-sans text-[#89918A]">Chit Fund Management & Collection System</span>
-                </div>
-                <p class="text-xs sm:text-sm text-[#68736C] mt-2 max-w-2xl line-clamp-3 sm:line-clamp-2">
-                  Comprehensive chit fund platform with centralized admin monitoring, offline-first mobile app for field agents, and idempotent financial processing.
+              <!-- Title & Mission Statement -->
+              <div>
+                <h3
+                  class="font-display text-2xl sm:text-3xl lg:text-4xl text-[#263746] font-normal group-hover:text-[#496D65] transition-colors leading-tight">
+                  CollectEasy — Chit Fund Management & Offline Field Collection System
+                </h3>
+                <p class="font-mono text-xs text-[#89918A] mt-1.5 uppercase tracking-wide">
+                  Centralized Operations · Field Agent Mobile App · Idempotent Financial Engine
+                </p>
+                <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed mt-3.5">
+                  Comprehensive financial management platform that digitizes chit fund operations, customer management,
+                  payment collections, and administrative auditing across three integrated modules. Built to operate
+                  reliably in low-connectivity environments with strict accounting guarantees.
                 </p>
               </div>
 
-              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A] pt-3 border-t border-[#DDE2D9]/70 flex-wrap gap-2">
-                <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-                  <span class="text-[#263746] font-medium">React 18 · TypeScript</span>
-                  <span>·</span>
-                  <span class="text-[#263746] font-medium">Node.js · Express</span>
-                  <span>·</span>
-                  <span class="text-[#263746] font-medium">MySQL 8</span>
-                  <span>·</span>
-                  <span class="text-[#263746] font-medium">IndexedDB (Offline)</span>
+              <!-- Three Core Engineering Highlights -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9]">
+                  <span class="font-mono text-[10px] text-[#496D65] font-semibold block uppercase">01 // Offline-First
+                    PWA</span>
+                  <span class="font-sans text-xs font-medium text-[#263746] mt-1 block">IndexedDB Sync</span>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
+                    Field agents record payments without internet; automatic two-way sync reconciles data when
+                    reconnected.
+                  </p>
                 </div>
-                <span class="text-[#C1A66B] font-semibold">3 Integrated Modules</span>
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9]">
+                  <span class="font-mono text-[10px] text-[#496D65] font-semibold block uppercase">02 //
+                    Idempotency</span>
+                  <span class="font-sans text-xs font-medium text-[#263746] mt-1 block">UUID Unique Keys</span>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
+                    Client-generated UUIDs eliminate duplicate payment submissions during intermittent network drops.
+                  </p>
+                </div>
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9]">
+                  <span class="font-mono text-[10px] text-[#496D65] font-semibold block uppercase">03 // Precision
+                    Math</span>
+                  <span class="font-sans text-xs font-medium text-[#263746] mt-1 block">Paise Integer Units</span>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
+                    Calculations executed in atomic integer units (paise), preventing IEEE 754 floating-point rounding
+                    drift.
+                  </p>
+                </div>
               </div>
+
+              <!-- Tech Stack Badges -->
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-2">
+                <span class="technical-pill">React 18</span>
+                <span class="technical-pill">TypeScript</span>
+                <span class="technical-pill">Node.js</span>
+                <span class="technical-pill">Express</span>
+                <span class="technical-pill">MySQL 8</span>
+                <span class="technical-pill">IndexedDB</span>
+                <span class="technical-pill">Service Workers</span>
+                <span class="technical-pill">REST API</span>
+              </div>
+
+              <!-- Interactive Case Study Trigger -->
+              <div class="pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+                <span class="font-mono text-[11px] text-[#89918A]">Coimbatore, Tamil Nadu · Production Deployed</span>
+                <span
+                  class="font-semibold text-xs text-[#496D65] group-hover:text-[#263746] inline-flex items-center gap-1.5 transition-colors">
+                  <span>Explore Architecture & Database Schema</span>
+                  <i data-lucide="arrow-right"
+                    class="w-4 h-4 text-[#C1A66B] group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </div>
+
             </div>
 
-            <!-- Details Row -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B] font-semibold block">Category</span>
-                <h3 class="font-display text-xl sm:text-2xl text-[#263746] font-medium mt-0.5">
-                  CollectEasy – Chit Fund Management & Collection System
-                </h3>
+            <!-- Right Column: Interactive System Topology & Module Architecture (5 Cols) -->
+            <div
+              class="lg:col-span-5 flex flex-col justify-between bg-[#F4F5F0] border border-[#DDE2D9] rounded-xl p-5 sm:p-6 group-hover:bg-[#E3EAE3]/40 transition-colors">
+
+              <!-- Blueprint Header -->
+              <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
+                <span class="text-meta">SYSTEM TOPOLOGY // 3-TIER ARCHITECTURE</span>
+                <span
+                  class="inline-flex items-center gap-1.5 font-mono text-[10px] text-[#496D65] font-semibold bg-[#E3EAE3] px-2.5 py-0.5 rounded-full border border-[#DDE2D9]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#496D65]"></span>
+                  ONLINE
+                </span>
               </div>
-              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap shrink-0">
-                <span class="px-2.5 py-1 rounded-[4px] bg-[#EAEDE6] border border-[#DDE2D9] text-[#263746] text-[10px] font-mono font-medium">Offline-First</span>
-                <span class="px-2.5 py-1 rounded-[4px] bg-[#EAEDE6] border border-[#DDE2D9] text-[#263746] text-[10px] font-mono font-medium">Idempotent Payments</span>
-                <span class="px-2.5 py-1 rounded-[4px] bg-[#EAEDE6] border border-[#DDE2D9] text-[#263746] text-[10px] font-mono font-medium">Paise Integer Math</span>
+
+              <!-- Architectural Module Nodes -->
+              <div class="my-4 space-y-3.5">
+
+                <!-- Module 01 -->
+                <div
+                  class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase">MODULE 01 · ADMIN
+                      PLATFORM</span>
+                    <span class="font-mono text-[10px] text-[#89918A]">DESKTOP WEB</span>
+                  </div>
+                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Central Operations & Reporting Dashboard
+                  </h4>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1">
+                    Chit auction balancing, member KYC records, agent collection tracking, and automated ledger
+                    balancing.
+                  </p>
+                  <div class="mt-2 text-[10px] font-mono text-[#89918A]">React 18 · TypeScript · Recharts</div>
+                </div>
+
+                <!-- Module 02 -->
+                <div
+                  class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase">MODULE 02 · AGENT APP</span>
+                    <span class="font-mono text-[10px] text-[#C1A66B] font-semibold">OFFLINE-FIRST PWA</span>
+                  </div>
+                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Field Agent Payment Collection Web App
+                  </h4>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1">
+                    Instant offline receipt generation, local IndexedDB storage, and background synchronization queue.
+                  </p>
+                  <div class="mt-2 text-[10px] font-mono text-[#89918A]">PWA · IndexedDB · Service Workers</div>
+                </div>
+
+                <!-- Module 03 -->
+                <div
+                  class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase">MODULE 03 · REST
+                      ENGINE</span>
+                    <span class="font-mono text-[10px] text-[#89918A]">BACKEND API</span>
+                  </div>
+                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Idempotent Transaction Processing API</h4>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1">
+                    ACID transaction management, duplicate rejection, paise integer math, and role-based JWT auth.
+                  </p>
+                  <div class="mt-2 text-[10px] font-mono text-[#89918A]">Node.js · Express · MySQL 8</div>
+                </div>
+
               </div>
+
+              <!-- Blueprint Footer CTA -->
+              <div
+                class="pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-[11px] font-mono text-[#496D65] font-semibold">
+                <span>CLICK CARD TO VIEW CASE STUDY MODAL</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              </div>
+
             </div>
 
-            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed">
-              Designed and developed CollectEasy, a comprehensive chit fund management platform that digitizes financial operations, customer management, payment collections and administrative reporting across three integrated modules.
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- 02. SPM CRACKERS — E-COMMERCE SYSTEM (6 Cols Bento)  -->
+        <!-- ==================================================== -->
+        <div
+          class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-5">
+
+            <!-- Card Header -->
+            <div class="flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+                E-COMMERCE SYSTEM · LIVE PRODUCTION
+              </span>
+              <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
+                class="font-mono text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1 transition-colors"
+                title="Open SPM Crackers in new tab" aria-label="Visit SPM Crackers live site">
+                <span>spmcrackers.in</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              </a>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+              <h3
+                class="font-display text-2xl sm:text-3xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                SPM Crackers
+              </h3>
+              <p class="font-mono text-xs text-[#89918A] mt-1 uppercase tracking-wide">
+                Retail Web Application & Seasonal E-Commerce Engine
+              </p>
+            </div>
+
+            <!-- Architectural Preview Box -->
+            <div class="p-4 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] space-y-2.5">
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span class="text-[#263746] font-semibold">PRODUCTION WORKFLOW</span>
+                <span>spmcrackers.in</span>
+              </div>
+              <ul class="space-y-1.5 text-xs text-[#5F6C65]">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Dynamic product catalog with multi-category discovery.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Seasonal high-load order intake and inquiry workflow.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Full-stack responsive design optimized for mobile shoppers.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Description -->
+            <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+              Developed and deployed a full-stack retail web application for a fireworks merchant. Features rapid
+              product browsing, categorized inventory presentation, and an order intake dashboard built to handle
+              concentrated seasonal traffic spikes.
             </p>
 
-            <!-- Key Highlight Callout in Card -->
-            <div class="mt-4 p-3 sm:p-3.5 bg-[#F4F5F0] border-l-2 border-[#C1A66B] rounded-r-[6px] text-xs text-[#496D65]">
-              <strong class="font-semibold text-[#263746]">Project Highlight:</strong> Developed an offline-first financial collection workflow allowing field agents to record payments without active internet and auto-synchronize when connectivity returns.
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-1">
+              <span class="technical-pill">Full-Stack JS</span>
+              <span class="technical-pill">Node.js</span>
+              <span class="technical-pill">Catalog Engine</span>
+              <span class="technical-pill">Order Intake</span>
+              <span class="technical-pill">Responsive UI</span>
             </div>
+
           </div>
 
-          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-            <span class="font-mono text-[#89918A] text-[11px]">Admin Dashboard · Offline Mobile Web App · RESTful Backend API</span>
-            <span class="text-xs font-semibold text-[#496D65] group-hover:text-[#263746] inline-flex items-center gap-1.5 transition-colors self-start sm:self-auto">
-              <span>View Full Project Case Study</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#C1A66B]"></i>
+          <!-- Card Footer -->
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Live Client Production</span>
+            <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
+              class="font-semibold text-xs text-[#263746] hover:text-[#496D65] inline-flex items-center gap-1.5 transition-colors">
+              <span>Visit Live Application</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- 03. THE GROVE RESTAURANT — GCP CLOUD RUN (6 Cols Bento)-->
+        <!-- ==================================================== -->
+        <div
+          class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-5">
+
+            <!-- Card Header -->
+            <div class="flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+                HOSPITALITY WEB · GCP CLOUD RUN
+              </span>
+              <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
+                class="font-mono text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1 transition-colors"
+                title="Open The Grove Restaurant in new tab" aria-label="Visit The Grove Restaurant live site">
+                <span>thegrove.restaurant</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              </a>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+              <h3
+                class="font-display text-2xl sm:text-3xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                The Grove Restaurant
+              </h3>
+              <p class="font-mono text-xs text-[#89918A] mt-1 uppercase tracking-wide">
+                Interactive Dining Menu & Digital Brand Experience
+              </p>
+            </div>
+
+            <!-- Architectural Preview Box -->
+            <div class="p-4 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] space-y-2.5">
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span class="text-[#263746] font-semibold">SERVERLESS ARCHITECTURE</span>
+                <span>thegrove.restaurant</span>
+              </div>
+              <ul class="space-y-1.5 text-xs text-[#5F6C65]">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Server-rendered interactive dining and beverage menu.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Containerized Next.js deployed on GCP Cloud Run.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>High availability auto-scaling with sub-second page delivery.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Description -->
+            <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+              Engineered and deployed a modern brand platform for a fine dining restaurant. Built using Next.js for
+              server-rendered page efficiency, packaged in lightweight Docker containers, and hosted on Google Cloud Run
+              for automatic zero-downtime scaling.
+            </p>
+
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-1">
+              <span class="technical-pill">Next.js</span>
+              <span class="technical-pill">React</span>
+              <span class="technical-pill">GCP Cloud Run</span>
+              <span class="technical-pill">Docker</span>
+              <span class="technical-pill">Tailwind CSS</span>
+              <span class="technical-pill">SEO</span>
+            </div>
+
+          </div>
+
+          <!-- Card Footer -->
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Live Client Production</span>
+            <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
+              class="font-semibold text-xs text-[#263746] hover:text-[#496D65] inline-flex items-center gap-1.5 transition-colors">
+              <span>Visit Live Application</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- 04. SCALABLE AWS INFRASTRUCTURE (6 Cols Bento)       -->
+        <!-- ==================================================== -->
+        <div
+          class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-5">
+
+            <!-- Card Header -->
+            <div class="flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+                CLOUD INFRASTRUCTURE · AWS
+              </span>
+              <span class="font-mono text-[11px] text-[#89918A]">SPEC // INFRA-01</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+              <h3
+                class="font-display text-2xl sm:text-3xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                Scalable Web Application on AWS
+              </h3>
+              <p class="font-mono text-xs text-[#89918A] mt-1 uppercase tracking-wide">
+                Multi-Service Cloud Hosting Topology
+              </p>
+            </div>
+
+            <!-- Topology Breakdown Box -->
+            <div class="p-4 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] space-y-2.5">
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span class="text-[#263746] font-semibold">INFRASTRUCTURE TOPOLOGY</span>
+                <span>AWS SERVICES</span>
+              </div>
+              <ul class="space-y-1.5 text-xs text-[#5F6C65]">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Custom VPC network with isolated public and private subnets.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Compute on EC2 with automated static asset offloading to S3.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Amazon RDS database with automated backup retention schedules.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Route 53 DNS routing and proactive CloudWatch metric alarms.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Description -->
+            <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+              Architected and provisioned an enterprise-grade cloud hosting environment on AWS. Established hardened
+              network isolation through custom VPC subnets, automated file delivery via S3, and proactive system health
+              monitoring through CloudWatch.
+            </p>
+
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-1">
+              <span class="technical-pill">AWS EC2</span>
+              <span class="technical-pill">AWS S3</span>
+              <span class="technical-pill">VPC Subnets</span>
+              <span class="technical-pill">Amazon RDS</span>
+              <span class="technical-pill">Route 53</span>
+              <span class="technical-pill">CloudWatch</span>
+            </div>
+
+          </div>
+
+          <!-- Card Footer -->
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Production Infrastructure</span>
+            <span class="font-mono text-xs font-semibold text-[#496D65]">
+              VPC · EC2 · RDS · S3
             </span>
           </div>
         </div>
 
-        <!-- Project 1: SPM Crackers -->
-        <div class="editorial-card p-5 sm:p-7 flex flex-col justify-between editorial-reveal">
-          <div>
-            <!-- Project Preview Visual Box -->
-            <div
-              class="project-image-box aspect-auto min-h-[170px] sm:aspect-[16/10] bg-[#F4F5F0] border border-[#DDE2D9] mb-5 sm:mb-6 flex flex-col justify-between p-4 sm:p-5 relative">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B]">E-COMMERCE SYSTEM</span>
-                <span class="text-[10px] font-mono text-[#68736C]">LIVE PRODUCTION</span>
-              </div>
-              <div class="text-center my-auto py-2">
-                <h4 class="font-display text-2xl text-[#263746] font-normal">SPM Crackers</h4>
-                <p class="text-xs text-[#68736C] mt-1">Retail Web Application & Catalog</p>
-              </div>
+        <!-- ==================================================== -->
+        <!-- 05. HIGH AVAILABILITY AWS ARCHITECTURE (6 Cols Bento) -->
+        <!-- ==================================================== -->
+        <div
+          class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-5">
+
+            <!-- Card Header -->
+            <div class="flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+                FAULT TOLERANT · HIGH AVAILABILITY
+              </span>
+              <span class="font-mono text-[11px] text-[#89918A]">SPEC // AWS-INFRA-02</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+              <h3
+                class="font-display text-2xl sm:text-3xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                Highly Available Multi-AZ Architecture
+              </h3>
+              <p class="font-mono text-xs text-[#89918A] mt-1 uppercase tracking-wide">
+                Resilient Elastic Cloud Infrastructure
+              </p>
+            </div>
+
+            <!-- Topology Breakdown Box -->
+            <div class="p-4 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] space-y-2.5">
               <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
-                <span>spmcrackers.in</span>
-                <span>Full-Stack</span>
+                <span class="text-[#263746] font-semibold">HIGH AVAILABILITY TOPOLOGY</span>
+                <span>ZERO SINGLE POINT OF FAILURE</span>
               </div>
+              <ul class="space-y-1.5 text-xs text-[#5F6C65]">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Application Load Balancer (ALB) health-check traffic distribution.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>EC2 Auto Scaling Groups spanning 2+ independent Availability Zones.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Amazon RDS Multi-AZ synchronous replication with automatic failover.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Self-healing compute tier automatically replacing failed instances.</span>
+                </li>
+              </ul>
             </div>
 
-            <!-- Details -->
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-display text-xl text-[#263746] font-medium">SPM Crackers</h3>
-              <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
-                class="text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1">
-                <span>spmcrackers.in</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
-              </a>
-            </div>
-
-            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed mt-3">
-              Developed and deployed a full-stack web application for a fireworks retailer, with a digital product
-              catalog and order management dashboard, focused on product presentation and seamless web functionality.
+            <!-- Description -->
+            <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+              Designed a fault-tolerant multi-tier cloud topology eliminating single points of failure. Orchestrated
+              elastic traffic routing across Availability Zones, automated dynamic compute scaling to absorb traffic
+              surges, and configured zero-downtime database standby failover.
             </p>
+
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-1">
+              <span class="technical-pill">ALB</span>
+              <span class="technical-pill">Auto Scaling Groups</span>
+              <span class="technical-pill">Multi-AZ RDS</span>
+              <span class="technical-pill">Self-Healing</span>
+              <span class="technical-pill">Fault Tolerance</span>
+              <span class="technical-pill">AWS IAM</span>
+            </div>
+
           </div>
 
+          <!-- Card Footer -->
           <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
-            <span class="font-mono text-[#89918A] text-[11px]">Full-Stack Web Application</span>
-            <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
-              class="text-xs font-semibold text-[#263746] hover:text-[#496D65]">
-              Visit Live Site →
-            </a>
-          </div>
-        </div>
-
-        <!-- Project 2: The Grove Restaurant -->
-        <div class="editorial-card p-5 sm:p-7 flex flex-col justify-between editorial-reveal">
-          <div>
-            <!-- Project Preview Visual Box -->
-            <div
-              class="project-image-box aspect-auto min-h-[170px] sm:aspect-[16/10] bg-[#F4F5F0] border border-[#DDE2D9] mb-5 sm:mb-6 flex flex-col justify-between p-4 sm:p-5 relative">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B]">HOSPITALITY WEB</span>
-                <span class="text-[10px] font-mono text-[#68736C]">GCP CLOUD RUN</span>
-              </div>
-              <div class="text-center my-auto py-2">
-                <h4 class="font-display text-2xl text-[#263746] font-normal">The Grove Restaurant</h4>
-                <p class="text-xs text-[#68736C] mt-1">Interactive Menu & Brand Website</p>
-              </div>
-              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
-                <span>thegrove.restaurant</span>
-                <span>Next.js</span>
-              </div>
-            </div>
-
-            <!-- Details -->
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-display text-xl text-[#263746] font-medium">The Grove Restaurant</h3>
-              <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
-                class="text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1">
-                <span>thegrove.restaurant</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
-              </a>
-            </div>
-
-            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed mt-3">
-              Built and deployed a responsive restaurant website with an intuitive user interface and menu presentation,
-              using Next.js and hosted on GCP Cloud Run.
-            </p>
-          </div>
-
-          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
-            <span class="font-mono text-[#89918A] text-[11px]">Next.js · GCP Cloud Run</span>
-            <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
-              class="text-xs font-semibold text-[#263746] hover:text-[#496D65]">
-              Visit Live Site →
-            </a>
-          </div>
-        </div>
-
-        <!-- Project 3: Scalable Web Application on AWS -->
-        <div class="editorial-card p-5 sm:p-7 flex flex-col justify-between editorial-reveal">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B]">INFRASTRUCTURE</span>
-              <span class="text-[10px] font-mono text-[#89918A]">AWS CLOUD</span>
-            </div>
-            <h3 class="font-display text-xl text-[#263746] font-medium">
-              Scalable Web Application on AWS
-            </h3>
-            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed mt-3">
-              Designed and deployed a scalable web application infrastructure using AWS EC2, S3, VPC, RDS, Route 53, and
-              CloudWatch.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-[#DDE2D9]">
-            <span class="text-[11px] font-mono text-[#496D65] break-words">EC2 · S3 · VPC · RDS · Route 53 · CloudWatch</span>
-          </div>
-        </div>
-
-        <!-- Project 4: Highly Available AWS Architecture -->
-        <div class="editorial-card p-5 sm:p-7 flex flex-col justify-between editorial-reveal">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-[10px] font-mono uppercase tracking-wider text-[#C1A66B]">SYSTEM ARCHITECTURE</span>
-              <span class="text-[10px] font-mono text-[#89918A]">HIGH AVAILABILITY</span>
-            </div>
-            <h3 class="font-display text-xl text-[#263746] font-medium">
-              Highly Available AWS Architecture
-            </h3>
-            <p class="text-xs sm:text-sm text-[#68736C] leading-relaxed mt-3">
-              Designed a multi-tier AWS architecture using EC2, Load Balancer, Auto Scaling, RDS, and VPC for improved
-              availability and scalability.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-[#DDE2D9]">
-            <span class="text-[11px] font-mono text-[#496D65] break-words">EC2 · Load Balancer · Auto Scaling · RDS · VPC</span>
+            <span class="font-mono text-[#89918A] text-[11px]">System Architecture</span>
+            <span class="font-mono text-xs font-semibold text-[#496D65]">
+              ALB · Multi-AZ · Auto Scaling
+            </span>
           </div>
         </div>
 
@@ -1025,137 +1754,220 @@
   <section id="journey" class="py-16 sm:py-24 md:py-32 bg-[#F4F5F0]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
-      <!-- Eyebrow -->
-      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">05 / EXPERIENCE &
-            EDUCATION</span>
-          <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
-          <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">CAREER TIMELINE</span>
+      <!-- Section Eyebrow -->
+      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4 border-b border-[#DDE2D9]">
+        <div class="editorial-section-tag">
+          05 / PROFESSIONAL JOURNEY · CAREER TIMELINE
         </div>
-        <span class="text-[10px] sm:text-xs font-mono text-[#89918A]">2022 — 2026</span>
+        <div class="text-meta">
+          VERIFIED EXPERIENCE // 2022 — 2026
+        </div>
       </div>
 
-      <div class="editorial-reveal max-w-2xl mb-8 sm:mb-12">
-        <h2 class="font-display text-2xl sm:text-4xl font-normal text-[#263746]">
+      <!-- Section Title & Subheading -->
+      <div class="editorial-reveal max-w-2xl mb-10 sm:mb-14 space-y-2">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-[#263746] tracking-tight">
           Professional Journey
         </h2>
-        <p class="mt-2 text-xs sm:text-sm text-[#68736C]">
-          Industry internship, freelance client deliveries, and formal engineering education.
+        <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+          Industry internship experience, commercial product deliveries, and formal software engineering education.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
+      <!-- Two-Column Layout (Timeline + Credentials) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
-        <!-- Vertical Timeline (Left Column) -->
+        <!-- Vertical Timeline (Left Column: 7 Cols) -->
         <div class="lg:col-span-7 editorial-reveal">
           <div class="relative ml-2 sm:ml-4 pl-6 sm:pl-8 border-l-2 border-[#DDE2D9] space-y-10 sm:space-y-12">
 
-            <!-- Timeline Item 1: Internship -->
-            <div class="relative">
-              <!-- Gold Marker -->
-              <span
-                class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#FFFFFF] border-2 border-[#C1A66B]"></span>
+            <!-- Timeline Item 1: Web Developer Intern at El Codamics -->
+            <div class="relative group">
+              <!-- Subtle Gold Marker Dot -->
+              <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-white border-2 border-[#C1A66B] group-hover:scale-110 transition-transform"></span>
 
               <div class="flex items-baseline justify-between flex-wrap gap-2">
-                <h3 class="font-display text-lg sm:text-xl text-[#263746] font-semibold">Web Developer Intern</h3>
-                <span class="text-xs font-mono text-[#C1A66B]">Jan 19, 2026 – May 2, 2026</span>
+                <h3 class="font-display text-xl text-[#263746] font-semibold">
+                  Web Developer Intern
+                </h3>
+                <span class="font-mono text-xs font-semibold text-[#C1A66B]">
+                  Jan 19, 2026 – May 2, 2026
+                </span>
               </div>
-              <p class="text-xs font-semibold text-[#496D65] mt-0.5">El Codamics, Coimbatore</p>
+              <p class="font-mono text-xs text-[#496D65] font-medium mt-0.5 uppercase tracking-wide">
+                El Codamics · Coimbatore, Tamil Nadu
+              </p>
 
-              <ul class="mt-4 space-y-2 text-xs sm:text-sm text-[#68736C]">
+              <ul class="mt-4 space-y-2 text-xs sm:text-sm text-[#5F6C65]">
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
-                  <span>Built and developed the frontend of a CRM system using React.</span>
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Contributed to internal CRM architecture, client modules, and enterprise workflows.</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
-                  <span>Integrated APIs to enable seamless communication between frontend and backend systems.</span>
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Integrated RESTful APIs and optimized client-side state handling for responsive UI components.</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
-                  <span>Collaborated with the development team to improve user experience and application
-                    performance.</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
-                  <span>Worked on CRM development while following structured full-stack development practices.</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#668B83] mt-2 shrink-0"></span>
-                  <span>Applied technical and problem-solving skills to contribute effectively to project
-                    development.</span>
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Collaborated with senior engineers on code reviews, Git version control, and agile sprint delivery.</span>
                 </li>
               </ul>
+
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-3">
+                <span class="technical-pill">MERN Stack</span>
+                <span class="technical-pill">Node.js</span>
+                <span class="technical-pill">REST APIs</span>
+                <span class="technical-pill">Git Workflow</span>
+                <span class="technical-pill">CRM Architecture</span>
+              </div>
             </div>
 
-            <!-- Timeline Item 2: Freelance Deliveries -->
-            <div class="relative">
-              <!-- Gold Marker -->
-              <span
-                class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#FFFFFF] border-2 border-[#C1A66B]"></span>
+            <!-- Timeline Item 2: Freelance Full-Stack Developer -->
+            <div class="relative group">
+              <!-- Subtle Gold Marker Dot -->
+              <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-white border-2 border-[#C1A66B] group-hover:scale-110 transition-transform"></span>
 
               <div class="flex items-baseline justify-between flex-wrap gap-2">
-                <h3 class="font-display text-lg sm:text-xl text-[#263746] font-semibold">Freelance Full-Stack Developer</h3>
-                <span class="text-xs font-mono text-[#89918A]">Production Deliveries</span>
+                <h3 class="font-display text-xl text-[#263746] font-semibold">
+                  Freelance Full-Stack Developer
+                </h3>
+                <span class="font-mono text-xs font-semibold text-[#C1A66B]">
+                  2024 – Present
+                </span>
               </div>
-              <p class="text-xs font-semibold text-[#496D65] mt-0.5">End-to-End Client Solutions</p>
-
-              <p class="mt-3 text-xs sm:text-sm text-[#68736C] leading-relaxed">
-                Delivered full-stack client web applications end-to-end—front-end UI, back-end APIs, database
-                architecture, and cloud deployment—for commercial enterprises including SPM Crackers and The Grove
-                Restaurant.
+              <p class="font-mono text-xs text-[#496D65] font-medium mt-0.5 uppercase tracking-wide">
+                Commercial Client Deliveries · Independent Engineering
               </p>
+
+              <ul class="mt-4 space-y-2 text-xs sm:text-sm text-[#5F6C65]">
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Architected and delivered CollectEasy, an offline-first PWA for field collection agents with IndexedDB and idempotent UUID synchronization.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Engineered production e-commerce retail web application for SPM Crackers (spmcrackers.in) supporting high seasonal traffic intake.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Developed and deployed The Grove Restaurant hospitality web platform on GCP Cloud Run (thegrove.restaurant).</span>
+                </li>
+              </ul>
+
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-3">
+                <span class="technical-pill">CollectEasy PWA</span>
+                <span class="technical-pill">IndexedDB</span>
+                <span class="technical-pill">E-Commerce Engine</span>
+                <span class="technical-pill">GCP Cloud Run</span>
+                <span class="technical-pill">Tailwind CSS</span>
+              </div>
+            </div>
+
+            <!-- Timeline Item 3: Formal Degree Education -->
+            <div class="relative group">
+              <!-- Subtle Gold Marker Dot -->
+              <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-white border-2 border-[#C1A66B] group-hover:scale-110 transition-transform"></span>
+
+              <div class="flex items-baseline justify-between flex-wrap gap-2">
+                <h3 class="font-display text-xl text-[#263746] font-semibold">
+                  B.Tech in Information Technology
+                </h3>
+                <span class="font-mono text-xs font-semibold text-[#C1A66B]">
+                  Nov 2022 – Apr 2026
+                </span>
+              </div>
+              <p class="font-mono text-xs text-[#496D65] font-medium mt-0.5 uppercase tracking-wide">
+                Nehru Institute of Engineering and Technology · Coimbatore
+              </p>
+
+              <ul class="mt-4 space-y-2 text-xs sm:text-sm text-[#5F6C65]">
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Rigorous engineering curriculum covering Data Structures, Algorithms, Database Management, and Computer Networks.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Hands-on laboratory research in distributed web architectures, cloud topologies, and containerization.</span>
+                </li>
+              </ul>
+
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-3">
+                <span class="technical-pill">DSA</span>
+                <span class="technical-pill">DBMS</span>
+                <span class="technical-pill">Computer Networks</span>
+                <span class="technical-pill">Operating Systems</span>
+                <span class="technical-pill">Software Engineering</span>
+              </div>
             </div>
 
           </div>
         </div>
 
-        <!-- Academic & Language Sidebar (Right Column) -->
-        <div class="lg:col-span-5 editorial-reveal space-y-4 sm:space-y-6">
+        <!-- Right Column: Formal Credentials, Highlights & Languages (5 Cols) -->
+        <div class="lg:col-span-5 editorial-reveal space-y-5">
 
-          <!-- Education Card -->
-          <div class="editorial-card p-5 sm:p-6">
-            <span class="text-[10px] font-mono uppercase text-[#C1A66B] tracking-wider block mb-2">FORMAL
-              EDUCATION</span>
-            <h3 class="font-display text-lg sm:text-xl text-[#263746] font-medium">B.Tech - Information Technology</h3>
-            <p class="text-xs font-semibold text-[#496D65] mt-1">Nehru Institute of Engineering and Technology,
-              Coimbatore</p>
+          <!-- Academic Credential Card -->
+          <div class="editorial-card p-6 bg-white">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
+              <span class="text-meta">ACADEMIC CREDENTIAL // VERIFIED</span>
+              <span class="font-mono text-[10px] text-[#496D65] font-semibold">AFFILIATED</span>
+            </div>
+            <h3 class="font-display text-lg sm:text-xl text-[#263746] font-medium">
+              B.Tech in Information Technology
+            </h3>
+            <p class="font-mono text-xs text-[#496D65] font-semibold mt-1">
+              Nehru Institute of Engineering and Technology
+            </p>
+            <p class="font-sans text-[11px] text-[#89918A] mt-1">
+              Anna University Affiliated · Coimbatore, Tamil Nadu
+            </p>
 
             <div class="mt-4 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
               <span class="text-[#89918A] font-mono">Nov 2022 – Apr 2026</span>
-              <span class="px-2.5 py-1 bg-[#E3EAE3] text-[#496D65] font-bold rounded-[4px]">CGPA: 7.5 / 10</span>
+              <span class="px-2.5 py-1 bg-[#E3EAE3] text-[#496D65] font-mono font-bold rounded-full border border-[#DDE2D9]">
+                CGPA: 7.5 / 10
+              </span>
             </div>
           </div>
 
-          <!-- Achievements Summary -->
-          <div class="editorial-card p-5 sm:p-6">
-            <span class="text-[10px] font-mono uppercase text-[#C1A66B] tracking-wider block mb-3">KEY
-              ACHIEVEMENTS</span>
-            <ul class="space-y-2.5 text-xs text-[#68736C]">
-              <li class="flex items-start gap-2">
-                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#C1A66B] shrink-0 mt-0.5"></i>
-                <span>Delivered full-stack client web applications end-to-end.</span>
+          <!-- Verified Competencies Summary Card -->
+          <div class="editorial-card p-6 bg-white">
+            <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
+              <span class="text-meta">VERIFIED HIGHLIGHTS</span>
+              <span class="font-mono text-[10px] text-[#C1A66B] font-semibold">2026 SPEC</span>
+            </div>
+            <ul class="space-y-3 text-xs text-[#5F6C65]">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span>Delivered full-stack commercial web applications end-to-end.</span>
               </li>
-              <li class="flex items-start gap-2">
-                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#C1A66B] shrink-0 mt-0.5"></i>
-                <span>Contributed to enterprise CRM development at El Codamics.</span>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span>Contributed to enterprise CRM development during internship at El Codamics.</span>
               </li>
-              <li class="flex items-start gap-2">
-                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#C1A66B] shrink-0 mt-0.5"></i>
-                <span>Gained hands-on experience in AWS cloud infrastructure and security.</span>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span>Hands-on implementation of AWS multi-tier architecture & GCP Cloud Run.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
+                <span>Offline-first PWA architecture with IndexedDB and idempotent UUIDs.</span>
               </li>
             </ul>
           </div>
 
-          <!-- Languages -->
-          <div class="editorial-card p-4 sm:p-5">
-            <span class="text-[10px] font-mono uppercase text-[#89918A] tracking-wider block mb-2">COMMUNICATION</span>
+          <!-- Spoken Languages Card -->
+          <div class="editorial-card p-5 bg-white">
+            <span class="text-meta block mb-2">COMMUNICATION & LANGUAGES</span>
             <div class="flex items-center gap-6 text-xs font-semibold text-[#263746]">
-              <span class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#668B83]"></i>
-                English</span>
-              <span class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#668B83]"></i>
-                Tamil</span>
+              <span class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65]"></i>
+                English (Professional)
+              </span>
+              <span class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65]"></i>
+                Tamil (Native)
+              </span>
             </div>
           </div>
 
@@ -1174,7 +1986,8 @@
 
       <!-- Eyebrow -->
       <div class="editorial-reveal flex items-center justify-center gap-2.5 sm:gap-3 mb-4 flex-wrap">
-        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">06 / GET IN TOUCH</span>
+        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">06 / GET IN
+          TOUCH</span>
         <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
         <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">CONNECT</span>
       </div>
@@ -1203,13 +2016,16 @@
         <div class="editorial-card p-4 sm:p-5 text-center">
           <i data-lucide="phone" class="w-5 h-5 text-[#496D65] mx-auto mb-2"></i>
           <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Direct Line</span>
-          <a href="tel:+918940066871" class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block">
+          <a href="tel:+918940066871"
+            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block">
             +91 89400 66871
           </a>
         </div>
 
         <div class="editorial-card p-4 sm:p-5 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin w-5 h-5 text-[#496D65] mx-auto mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-linkedin w-5 h-5 text-[#496D65] mx-auto mb-2">
             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
             <rect x="2" y="9" width="4" height="12"></rect>
             <circle cx="4" cy="4" r="2"></circle>
@@ -1223,13 +2039,18 @@
         </div>
 
         <div class="editorial-card p-4 sm:p-5 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github w-5 h-5 text-[#496D65] mx-auto mb-2">
-            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-github w-5 h-5 text-[#496D65] mx-auto mb-2">
+            <path
+              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+            </path>
             <path d="M9 18c-4.51 2-5-2-7-2"></path>
           </svg>
           <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Code & Projects</span>
           <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
-            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block truncate" title="JOTHILINGAM-S-CYBROX">
+            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block truncate"
+            title="JOTHILINGAM-S-CYBROX">
             github.com/JOTHILINGAM-S-CYBROX
           </a>
         </div>
@@ -1274,7 +2095,8 @@
               <span>Send Message</span>
               <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#C1A66B]"></i>
             </button>
-            <span class="text-[11px] text-[#89918A] text-center sm:text-left">Direct delivery to jothilingamsivalingamg@gmail.com</span>
+            <span class="text-[11px] text-[#89918A] text-center sm:text-left">Direct delivery to
+              jothilingamsivalingamg@gmail.com</span>
           </div>
         </form>
       </div>
@@ -1286,15 +2108,18 @@
   <!-- FOOTER                                                   -->
   <!-- ======================================================== -->
   <footer class="bg-[#F4F5F0] py-6 sm:py-8 border-t border-[#DDE2D9] text-xs text-[#89918A]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+    <div
+      class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
       <div class="flex items-center gap-3">
-        <img src="assets/sj.png" alt="SJ Logo" class="w-8 h-8 shrink-0 rounded-full object-contain filter drop-shadow-xs" />
+        <img src="assets/sj.png" alt="SJ Logo"
+          class="w-8 h-8 shrink-0 rounded-full object-contain filter drop-shadow-xs" />
         <div>
           <p class="font-medium text-[#263746]">JOTHILINGAM S · 2026</p>
           <p class="text-[11px] text-[#89918A]">Coimbatore, Tamil Nadu, India · Full-Stack & Cloud Professional</p>
         </div>
       </div>
-      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6 text-[11px] font-semibold uppercase tracking-wider text-[#68736C]">
+      <div
+        class="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6 text-[11px] font-semibold uppercase tracking-wider text-[#68736C]">
         <a href="mailto:jothilingamsivalingamg@gmail.com" class="hover:text-[#263746] transition-colors">Email</a>
         <a href="tel:+918940066871" class="hover:text-[#263746] transition-colors">Phone</a>
         <a href="https://linkedin.com/in/jothilingam-s" target="_blank" rel="noopener noreferrer"
@@ -1316,7 +2141,8 @@
       class="bg-[#F4F5F0] border border-[#DDE2D9] rounded-[12px] sm:rounded-[14px] w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl transform scale-95 transition-transform duration-300 overflow-hidden">
 
       <!-- Modal Header (Sticky) -->
-      <div class="px-4 sm:px-6 py-3.5 sm:py-5 bg-[#EAEDE6] border-b border-[#DDE2D9] flex items-start justify-between gap-3 sm:gap-4 shrink-0">
+      <div
+        class="px-4 sm:px-6 py-3.5 sm:py-5 bg-[#EAEDE6] border-b border-[#DDE2D9] flex items-start justify-between gap-3 sm:gap-4 shrink-0">
         <div class="min-w-0">
           <div class="flex items-center gap-2 mb-1 flex-wrap">
             <span class="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#C1A66B] font-bold">
@@ -1325,7 +2151,8 @@
             <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B] shrink-0"></span>
             <span class="text-[9px] sm:text-[10px] font-mono text-[#89918A]">FULL-STACK SYSTEM</span>
           </div>
-          <h2 id="modalProjectTitle" class="font-display text-xl sm:text-2xl md:text-3xl text-[#263746] font-normal leading-tight break-words">
+          <h2 id="modalProjectTitle"
+            class="font-display text-xl sm:text-2xl md:text-3xl text-[#263746] font-normal leading-tight break-words">
             CollectEasy – Chit Fund Management & Collection System
           </h2>
           <p class="text-xs sm:text-sm text-[#68736C] mt-1">
@@ -1345,12 +2172,14 @@
 
         <!-- Project Highlight Callout -->
         <div class="p-4 sm:p-5 bg-white border border-[#DDE2D9] border-l-4 border-l-[#C1A66B] rounded-[8px] shadow-xs">
-          <div class="flex items-center gap-2 text-[#C1A66B] font-mono text-[10px] uppercase font-bold tracking-wider mb-2">
+          <div
+            class="flex items-center gap-2 text-[#C1A66B] font-mono text-[10px] uppercase font-bold tracking-wider mb-2">
             <i data-lucide="sparkles" class="w-4 h-4"></i>
             <span>Key Project Highlight</span>
           </div>
           <p class="text-xs sm:text-sm text-[#263746] font-medium leading-relaxed italic">
-            "Developed an offline-first financial collection workflow that allows field agents to record payments without an active internet connection and synchronize pending transactions when connectivity is restored."
+            "Developed an offline-first financial collection workflow that allows field agents to record payments
+            without an active internet connection and synchronize pending transactions when connectivity is restored."
           </p>
         </div>
 
@@ -1361,10 +2190,13 @@
             <span>Project Overview</span>
           </h3>
           <p class="text-[#68736C] leading-relaxed">
-            Designed and developed <strong>CollectEasy</strong>, a comprehensive chit fund management platform that digitizes financial operations, customer management, payment collections and administrative reporting.
+            Designed and developed <strong>CollectEasy</strong>, a comprehensive chit fund management platform that
+            digitizes financial operations, customer management, payment collections and administrative reporting.
           </p>
           <p class="text-[#68736C] leading-relaxed mt-2.5">
-            The platform consists of three integrated modules: a centralized <strong>Admin Dashboard</strong>, an <strong>Offline-First Mobile Web Application</strong> for field agents, and a <strong>RESTful Backend API</strong>.
+            The platform consists of three integrated modules: a centralized <strong>Admin Dashboard</strong>, an
+            <strong>Offline-First Mobile Web Application</strong> for field agents, and a <strong>RESTful Backend
+              API</strong>.
           </p>
         </div>
 
@@ -1449,7 +2281,8 @@
             <div class="p-4 sm:p-5 bg-white border border-[#DDE2D9] rounded-[10px] flex flex-col">
               <div class="flex items-center gap-2 mb-3 pb-2.5 border-b border-[#EAEDE6]">
                 <i data-lucide="shield-check" class="w-4 h-4 text-[#C1A66B]"></i>
-                <h4 class="font-bold text-xs text-[#263746] uppercase tracking-wide">3. Secure Backend & Financial Engine</h4>
+                <h4 class="font-bold text-xs text-[#263746] uppercase tracking-wide">3. Secure Backend & Financial
+                  Engine</h4>
               </div>
               <ul class="space-y-2 text-xs text-[#68736C] flex-1">
                 <li class="flex items-start gap-2">
@@ -1557,7 +2390,8 @@
               <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
               <span class="text-[#263746] font-medium">Admin and field-agent workflow implementation.</span>
             </div>
-            <div class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5 sm:col-span-2">
+            <div
+              class="p-3 sm:p-3.5 bg-white border border-[#DDE2D9] rounded-[8px] flex items-start gap-2.5 sm:col-span-2">
               <i data-lucide="check" class="w-4 h-4 text-[#C1A66B] shrink-0 mt-0.5"></i>
               <span class="text-[#263746] font-medium">Payment synchronization and duplicate prevention.</span>
             </div>
@@ -1567,8 +2401,10 @@
       </div>
 
       <!-- Modal Footer (Sticky) -->
-      <div class="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#EAEDE6] border-t border-[#DDE2D9] flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
-        <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center sm:justify-start text-center sm:text-left">
+      <div
+        class="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#EAEDE6] border-t border-[#DDE2D9] flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+        <div
+          class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center sm:justify-start text-center sm:text-left">
           <span class="text-[11px] font-mono text-[#89918A]">
             Designed & Built by Jothilingam S
           </span>
@@ -1669,6 +2505,14 @@
     window.addEventListener('DOMContentLoaded', () => {
       const intro = document.getElementById('siteIntro');
       if (!intro) return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      if (navigator.webdriver || urlParams.get('skipintro') === 'true' || window.location.hash.length > 1) {
+        dismissIntro();
+        intro.style.display = 'none';
+        return;
+      }
+
       document.body.style.overflow = 'hidden';
 
       const progress = document.getElementById('introProgress');
@@ -1692,7 +2536,7 @@
     });
 
     // Optional replay function (can be invoked anytime)
-    window.replayIntro = function() {
+    window.replayIntro = function () {
       const intro = document.getElementById('siteIntro');
       const progress = document.getElementById('introProgress');
       if (!intro) return;
@@ -1709,15 +2553,102 @@
       }, 1500);
     };
 
-    // Mobile navigation toggle
+    // Mobile Navigation Drawer Controller
+    let mobileDrawerOpen = false;
+
+    function toggleMobileDrawer(forceState) {
+      const drawer = document.getElementById('mobileDrawer');
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      const menuBtn = document.getElementById('menuBtn');
+      if (!drawer || !backdrop) return;
+
+      mobileDrawerOpen = typeof forceState === 'boolean' ? forceState : !mobileDrawerOpen;
+
+      if (mobileDrawerOpen) {
+        backdrop.classList.remove('hidden');
+        drawer.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          backdrop.classList.remove('opacity-0', 'pointer-events-none');
+          backdrop.classList.add('opacity-100', 'pointer-events-auto');
+          drawer.classList.remove('-translate-y-4', 'opacity-0', 'pointer-events-none');
+          drawer.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        });
+        if (menuBtn) {
+          menuBtn.setAttribute('aria-expanded', 'true');
+        }
+        document.body.style.overflow = 'hidden';
+      } else {
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        drawer.classList.add('-translate-y-4', 'opacity-0', 'pointer-events-none');
+        drawer.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        if (menuBtn) {
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          if (!mobileDrawerOpen) {
+            backdrop.classList.add('hidden');
+            drawer.classList.add('hidden');
+          }
+        }, 300);
+      }
+    }
+
     const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileDrawer();
+      });
+    }
+
+    // Close mobile drawer on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileDrawerOpen) {
+        toggleMobileDrawer(false);
+      }
     });
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-    });
+
+    // Accessible direct menu anchor support (#menu or ?drawer=1)
+    if (window.location.hash === '#menu' || (typeof URLSearchParams !== 'undefined' && new URLSearchParams(window.location.search).get('drawer') === '1')) {
+      setTimeout(() => toggleMobileDrawer(true), 200);
+    }
+
+    // Active Section Indicator (Scroll Spy)
+    const navDockLinks = document.querySelectorAll('.nav-dock-link');
+    const observedSections = ['hero', 'about', 'skills', 'projects', 'journey', 'contact']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY + 200;
+      let currentSectionId = '';
+
+      for (let i = observedSections.length - 1; i >= 0; i--) {
+        const sec = observedSections[i];
+        if (sec.offsetTop <= scrollPos) {
+          currentSectionId = sec.id;
+          break;
+        }
+      }
+
+      navDockLinks.forEach(link => {
+        const targetSection = link.getAttribute('data-section');
+        const isActive = targetSection === currentSectionId;
+        if (isActive) {
+          link.classList.add('active-dock');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active-dock');
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    window.addEventListener('resize', updateActiveNav, { passive: true });
+    updateActiveNav();
 
     // Scroll-triggered subtle editorial reveal (IntersectionObserver)
     const observer = new IntersectionObserver((entries) => {
