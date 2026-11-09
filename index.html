@@ -51,6 +51,7 @@
             gold: '#C1A66B',
             'gold-dim': 'rgba(193, 166, 107, 0.20)',
             rule: '#DDE2D9',
+            'rule-subtle': '#E8ECE4',
 
             // Semantic Aliases & Backward Compatibility
             bgMain: '#F4F5F0',
@@ -62,6 +63,13 @@
             accentPrimary: '#496D65',
             primaryDark: '#3D5C55',
             borderLine: '#DDE2D9',
+          },
+          letterSpacing: {
+            'architectural': '0.12em',
+            'spec': '0.18em',
+          },
+          transitionTimingFunction: {
+            'architectural': 'cubic-bezier(0.16, 1, 0.3, 1)',
           },
           borderRadius: {
             card: '12px',
@@ -91,12 +99,18 @@
       --color-forest-dark: #3D5C55;
       --color-sage-tint: #E3EAE3;
       --color-gold: #C1A66B;
+      --color-gold-dim: rgba(193, 166, 107, 0.20);
       --color-rule: #DDE2D9;
+      --color-rule-subtle: #E8ECE4;
 
       /* Standard Architectural Radii */
       --radius-card: 12px;
       --radius-button: 6px;
       --radius-pill: 9999px;
+
+      /* Animation Tokens */
+      --ease-architectural: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-standard: 250ms;
 
       /* Backwards-compatible legacy mappings */
       --color-bg: var(--color-paper);
@@ -115,10 +129,57 @@
       box-sizing: border-box;
     }
 
-    html {
-      width: 100%;
-      text-size-adjust: 100%;
-      -webkit-text-size-adjust: 100%;
+    ::selection {
+      background-color: var(--color-sage-tint);
+      color: var(--color-ink);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--color-forest);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    html,
+    body,
+    * {
+      /* Custom Architectural Scrollbar (Standard CSS for modern Chrome, Firefox, Safari) */
+      scrollbar-width: thin;
+      scrollbar-color: #496D65 #F4F5F0;
+    }
+
+    /* Custom Architectural Scrollbar (WebKit / Chrome / Edge / Safari) */
+    ::-webkit-scrollbar {
+      width: 9px;
+      height: 9px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F4F5F0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #496D65;
+      border-radius: 9999px;
+      border: 2px solid #F4F5F0;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #3D5C55;
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+      background-color: #C1A66B;
     }
 
     body {
@@ -161,6 +222,17 @@
       transform: translateY(0);
     }
 
+    /* Precision Scroll Anchor Offsets for Sticky Floating Nav */
+    section[id] {
+      scroll-margin-top: 5.75rem;
+    }
+
+    @media (min-width: 640px) {
+      section[id] {
+        scroll-margin-top: 6.5rem;
+      }
+    }
+
     /* Editorial Card Styling */
     .editorial-card {
       background-color: var(--color-surface);
@@ -189,19 +261,22 @@
       font-weight: 500;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      padding: 0.25rem 0.625rem;
+      padding: 0.28rem 0.65rem;
       border-radius: var(--radius-pill);
       border: 1px solid var(--color-rule);
-      background-color: var(--color-paper);
-      color: var(--color-graphite);
+      background-color: #FFFFFF;
+      color: var(--color-ink);
+      box-shadow: 0 1px 2px rgba(38, 55, 70, 0.03);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       line-height: 1.2;
     }
 
     .technical-pill:hover {
       border-color: var(--color-forest);
-      color: var(--color-ink);
-      background-color: var(--color-surface);
+      color: var(--color-forest);
+      background-color: var(--color-sage-tint);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px -2px rgba(73, 109, 101, 0.15);
     }
 
     /* Text Meta Caption */
@@ -330,84 +405,110 @@
       transform: scale(1.025);
     }
 
-    /* Hero Profile Photograph 45-Degree Diagonal Light Flash Sweep */
+    /* Hero Profile Photograph 45-Degree Metallic Reflection (Hardware Accelerated) */
     .portrait-shine {
       position: relative;
       overflow: hidden;
       contain: paint;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .portrait-shine::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
+      top: -60%;
+      left: -60%;
+      width: 220%;
+      height: 220%;
       pointer-events: none;
       z-index: 10;
       opacity: 0;
-      background: linear-gradient(90deg,
+      background: linear-gradient(105deg,
           rgba(255, 255, 255, 0) 0%,
           rgba(255, 255, 255, 0) 38%,
-          rgba(255, 255, 255, 0.04) 43%,
-          rgba(255, 255, 255, 0.18) 47%,
-          rgba(255, 255, 255, 0.38) 50%,
-          rgba(255, 255, 255, 0.18) 53%,
-          rgba(255, 255, 255, 0.04) 57%,
-          rgba(255, 255, 255, 0) 62%,
+          rgba(255, 255, 255, 0.15) 44%,
+          rgba(255, 248, 230, 0.55) 49%,
+          rgba(255, 255, 255, 0.85) 50%,
+          rgba(255, 248, 230, 0.55) 51%,
+          rgba(193, 166, 107, 0.30) 56%,
+          rgba(255, 255, 255, 0) 64%,
           rgba(255, 255, 255, 0) 100%);
       transform: translate3d(-100%, -100%, 0) rotate(45deg);
-      filter: blur(2px);
-      animation: portraitShineSweep 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      filter: blur(1.5px);
+      animation: portraitMetallicSweep 5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
       will-change: transform, opacity;
     }
 
-    @keyframes portraitShineSweep {
-
+    @keyframes portraitMetallicSweep {
       0%,
-      50% {
+      68% {
         opacity: 0;
         transform: translate3d(-100%, -100%, 0) rotate(45deg);
       }
 
-      55% {
-        opacity: 0.5;
-        transform: translate3d(-50%, -50%, 0) rotate(45deg);
+      70% {
+        opacity: 0.2;
+        transform: translate3d(-80%, -80%, 0) rotate(45deg);
       }
 
-      65% {
+      82% {
         opacity: 1;
-        transform: translate3d(0%, 0%, 0) rotate(45deg);
+        transform: translate3d(20%, 20%, 0) rotate(45deg);
       }
 
-      85% {
-        opacity: 1;
-        transform: translate3d(60%, 60%, 0) rotate(45deg);
+      94% {
+        opacity: 0.2;
+        transform: translate3d(90%, 90%, 0) rotate(45deg);
       }
 
-      92% {
-        opacity: 0.3;
-        transform: translate3d(85%, 85%, 0) rotate(45deg);
-      }
-
-      98%,
+      96%,
       100% {
         opacity: 0;
-        transform: translate3d(100%, 100%, 0) rotate(45deg);
+        transform: translate3d(110%, 110%, 0) rotate(45deg);
       }
     }
 
-    /* Floating Navigation Dock Active Link Indicator */
+    /* Floating Navigation Dock Active & Scrolled States */
+    .nav-dock-link {
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .nav-dock-link:hover {
+      color: var(--color-ink) !important;
+      background-color: rgba(227, 234, 227, 0.65);
+    }
+
     .nav-dock-link.active-dock {
       color: var(--color-ink) !important;
       font-weight: 600 !important;
       background-color: var(--color-sage-tint) !important;
+      border: 1px solid rgba(73, 109, 101, 0.18);
       box-shadow: 0 1px 3px rgba(38, 55, 70, 0.05);
+    }
+
+    .nav-dock-link .nav-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 9999px;
+      background-color: var(--color-gold);
+      display: none;
+      box-shadow: 0 0 6px rgba(193, 166, 107, 0.6);
     }
 
     .nav-dock-link.active-dock .nav-dot {
       display: inline-block !important;
+    }
+
+    #navDockContainer {
+      transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #navDockContainer.dock-scrolled {
+      background-color: rgba(244, 245, 240, 0.96) !important;
+      box-shadow: 0 12px 36px -4px rgba(38, 55, 70, 0.10), 0 4px 12px -2px rgba(38, 55, 70, 0.04) !important;
+      border-color: rgba(193, 166, 107, 0.35) !important;
     }
 
     /* Site Intro Monogram Screen */
@@ -595,7 +696,7 @@
   <!-- FLOATING NAVIGATION DOCK                                 -->
   <!-- ======================================================== -->
   <header class="sticky top-3 sm:top-5 z-40 w-full px-3 sm:px-6 pointer-events-none transition-all">
-    <div
+    <div id="navDockContainer"
       class="max-w-5xl mx-auto flex items-center justify-between gap-3 bg-[#F4F5F0]/90 backdrop-blur-md border border-[#DDE2D9] shadow-[0_8px_30px_rgba(38,55,70,0.06)] rounded-full sm:rounded-2xl px-3.5 sm:px-6 py-2.5 sm:py-3 pointer-events-auto">
 
       <!-- Brand Logotype & Monogram -->
@@ -618,7 +719,7 @@
       </a>
 
       <!-- Desktop Navigation Links with Active Indicator -->
-      <nav class="hidden md:flex items-center gap-1.5 lg:gap-2 text-xs font-medium tracking-wider uppercase"
+      <nav class="hidden lg:flex items-center gap-1.5 lg:gap-2 text-xs font-medium tracking-wider uppercase"
         aria-label="Main Navigation">
         <a href="#about"
           class="nav-dock-link text-[#5F6C65] hover:text-[#263746] px-3 py-1.5 rounded-full transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#496D65]"
@@ -667,18 +768,25 @@
           </svg>
         </a>
 
-        <!-- Get in Touch CTA -->
+        <!-- Get in Touch CTA with tactile micro-interaction -->
         <a href="#contact"
-          class="hidden sm:inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#496D65] text-white text-xs font-semibold tracking-wide hover:bg-[#3D5C55] transition-all shadow-xs focus-visible:ring-2 focus-visible:ring-[#496D65]">
+          class="group hidden sm:inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#496D65] text-white text-xs font-semibold tracking-wide hover:bg-[#3D5C55] transition-all shadow-xs focus-visible:ring-2 focus-visible:ring-[#496D65]">
           <span>Get in Touch</span>
-          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+          <svg class="w-3.5 h-3.5 text-[#C1A66B] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
         </a>
 
         <!-- Mobile Drawer Toggle Button -->
         <button id="menuBtn" type="button"
-          class="md:hidden w-9 h-9 rounded-full border border-[#DDE2D9] text-[#263746] flex items-center justify-center hover:bg-white transition-colors focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          class="lg:hidden w-9 h-9 rounded-full border border-[#DDE2D9] text-[#263746] flex items-center justify-center hover:bg-white transition-colors focus-visible:ring-2 focus-visible:ring-[#496D65]"
           aria-label="Toggle navigation drawer" aria-expanded="false" aria-controls="mobileDrawer">
-          <i data-lucide="menu" class="w-4 h-4" id="menuIcon"></i>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
         </button>
       </div>
 
@@ -686,18 +794,24 @@
 
     <!-- Mobile Navigation Drawer & Backdrop -->
     <div id="mobileDrawerBackdrop"
-      class="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs hidden md:hidden transition-opacity opacity-0 pointer-events-none"
+      class="fixed inset-0 z-40 bg-[#263746]/45 backdrop-blur-sm hidden lg:hidden transition-opacity opacity-0 pointer-events-none"
       onclick="toggleMobileDrawer(false)"></div>
 
     <div id="mobileDrawer"
-      class="fixed top-16 sm:top-20 inset-x-3 z-50 md:hidden bg-[#F4F5F0] border border-[#DDE2D9] rounded-2xl shadow-xl px-5 py-6 space-y-4 transition-all duration-300 transform -translate-y-4 opacity-0 pointer-events-none hidden"
+      class="fixed top-16 sm:top-20 inset-x-3 sm:inset-x-6 sm:max-w-md sm:mx-auto z-50 lg:hidden bg-[#F4F5F0] border border-[#DDE2D9] rounded-2xl shadow-[0_20px_50px_rgba(38,55,70,0.18)] px-5 py-6 space-y-4 transition-all duration-300 transform -translate-y-4 opacity-0 pointer-events-none hidden"
       role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
 
       <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
-        <span class="text-meta">PORTFOLIO INDEX</span>
-        <button type="button" onclick="toggleMobileDrawer(false)" class="p-1 text-[#5F6C65] hover:text-[#263746]"
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+          <span class="text-meta">PORTFOLIO INDEX</span>
+        </div>
+        <button type="button" onclick="toggleMobileDrawer(false)" class="w-7 h-7 rounded-full flex items-center justify-center text-[#5F6C65] hover:text-[#263746] hover:bg-[#EAEDE6] transition-colors"
           aria-label="Close Navigation Menu">
-          <i data-lucide="x" class="w-4 h-4"></i>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
       </div>
 
@@ -705,39 +819,44 @@
         aria-label="Mobile Navigation">
         <a href="#about"
           class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-[#EAEDE6] hover:text-[#263746] transition-colors"
+          data-section="about"
           onclick="toggleMobileDrawer(false)">
           <span>About</span>
           <span class="font-mono text-[10px] text-[#89918A]">01</span>
         </a>
         <a href="#skills"
           class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-[#EAEDE6] hover:text-[#263746] transition-colors"
+          data-section="skills"
           onclick="toggleMobileDrawer(false)">
           <span>Capabilities</span>
           <span class="font-mono text-[10px] text-[#89918A]">02</span>
         </a>
         <a href="#projects"
           class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-[#EAEDE6] hover:text-[#263746] transition-colors"
+          data-section="projects"
           onclick="toggleMobileDrawer(false)">
           <span>Selected Works</span>
           <span class="font-mono text-[10px] text-[#89918A]">03</span>
         </a>
         <a href="#journey"
           class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg hover:bg-[#EAEDE6] hover:text-[#263746] transition-colors"
+          data-section="journey"
           onclick="toggleMobileDrawer(false)">
           <span>Journey</span>
           <span class="font-mono text-[10px] text-[#89918A]">04</span>
         </a>
         <a href="#contact"
-          class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg bg-[#E3EAE3] text-[#496D65] transition-colors font-bold"
+          class="mobile-nav-link flex items-center justify-between py-2.5 px-3 rounded-lg bg-[#496D65] text-white hover:bg-[#3D5C55] transition-colors font-bold mt-2 shadow-xs"
+          data-section="contact"
           onclick="toggleMobileDrawer(false)">
-          <span>Get in Touch</span>
+          <span class="text-white">Get in Touch</span>
           <span class="font-mono text-[10px] text-[#C1A66B]">05 →</span>
         </a>
       </nav>
 
       <div class="pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-xs text-[#5F6C65]">
         <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
-          class="flex items-center gap-2 hover:text-[#263746]">
+          class="flex items-center gap-2 hover:text-[#263746] transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path
@@ -745,7 +864,7 @@
             </path>
             <path d="M9 18c-4.51 2-5-2-7-2"></path>
           </svg>
-          <span>GitHub</span>
+          <span class="font-mono text-[11px] font-semibold">GitHub</span>
         </a>
         <span class="font-mono text-[10px] text-[#89918A]">COIMBATORE, IN</span>
       </div>
@@ -774,74 +893,109 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
         <!-- Left Column: Editorial Headline, Professional Bio, Metadata, CTAs (60% width) -->
-        <div class="lg:col-span-7 editorial-reveal space-y-6">
+        <div class="lg:col-span-7 editorial-reveal space-y-6 sm:space-y-7">
 
           <!-- Subtle Availability Indicator -->
           <div
             class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#E3EAE3] border border-[#DDE2D9] max-w-full">
-            <span class="w-2 h-2 rounded-full bg-[#496D65] shrink-0"></span>
+            <span class="w-2 h-2 rounded-full bg-[#496D65] animate-pulse shrink-0"></span>
             <span class="font-mono text-[11px] sm:text-xs font-medium text-[#496D65] tracking-wide uppercase truncate">
               AVAILABLE FOR SELECT OPPORTUNITIES · COIMBATORE, IN
             </span>
           </div>
 
-          <!-- Editorial Headline in Playfair Display -->
+          <!-- Editorial Headline in Playfair Display with Golden Ratio Proportion -->
           <h1
-            class="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-normal text-[#263746] leading-[1.12] sm:leading-[1.10] tracking-tight">
+            class="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-normal text-[#263746] leading-[1.14] sm:leading-[1.10] tracking-tight">
             Thoughtful Design.<br />
             <span class="italic font-normal text-[#496D65]">Intelligent</span> Engineering.
           </h1>
 
-          <!-- Grounded Architectural Summary -->
-          <p class="text-sm sm:text-base font-normal text-[#5F6C65] leading-relaxed max-w-xl">
-            Full-stack web application developer and cloud professional specializing in building high-performance
-            distributed systems, resilient client interfaces, and scalable AWS infrastructure. Focused on clean
-            architecture, end-to-end reliability, and human-centered digital experiences.
+          <!-- Grounded Architectural Summary Communicating End-to-End Engineering & Cloud Architecture -->
+          <p class="text-sm sm:text-base font-normal text-[#5F6C65] leading-[1.7] max-w-xl">
+            Full-stack software engineer and cloud architect specializing in engineering end-to-end web applications,
+            resilient distributed systems, and scalable AWS infrastructure. From offline-first client architectures (PWA &
+            IndexedDB) to fault-tolerant multi-tier cloud topologies, I build software with architectural discipline, atomic
+            data integrity, and production-grade reliability.
           </p>
 
-          <!-- Primary & Secondary Action CTAs -->
-          <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-            <a href="#projects" class="btn-primary text-center">
+          <!-- Primary, Secondary & GitHub Action CTAs with Tactile Micro-Interactions -->
+          <div class="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5">
+            <a href="#projects" class="btn-primary group text-center">
               <span>Explore Selected Works</span>
-              <i data-lucide="arrow-down-right" class="w-4 h-4 text-[#C1A66B]"></i>
+              <svg class="w-4 h-4 text-[#C1A66B] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="7" x2="17" y2="17"></line>
+                <polyline points="17 7 17 17 7 17"></polyline>
+              </svg>
             </a>
 
-            <a href="#contact" class="btn-secondary text-center">
+            <a href="#contact" class="btn-secondary group text-center">
               <span>Contact Jothilingam</span>
-              <i data-lucide="mail" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              <svg class="w-3.5 h-3.5 text-[#C1A66B] transition-transform duration-200 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
             </a>
 
             <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[6px] bg-white border border-[#DDE2D9] text-[#263746] text-xs font-semibold hover:border-[#496D65] hover:text-[#496D65] transition-all"
-              title="GitHub Profile">
+              class="btn-secondary group text-center"
+              title="GitHub Profile - JOTHILINGAM-S-CYBROX">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-[#263746] transition-transform duration-200 group-hover:scale-110">
                 <path
                   d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
                 </path>
                 <path d="M9 18c-4.51 2-5-2-7-2"></path>
               </svg>
               <span>GitHub</span>
-              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#89918A]"></i>
+              <svg class="w-3.5 h-3.5 text-[#89918A] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
             </a>
           </div>
 
+          <!-- Compact Engineering Highlights Strip (Verified Information - 3-Column Symmetrical Grid) -->
+          <div class="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
+            <div
+              class="group flex items-center gap-2 px-3 py-2 rounded-[6px] bg-white border border-[#DDE2D9] shadow-2xs hover:border-[#496D65] hover:shadow-xs transition-all">
+              <svg class="w-3.5 h-3.5 text-[#496D65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+              <span class="font-mono text-[10px] sm:text-[11px] text-[#5F6C65] leading-tight truncate"><strong class="font-semibold text-[#263746]">CollectEasy</strong> · Offline PWA</span>
+            </div>
+            <div
+              class="group flex items-center gap-2 px-3 py-2 rounded-[6px] bg-white border border-[#DDE2D9] shadow-2xs hover:border-[#496D65] hover:shadow-xs transition-all">
+              <svg class="w-3.5 h-3.5 text-[#496D65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+              </svg>
+              <span class="font-mono text-[10px] sm:text-[11px] text-[#5F6C65] leading-tight truncate"><strong class="font-semibold text-[#263746]">AWS & GCP</strong> · Cloud Topologies</span>
+            </div>
+            <div
+              class="group flex items-center gap-2 px-3 py-2 rounded-[6px] bg-white border border-[#DDE2D9] shadow-2xs hover:border-[#496D65] hover:shadow-xs transition-all">
+              <svg class="w-3.5 h-3.5 text-[#496D65] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+              <span class="font-mono text-[10px] sm:text-[11px] text-[#5F6C65] leading-tight truncate"><strong class="font-semibold text-[#263746]">Freelance</strong> · May 2026 – Present</span>
+            </div>
+          </div>
+
           <!-- Architectural Technical Metadata Strip -->
-          <div class="pt-6 border-t border-[#DDE2D9] grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div class="pt-5 border-t border-[#DDE2D9] grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div>
               <span class="text-meta block">Datum // 01 · Location</span>
-              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">COIMBATORE, TAMIL
-                NADU</span>
+              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">COIMBATORE, TAMIL NADU</span>
             </div>
             <div>
               <span class="text-meta block">Datum // 02 · Discipline</span>
-              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">FULL-STACK & CLOUD
-                ENGINEERING</span>
+              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">FULL-STACK & CLOUD SYSTEMS</span>
             </div>
             <div>
               <span class="text-meta block">Datum // 03 · Education</span>
-              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">B.TECH INFORMATION
-                TECHNOLOGY</span>
+              <span class="font-mono text-xs font-semibold text-[#263746] mt-1 block tracking-tight">B.TECH IT · NIET (CGPA 7.5/10)</span>
             </div>
           </div>
 
@@ -856,33 +1010,37 @@
 
               <!-- Top Card Header: Technical Coordinates -->
               <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#DDE2D9] text-xs">
-                <span class="font-mono text-[10px] text-[#89918A] tracking-wider uppercase">ARCHITECTURAL SPEC //
-                  2026</span>
-                <span class="font-mono text-[10px] font-semibold text-[#C1A66B] uppercase tracking-wider">FIG. 01</span>
+                <span class="font-mono text-[10px] text-[#89918A] tracking-wider uppercase">ARCHITECTURAL SPEC // 2026</span>
+                <span class="font-mono text-[10px] font-semibold text-[#C1A66B] uppercase tracking-wider">FIG. 01 · PRINCIPAL</span>
               </div>
 
-              <!-- Profile Image Box with 45-Degree Metallic Reflection (Every 5 seconds) -->
+              <!-- Profile Image Box with 45-Degree Metallic Reflection (Hardware Accelerated) -->
               <div
-                class="portrait-shine relative w-full aspect-[4/5] rounded-[10px] overflow-hidden bg-[#EAEDE6] border border-[#DDE2D9]">
-                <img id="userAvatar" src="assets/Jothi.png" alt="Jothilingam S"
-                  class="w-full h-full object-cover object-center filter contrast-[0.98]"
-                  onerror="this.src='https://placehold.co/500x625/EAEDE6/263746?text=Jothilingam+S'" />
+                class="portrait-shine relative w-full aspect-[4/5] rounded-[10px] overflow-hidden bg-[#EAEDE6] border border-[#DDE2D9] shadow-inner">
+                <img id="userAvatar" src="assets/Jothi.png" alt="Jothilingam S - Full-Stack Software Engineer & Cloud Architect"
+                  class="w-full h-full object-cover object-center filter contrast-[1.02] brightness-[0.99] group-hover:scale-[1.015] transition-transform duration-700 ease-out"
+                  onerror="this.src='assets/sj.png'" loading="eager" />
               </div>
 
-              <!-- Profile Card Details Footer -->
-              <div class="mt-4 pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
-                <div>
-                  <h3 class="font-sans font-bold text-xs sm:text-sm tracking-wide text-[#263746] uppercase">JOTHILINGAM
-                    S</h3>
-                  <p class="font-mono text-[10px] text-[#89918A] uppercase mt-0.5">FULL-STACK & CLOUD PROFESSIONAL</p>
+              <!-- Profile Card Details Footer & Refined Bottom Caption -->
+              <div class="mt-4 pt-3.5 border-t border-[#DDE2D9] space-y-2 text-xs">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="font-sans font-bold text-xs sm:text-sm tracking-wide text-[#263746] uppercase">JOTHILINGAM S</h3>
+                    <p class="font-mono text-[10px] text-[#89918A] uppercase mt-0.5 tracking-wider">FULL-STACK ENGINEER & CLOUD ARCHITECT</p>
+                  </div>
+                  <div class="text-right">
+                    <span
+                      class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold text-[#496D65] bg-[#E3EAE3] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#496D65]"></span>
+                      VERIFIED
+                    </span>
+                  </div>
                 </div>
-                <div class="text-right">
-                  <span
-                    class="inline-flex items-center gap-1.5 font-mono text-[10px] font-medium text-[#496D65] bg-[#E3EAE3] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#496D65]"></span>
-                    VERIFIED
-                  </span>
-                </div>
+
+                <p class="font-mono text-[10px] text-[#5F6C65] leading-normal pt-1.5 border-t border-[#EAEDE6]">
+                  B.Tech IT · NIET Coimbatore · Full-Lifecycle Web & Scalable AWS Topologies
+                </p>
               </div>
 
             </div>
@@ -898,16 +1056,16 @@
   <!-- ======================================================== -->
   <!-- 02. ABOUT ME & PHILOSOPHY (Secondary Bg #EAEDE6)        -->
   <!-- ======================================================== -->
-  <section id="about" class="py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
+  <section id="about" class="scroll-mt-24 sm:scroll-mt-28 py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
       <!-- Section Eyebrow -->
-      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8 sm:mb-10 pb-4 border-b border-[#DDE2D9]">
+      <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8 sm:mb-12 pb-4 border-b border-[#DDE2D9]">
         <div class="editorial-section-tag">
-          02 / ABOUT ME · PHILOSOPHY & PRACTICE
+          02 / ABOUT · PHILOSOPHY & PRACTICE
         </div>
         <div class="text-meta">
-          ARCHITECTURAL PERSPECTIVE // 2026
+          SPEC // PERSPECTIVE & FOUNDATIONS · 2026
         </div>
       </div>
 
@@ -915,13 +1073,13 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
         <!-- Left Column: Editorial Statement & Philosophy (7 Cols) -->
-        <div class="lg:col-span-7 editorial-reveal space-y-6">
+        <div class="lg:col-span-7 editorial-reveal space-y-6 sm:space-y-7">
 
-          <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl text-[#263746] font-normal leading-[1.25] tracking-tight">
-            "Building meaningful digital products through technology, creativity, and precision."
+          <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl text-[#263746] font-normal leading-[1.24] tracking-tight">
+            "Building meaningful digital products through <span class="italic text-[#496D65]">technology</span>, <span class="italic text-[#496D65]">creativity</span>, and architectural precision."
           </h2>
 
-          <div class="space-y-4 text-xs sm:text-sm font-sans text-[#5F6C65] leading-relaxed">
+          <div class="space-y-4 text-xs sm:text-sm font-sans text-[#5F6C65] leading-[1.75]">
             <p>
               I am a full-stack focused software engineer with hands-on experience architecting responsive web
               applications, robust REST APIs, and scalable cloud deployments. My engineering approach treats
@@ -936,74 +1094,77 @@
           </div>
 
           <!-- Development Creed Card -->
-          <div class="editorial-card p-5 bg-[#F4F5F0] border-l-4 border-l-[#C1A66B]">
-            <span class="text-meta block mb-1 text-[#C1A66B]">DEVELOPMENT CREED // PRINCIPLE</span>
+          <div class="editorial-card p-5 sm:p-6 bg-[#F4F5F0] border-l-2 border-l-[#C1A66B] shadow-2xs">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+              <span class="text-meta text-[#C1A66B]">PRINCIPLE // ARCHITECTURAL CREED</span>
+            </div>
             <p class="font-display italic text-[#496D65] text-sm sm:text-base leading-snug">
-              Resilience, simplicity, and attention to detail. Every component should be intentional, and every system should be engineered to scale reliably.
+              "Resilience, simplicity, and attention to detail. Every component should be intentional, and every system should be engineered to scale reliably."
             </p>
           </div>
 
         </div>
 
-        <!-- Right Column: Key Professional Information, Education & Standards (5 Cols) -->
+        <!-- Right Column: Key Professional Credentials & Standards (5 Cols) -->
         <div class="lg:col-span-5 editorial-reveal space-y-4 sm:space-y-5">
 
           <!-- Key Info Card 1: Core Discipline -->
-          <div class="editorial-card p-5 bg-white">
+          <div class="editorial-card p-5 sm:p-6 bg-white border border-[#DDE2D9] shadow-2xs hover:border-[#496D65] transition-all">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
-              <span class="text-meta">CORE DISCIPLINE</span>
-              <span class="font-mono text-[10px] text-[#496D65] font-semibold">VERIFIED</span>
+              <span class="text-meta">01 // CORE DISCIPLINE</span>
+              <span class="font-mono text-[10px] text-[#496D65] font-semibold bg-[#E3EAE3] px-2 py-0.5 rounded-full">VERIFIED</span>
             </div>
-            <h3 class="font-display text-lg text-[#263746] font-medium">
+            <h3 class="font-display text-lg text-[#263746] font-medium leading-snug">
               Full-Stack Application Development & Cloud Architecture
             </h3>
-            <p class="font-sans text-xs text-[#5F6C65] mt-2 leading-relaxed">
+            <p class="font-sans text-xs text-[#5F6C65] mt-2.5 leading-relaxed">
               End-to-end web engineering encompassing responsive front-end design, secure RESTful microservices, transactional databases, and resilient cloud hosting.
             </p>
           </div>
 
           <!-- Key Info Card 2: Formal Education -->
-          <div class="editorial-card p-5 bg-white">
+          <div class="editorial-card p-5 sm:p-6 bg-white border border-[#DDE2D9] shadow-2xs hover:border-[#496D65] transition-all">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
-              <span class="text-meta">FORMAL EDUCATION</span>
+              <span class="text-meta">02 // FORMAL EDUCATION</span>
               <span class="font-mono text-[10px] text-[#C1A66B] font-semibold">2022 — 2026</span>
             </div>
-            <h3 class="font-display text-lg text-[#263746] font-medium">
+            <h3 class="font-display text-lg text-[#263746] font-medium leading-snug">
               B.Tech in Information Technology
             </h3>
             <p class="font-mono text-xs text-[#496D65] font-semibold mt-1">
               Nehru Institute of Engineering and Technology, Coimbatore
             </p>
-            <div class="mt-3 pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
-              <span class="font-mono text-[#89918A]">Academic Standing</span>
-              <span class="px-2.5 py-0.5 rounded-full bg-[#E3EAE3] text-[#496D65] font-mono font-bold text-[11px] border border-[#DDE2D9]">
+            <div class="mt-3.5 pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+              <span class="font-mono text-[11px] text-[#89918A]">Academic Standing</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#E3EAE3] text-[#496D65] font-mono font-bold text-[11px] border border-[#DDE2D9]">
                 CGPA: 7.5 / 10
               </span>
             </div>
           </div>
 
           <!-- Key Info Card 3: Engineering Standards -->
-          <div class="editorial-card p-5 bg-white">
+          <div class="editorial-card p-5 sm:p-6 bg-white border border-[#DDE2D9] shadow-2xs hover:border-[#496D65] transition-all">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
-              <span class="text-meta">ENGINEERING METHODOLOGY</span>
-              <span class="font-mono text-[10px] text-[#89918A]">STANDARDS</span>
+              <span class="text-meta">03 // ENGINEERING METHODOLOGY</span>
+              <span class="font-mono text-[10px] text-[#89918A]">SPEC // STANDARDS</span>
             </div>
-            <div class="grid grid-cols-2 gap-3 text-xs">
-              <div>
-                <span class="font-mono text-[10px] text-[#89918A] uppercase block">Architecture</span>
-                <span class="font-medium text-[#263746] mt-0.5 block">Modular & Clean</span>
+            <div class="grid grid-cols-2 gap-3.5 text-xs pt-1">
+              <div class="p-2.5 rounded-[6px] bg-[#F4F5F0] border border-[#DDE2D9]">
+                <span class="font-mono text-[9px] text-[#89918A] uppercase block">PWA Persistence</span>
+                <span class="font-medium text-[#263746] text-xs mt-1 block">IndexedDB Sync</span>
               </div>
-              <div>
-                <span class="font-mono text-[10px] text-[#89918A] uppercase block">Data Integrity</span>
-                <span class="font-medium text-[#263746] mt-0.5 block">Atomic Integer Math</span>
+              <div class="p-2.5 rounded-[6px] bg-[#F4F5F0] border border-[#DDE2D9]">
+                <span class="font-mono text-[9px] text-[#89918A] uppercase block">Data Integrity</span>
+                <span class="font-medium text-[#263746] text-xs mt-1 block">Paise Integer Math</span>
               </div>
-              <div>
-                <span class="font-mono text-[10px] text-[#89918A] uppercase block">APIs</span>
-                <span class="font-medium text-[#263746] mt-0.5 block">Idempotent Keys</span>
+              <div class="p-2.5 rounded-[6px] bg-[#F4F5F0] border border-[#DDE2D9]">
+                <span class="font-mono text-[9px] text-[#89918A] uppercase block">Network Sync</span>
+                <span class="font-medium text-[#263746] text-xs mt-1 block">UUID Idempotency</span>
               </div>
-              <div>
-                <span class="font-mono text-[10px] text-[#89918A] uppercase block">Reliability</span>
-                <span class="font-medium text-[#263746] mt-0.5 block">Offline-First PWA</span>
+              <div class="p-2.5 rounded-[6px] bg-[#F4F5F0] border border-[#DDE2D9]">
+                <span class="font-mono text-[9px] text-[#89918A] uppercase block">Cloud Infrastructure</span>
+                <span class="font-medium text-[#263746] text-xs mt-1 block">Multi-AZ AWS & GCP</span>
               </div>
             </div>
           </div>
@@ -1018,7 +1179,7 @@
   <!-- ======================================================== -->
   <!-- 03. ENGINEERING CAPABILITIES (#F4F5F0)                   -->
   <!-- ======================================================== -->
-  <section id="skills" class="py-16 sm:py-24 md:py-32 bg-[#F4F5F0]">
+  <section id="skills" class="scroll-mt-24 sm:scroll-mt-28 py-16 sm:py-24 md:py-32 bg-[#F4F5F0]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
       <!-- Section Eyebrow -->
@@ -1027,7 +1188,7 @@
           03 / ENGINEERING CAPABILITIES · TOOLCHAINS
         </div>
         <div class="text-meta">
-          TECHNICAL SPECIFICATION // ZERO FABRICATED METRICS
+          SPEC // TECHNICAL MATRIX · VERIFIED METRICS
         </div>
       </div>
 
@@ -1037,8 +1198,8 @@
           Technical Capabilities
         </h2>
         <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
-          Systematic overview of core engineering proficiencies across client-side interfaces, server backends,
-          cloud topologies, and persistence layers.
+          Systematic overview of core engineering proficiencies across client-side interfaces, server runtimes,
+          multi-tier cloud infrastructure, and transactional persistence systems.
         </p>
       </div>
 
@@ -1049,9 +1210,16 @@
         <div class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
           <div class="space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
-              <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
-                01 // FRONTEND ENGINEERING
-              </span>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#C1A66B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                  <path d="M3 9h18"></path>
+                  <path d="M9 21V9"></path>
+                </svg>
+                <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
+                  01 // FRONTEND ENGINEERING
+                </span>
+              </div>
               <span class="font-mono text-[10px] text-[#89918A]">SPEC // CLIENT-SIDE</span>
             </div>
             <div>
@@ -1087,9 +1255,15 @@
         <div class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
           <div class="space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
-              <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
-                02 // BACKEND ARCHITECTURE
-              </span>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#C1A66B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="4 17 10 11 4 5"></polyline>
+                  <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+                <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
+                  02 // BACKEND ARCHITECTURE
+                </span>
+              </div>
               <span class="font-mono text-[10px] text-[#89918A]">SPEC // SERVER-RUNTIME</span>
             </div>
             <div>
@@ -1125,9 +1299,14 @@
         <div class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
           <div class="space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
-              <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
-                03 // CLOUD INFRASTRUCTURE
-              </span>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#C1A66B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                </svg>
+                <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
+                  03 // CLOUD INFRASTRUCTURE
+                </span>
+              </div>
               <span class="font-mono text-[10px] text-[#89918A]">SPEC // CLOUD-DEPLOY</span>
             </div>
             <div>
@@ -1163,9 +1342,16 @@
         <div class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
           <div class="space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
-              <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
-                04 // DATA & SYSTEMS
-              </span>
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#C1A66B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+                  <path d="M3 12A9 3 0 0 0 21 12"></path>
+                </svg>
+                <span class="font-mono text-xs font-semibold tracking-wider uppercase text-[#C1A66B]">
+                  04 // DATA & SYSTEMS
+                </span>
+              </div>
               <span class="font-mono text-[10px] text-[#89918A]">SPEC // DATA-CORE</span>
             </div>
             <div>
@@ -1204,17 +1390,17 @@
   <!-- ======================================================== -->
   <!-- 04. SELECTED WORKS / ASYMMETRIC BENTO SHOWCASE           -->
   <!-- ======================================================== -->
-  <section id="projects" class="py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
+  <section id="projects" class="scroll-mt-24 sm:scroll-mt-28 py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
       <!-- Section Eyebrow -->
       <div
         class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4 border-b border-[#DDE2D9]">
         <div class="editorial-section-tag">
-          04 / SELECTED WORKS · PRODUCTION SYSTEMS
+          • 04 / SELECTED WORKS · PRODUCTION SYSTEMS
         </div>
-        <div class="text-meta">
-          PORTFOLIO // FULL-STACK & CLOUD
+        <div class="text-meta font-mono text-[11px] text-[#89918A]">
+          SPEC // FULL-STACK & CLOUD TOPOLOGIES
         </div>
       </div>
 
@@ -1224,8 +1410,7 @@
           Featured Engineering Showcases
         </h2>
         <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
-          Mission-critical financial systems, production e-commerce platforms, and scalable cloud architectures
-          engineered with end-to-end resilience.
+          Mission-critical financial systems, commercial e-commerce platforms, and resilient multi-tier cloud architectures engineered with atomic data integrity.
         </p>
       </div>
 
@@ -1256,9 +1441,9 @@
                 <span
                   class="inline-flex items-center gap-2 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-3 py-1 rounded-full border border-[#DDE2D9]">
                   <span class="w-2 h-2 rounded-full bg-[#C1A66B] animate-pulse"></span>
-                  FLAGSHIP PRODUCTION · FINTECH & ENTERPRISE
+                  FLAGSHIP ARCHITECTURE · PRODUCTION FINTECH
                 </span>
-                <span class="font-mono text-[11px] text-[#89918A]">CASE STUDY // 01</span>
+                <span class="font-mono text-[11px] text-[#89918A]">CASE STUDY // 01 · COIMBATORE, TN</span>
               </div>
 
               <!-- Title & Mission Statement -->
@@ -1271,38 +1456,31 @@
                   Centralized Operations · Field Agent Mobile App · Idempotent Financial Engine
                 </p>
                 <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed mt-3.5">
-                  Comprehensive financial management platform that digitizes chit fund operations, customer management,
-                  payment collections, and administrative auditing across three integrated modules. Built to operate
-                  reliably in low-connectivity environments with strict accounting guarantees.
+                  Enterprise financial management platform that digitizes chit fund operations, customer KYC, payment collections, and administrative auditing across three integrated modules. Architected for zero data loss in rural and low-connectivity field environments.
                 </p>
               </div>
 
               <!-- Three Core Engineering Highlights -->
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9]">
-                  <span class="font-mono text-[10px] text-[#496D65] font-semibold block uppercase">01 // Offline-First
-                    PWA</span>
-                  <span class="font-sans text-xs font-medium text-[#263746] mt-1 block">IndexedDB Sync</span>
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] group-hover:border-[#496D65]/40 transition-colors">
+                  <span class="font-mono text-[10px] text-[#496D65] font-bold block uppercase tracking-wider">01 // OFFLINE-FIRST PWA</span>
+                  <span class="font-sans text-xs font-bold text-[#263746] mt-1 block">IndexedDB Sync</span>
                   <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
-                    Field agents record payments without internet; automatic two-way sync reconciles data when
-                    reconnected.
+                    Field agents record transactions uninterrupted without internet; automated synchronization reconciles ledger records upon reconnection.
                   </p>
                 </div>
-                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9]">
-                  <span class="font-mono text-[10px] text-[#496D65] font-semibold block uppercase">02 //
-                    Idempotency</span>
-                  <span class="font-sans text-xs font-medium text-[#263746] mt-1 block">UUID Unique Keys</span>
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] group-hover:border-[#496D65]/40 transition-colors">
+                  <span class="font-mono text-[10px] text-[#496D65] font-bold block uppercase tracking-wider">02 // IDEMPOTENCY</span>
+                  <span class="font-sans text-xs font-bold text-[#263746] mt-1 block">UUID Unique Keys</span>
                   <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
-                    Client-generated UUIDs eliminate duplicate payment submissions during intermittent network drops.
+                    Client-generated UUID keys prevent duplicate ledger entries during intermittent network reconnects and background sync retries.
                   </p>
                 </div>
-                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9]">
-                  <span class="font-mono text-[10px] text-[#496D65] font-semibold block uppercase">03 // Precision
-                    Math</span>
-                  <span class="font-sans text-xs font-medium text-[#263746] mt-1 block">Paise Integer Units</span>
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] group-hover:border-[#496D65]/40 transition-colors">
+                  <span class="font-mono text-[10px] text-[#496D65] font-bold block uppercase tracking-wider">03 // PRECISION MATH</span>
+                  <span class="font-sans text-xs font-bold text-[#263746] mt-1 block">Paise Integer Units</span>
                   <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
-                    Calculations executed in atomic integer units (paise), preventing IEEE 754 floating-point rounding
-                    drift.
+                    Monetary calculations executed strictly at integer paise units, eliminating IEEE-754 floating-point rounding discrepancies.
                   </p>
                 </div>
               </div>
@@ -1338,55 +1516,64 @@
 
               <!-- Blueprint Header -->
               <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
-                <span class="text-meta">SYSTEM TOPOLOGY // 3-TIER ARCHITECTURE</span>
+                <span class="text-meta font-mono text-[11px] text-[#89918A]">SYSTEM TOPOLOGY // 3-TIER ARCHITECTURE</span>
                 <span
                   class="inline-flex items-center gap-1.5 font-mono text-[10px] text-[#496D65] font-semibold bg-[#E3EAE3] px-2.5 py-0.5 rounded-full border border-[#DDE2D9]">
                   <span class="w-1.5 h-1.5 rounded-full bg-[#496D65]"></span>
-                  ONLINE
+                  SYSTEM LIVE // MULTI-MODULE
                 </span>
               </div>
 
-              <!-- Architectural Module Nodes -->
-              <div class="my-4 space-y-3.5">
+              <!-- Architectural Module Nodes with explicit data-flow indicators -->
+              <div class="my-4 space-y-2.5">
 
                 <!-- Module 01 -->
                 <div
                   class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
                   <div class="flex items-center justify-between text-xs">
-                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase">MODULE 01 · ADMIN
-                      PLATFORM</span>
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase tracking-wide">MODULE 01 · ADMIN PLATFORM</span>
                     <span class="font-mono text-[10px] text-[#89918A]">DESKTOP WEB</span>
                   </div>
-                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Central Operations & Reporting Dashboard
-                  </h4>
+                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Central Operations & Reporting Dashboard</h4>
                   <p class="font-sans text-[11px] text-[#5F6C65] mt-1">
-                    Chit auction balancing, member KYC records, agent collection tracking, and automated ledger
-                    balancing.
+                    Chit auction balancing, member KYC records, agent collection tracking, and automated ledger balancing.
                   </p>
                   <div class="mt-2 text-[10px] font-mono text-[#89918A]">React 18 · TypeScript · Recharts</div>
+                </div>
+
+                <!-- Connector 1 -->
+                <div class="flex items-center justify-center -my-1">
+                  <span class="font-mono text-[9px] uppercase tracking-widest text-[#89918A] bg-white px-2.5 py-0.5 rounded-full border border-[#DDE2D9] shadow-2xs">
+                    ↓ REST API / JWT AUTH
+                  </span>
                 </div>
 
                 <!-- Module 02 -->
                 <div
                   class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
                   <div class="flex items-center justify-between text-xs">
-                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase">MODULE 02 · AGENT APP</span>
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase tracking-wide">MODULE 02 · AGENT APP</span>
                     <span class="font-mono text-[10px] text-[#C1A66B] font-semibold">OFFLINE-FIRST PWA</span>
                   </div>
-                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Field Agent Payment Collection Web App
-                  </h4>
+                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Field Agent Payment Collection Web App</h4>
                   <p class="font-sans text-[11px] text-[#5F6C65] mt-1">
                     Instant offline receipt generation, local IndexedDB storage, and background synchronization queue.
                   </p>
                   <div class="mt-2 text-[10px] font-mono text-[#89918A]">PWA · IndexedDB · Service Workers</div>
                 </div>
 
+                <!-- Connector 2 -->
+                <div class="flex items-center justify-center -my-1">
+                  <span class="font-mono text-[9px] uppercase tracking-widest text-[#89918A] bg-white px-2.5 py-0.5 rounded-full border border-[#DDE2D9] shadow-2xs">
+                    ↓ ATOMIC BATCH SYNC / IDEMPOTENT UUID
+                  </span>
+                </div>
+
                 <!-- Module 03 -->
                 <div
                   class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
                   <div class="flex items-center justify-between text-xs">
-                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase">MODULE 03 · REST
-                      ENGINE</span>
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase tracking-wide">MODULE 03 · REST ENGINE</span>
                     <span class="font-mono text-[10px] text-[#89918A]">BACKEND API</span>
                   </div>
                   <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Idempotent Transaction Processing API</h4>
@@ -1422,7 +1609,7 @@
               <span
                 class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
-                E-COMMERCE SYSTEM · LIVE PRODUCTION
+                01 // E-COMMERCE RETAIL · LIVE CLIENT
               </span>
               <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
                 class="font-mono text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1 transition-colors"
@@ -1467,9 +1654,7 @@
 
             <!-- Description -->
             <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
-              Developed and deployed a full-stack retail web application for a fireworks merchant. Features rapid
-              product browsing, categorized inventory presentation, and an order intake dashboard built to handle
-              concentrated seasonal traffic spikes.
+              Developed and deployed a full-stack retail web application for a fireworks merchant in Tamil Nadu. Features rapid product browsing, categorized inventory presentation, and an order intake dashboard built to handle concentrated seasonal traffic spikes.
             </p>
 
             <!-- Stack Pills -->
@@ -1506,7 +1691,7 @@
               <span
                 class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
-                HOSPITALITY WEB · GCP CLOUD RUN
+                02 // SERVERLESS HOSPITALITY · GCP CLOUD RUN
               </span>
               <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
                 class="font-mono text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1 transition-colors"
@@ -1551,9 +1736,7 @@
 
             <!-- Description -->
             <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
-              Engineered and deployed a modern brand platform for a fine dining restaurant. Built using Next.js for
-              server-rendered page efficiency, packaged in lightweight Docker containers, and hosted on Google Cloud Run
-              for automatic zero-downtime scaling.
+              Architected and deployed a modern brand platform for a fine dining restaurant. Built using Next.js for server-rendered page efficiency, packaged in lightweight Docker containers, and hosted on Google Cloud Run for automatic zero-downtime scaling.
             </p>
 
             <!-- Stack Pills -->
@@ -1591,9 +1774,9 @@
               <span
                 class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
-                CLOUD INFRASTRUCTURE · AWS
+                03 // CLOUD INFRASTRUCTURE · MULTI-SERVICE AWS
               </span>
-              <span class="font-mono text-[11px] text-[#89918A]">SPEC // INFRA-01</span>
+              <span class="font-mono text-[11px] text-[#89918A]">SPEC // AWS-INFRA-01</span>
             </div>
 
             <!-- Title & Subtitle -->
@@ -1635,9 +1818,7 @@
 
             <!-- Description -->
             <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
-              Architected and provisioned an enterprise-grade cloud hosting environment on AWS. Established hardened
-              network isolation through custom VPC subnets, automated file delivery via S3, and proactive system health
-              monitoring through CloudWatch.
+              Architected and provisioned an enterprise-grade cloud hosting environment on AWS. Established hardened network isolation through custom VPC subnets, automated file delivery via S3, and proactive system health monitoring through CloudWatch.
             </p>
 
             <!-- Stack Pills -->
@@ -1673,7 +1854,7 @@
               <span
                 class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
-                FAULT TOLERANT · HIGH AVAILABILITY
+                04 // FAULT TOLERANCE · MULTI-AZ ARCHITECTURE
               </span>
               <span class="font-mono text-[11px] text-[#89918A]">SPEC // AWS-INFRA-02</span>
             </div>
@@ -1717,9 +1898,7 @@
 
             <!-- Description -->
             <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
-              Designed a fault-tolerant multi-tier cloud topology eliminating single points of failure. Orchestrated
-              elastic traffic routing across Availability Zones, automated dynamic compute scaling to absorb traffic
-              surges, and configured zero-downtime database standby failover.
+              Designed a fault-tolerant multi-tier cloud topology eliminating single points of failure. Orchestrated elastic traffic routing across Availability Zones, automated dynamic compute scaling to absorb traffic surges, and configured zero-downtime database standby failover.
             </p>
 
             <!-- Stack Pills -->
@@ -1751,16 +1930,16 @@
   <!-- ======================================================== -->
   <!-- 05. EXPERIENCE & JOURNEY (#F4F5F0)                       -->
   <!-- ======================================================== -->
-  <section id="journey" class="py-16 sm:py-24 md:py-32 bg-[#F4F5F0]">
+  <section id="journey" class="scroll-mt-24 sm:scroll-mt-28 py-16 sm:py-24 md:py-32 bg-[#F4F5F0]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
       <!-- Section Eyebrow -->
       <div class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4 border-b border-[#DDE2D9]">
         <div class="editorial-section-tag">
-          05 / PROFESSIONAL JOURNEY · CAREER TIMELINE
+          • 05 / PROFESSIONAL JOURNEY · CAREER TIMELINE
         </div>
-        <div class="text-meta">
-          VERIFIED EXPERIENCE // 2022 — 2026
+        <div class="text-meta font-mono text-[11px] text-[#89918A]">
+          SPEC // VERIFIED EXPERIENCE · 2022 — 2026
         </div>
       </div>
 
@@ -1770,7 +1949,7 @@
           Professional Journey
         </h2>
         <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
-          Industry internship experience, commercial product deliveries, and formal software engineering education.
+          Independent engineering deliveries, industry internship experience, and formal information technology degree credentials.
         </p>
       </div>
 
@@ -1781,7 +1960,55 @@
         <div class="lg:col-span-7 editorial-reveal">
           <div class="relative ml-2 sm:ml-4 pl-6 sm:pl-8 border-l-2 border-[#DDE2D9] space-y-10 sm:space-y-12">
 
-            <!-- Timeline Item 1: Web Developer Intern at El Codamics -->
+            <!-- Timeline Item 1: Freelance Full-Stack Developer (Current State) -->
+            <div class="relative group">
+              <!-- Subtle Marker Dot with Active Status Indicator -->
+              <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#496D65] border-2 border-white shadow-xs group-hover:scale-110 transition-transform"></span>
+
+              <div class="flex items-baseline justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2">
+                  <h3 class="font-display text-xl text-[#263746] font-semibold">
+                    Freelance Full-Stack Developer
+                  </h3>
+                  <span class="inline-flex items-center gap-1 font-mono text-[10px] font-semibold text-[#496D65] bg-[#E3EAE3] px-2 py-0.5 rounded-full border border-[#DDE2D9]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] animate-pulse"></span>
+                    CURRENT
+                  </span>
+                </div>
+                <span class="font-mono text-xs font-semibold text-[#C1A66B]">
+                  May 2026 – Present
+                </span>
+              </div>
+              <p class="font-mono text-xs text-[#496D65] font-medium mt-0.5 uppercase tracking-wide">
+                Commercial Client Deliveries · Independent Engineering · Cloud Architectures
+              </p>
+
+              <ul class="mt-4 space-y-2 text-xs sm:text-sm text-[#5F6C65]">
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Architected and delivered <strong>CollectEasy</strong>, an offline-first PWA for chit fund field collection agents with IndexedDB and idempotent UUID synchronization.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Engineered production e-commerce retail web application for <strong>SPM Crackers</strong> (<a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer" class="text-[#496D65] underline font-semibold">spmcrackers.in</a>) supporting high seasonal traffic intake.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Developed and deployed <strong>The Grove Restaurant</strong> hospitality brand platform on GCP Cloud Run (<a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer" class="text-[#496D65] underline font-semibold">thegrove.restaurant</a>) with automated container scaling.</span>
+                </li>
+              </ul>
+
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-3">
+                <span class="technical-pill">CollectEasy PWA</span>
+                <span class="technical-pill">IndexedDB</span>
+                <span class="technical-pill">E-Commerce Engine</span>
+                <span class="technical-pill">GCP Cloud Run</span>
+                <span class="technical-pill">AWS Multi-AZ</span>
+                <span class="technical-pill">Tailwind CSS</span>
+              </div>
+            </div>
+
+            <!-- Timeline Item 2: Web Developer Intern at El Codamics -->
             <div class="relative group">
               <!-- Subtle Gold Marker Dot -->
               <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-white border-2 border-[#C1A66B] group-hover:scale-110 transition-transform"></span>
@@ -1822,47 +2049,6 @@
               </div>
             </div>
 
-            <!-- Timeline Item 2: Freelance Full-Stack Developer -->
-            <div class="relative group">
-              <!-- Subtle Gold Marker Dot -->
-              <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-white border-2 border-[#C1A66B] group-hover:scale-110 transition-transform"></span>
-
-              <div class="flex items-baseline justify-between flex-wrap gap-2">
-                <h3 class="font-display text-xl text-[#263746] font-semibold">
-                  Freelance Full-Stack Developer
-                </h3>
-                <span class="font-mono text-xs font-semibold text-[#C1A66B]">
-                  2024 – Present
-                </span>
-              </div>
-              <p class="font-mono text-xs text-[#496D65] font-medium mt-0.5 uppercase tracking-wide">
-                Commercial Client Deliveries · Independent Engineering
-              </p>
-
-              <ul class="mt-4 space-y-2 text-xs sm:text-sm text-[#5F6C65]">
-                <li class="flex items-start gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
-                  <span>Architected and delivered CollectEasy, an offline-first PWA for field collection agents with IndexedDB and idempotent UUID synchronization.</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
-                  <span>Engineered production e-commerce retail web application for SPM Crackers (spmcrackers.in) supporting high seasonal traffic intake.</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
-                  <span>Developed and deployed The Grove Restaurant hospitality web platform on GCP Cloud Run (thegrove.restaurant).</span>
-                </li>
-              </ul>
-
-              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-3">
-                <span class="technical-pill">CollectEasy PWA</span>
-                <span class="technical-pill">IndexedDB</span>
-                <span class="technical-pill">E-Commerce Engine</span>
-                <span class="technical-pill">GCP Cloud Run</span>
-                <span class="technical-pill">Tailwind CSS</span>
-              </div>
-            </div>
-
             <!-- Timeline Item 3: Formal Degree Education -->
             <div class="relative group">
               <!-- Subtle Gold Marker Dot -->
@@ -1889,6 +2075,10 @@
                   <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
                   <span>Hands-on laboratory research in distributed web architectures, cloud topologies, and containerization.</span>
                 </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0 mt-0.5"></i>
+                  <span>Graduated with verified <strong>CGPA 7.5 / 10</strong> from Anna University affiliated institution.</span>
+                </li>
               </ul>
 
               <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-3">
@@ -1907,10 +2097,10 @@
         <div class="lg:col-span-5 editorial-reveal space-y-5">
 
           <!-- Academic Credential Card -->
-          <div class="editorial-card p-6 bg-white">
+          <div class="editorial-card p-6 bg-white border border-[#DDE2D9] rounded-xl shadow-xs">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
-              <span class="text-meta">ACADEMIC CREDENTIAL // VERIFIED</span>
-              <span class="font-mono text-[10px] text-[#496D65] font-semibold">AFFILIATED</span>
+              <span class="text-meta font-mono text-[11px] text-[#89918A]">ACADEMIC CREDENTIAL // VERIFIED</span>
+              <span class="font-mono text-[10px] text-[#496D65] font-bold bg-[#E3EAE3] px-2 py-0.5 rounded-full border border-[#DDE2D9]">ANNA UNIVERSITY</span>
             </div>
             <h3 class="font-display text-lg sm:text-xl text-[#263746] font-medium">
               B.Tech in Information Technology
@@ -1931,9 +2121,9 @@
           </div>
 
           <!-- Verified Competencies Summary Card -->
-          <div class="editorial-card p-6 bg-white">
+          <div class="editorial-card p-6 bg-white border border-[#DDE2D9] rounded-xl shadow-xs">
             <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9] mb-3">
-              <span class="text-meta">VERIFIED HIGHLIGHTS</span>
+              <span class="text-meta font-mono text-[11px] text-[#89918A]">VERIFIED HIGHLIGHTS</span>
               <span class="font-mono text-[10px] text-[#C1A66B] font-semibold">2026 SPEC</span>
             </div>
             <ul class="space-y-3 text-xs text-[#5F6C65]">
@@ -1957,8 +2147,8 @@
           </div>
 
           <!-- Spoken Languages Card -->
-          <div class="editorial-card p-5 bg-white">
-            <span class="text-meta block mb-2">COMMUNICATION & LANGUAGES</span>
+          <div class="editorial-card p-5 bg-white border border-[#DDE2D9] rounded-xl shadow-xs">
+            <span class="text-meta font-mono text-[11px] text-[#89918A] block mb-2">COMMUNICATION & LANGUAGES</span>
             <div class="flex items-center gap-6 text-xs font-semibold text-[#263746]">
               <span class="flex items-center gap-2">
                 <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65]"></i>
@@ -1981,22 +2171,23 @@
   <!-- ======================================================== -->
   <!-- 06. CONTACT (#EAEDE6)                                    -->
   <!-- ======================================================== -->
-  <section id="contact" class="py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-t border-[#DDE2D9]">
+  <section id="contact" class="scroll-mt-24 sm:scroll-mt-28 py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-t border-[#DDE2D9]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
 
       <!-- Eyebrow -->
       <div class="editorial-reveal flex items-center justify-center gap-2.5 sm:gap-3 mb-4 flex-wrap">
-        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#C1A66B]">06 / GET IN
-          TOUCH</span>
+        <span class="editorial-section-tag">
+          • 06 / GET IN TOUCH · DIRECT COMMUNICATIONS
+        </span>
         <span class="w-6 sm:w-8 h-px bg-[#C1A66B] shrink-0"></span>
-        <span class="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-[#89918A]">CONNECT</span>
+        <span class="text-meta font-mono text-[11px] text-[#89918A]">SPEC // CLIENT & RECRUITER INTAKE · 2026</span>
       </div>
 
       <div class="editorial-reveal text-center max-w-xl mx-auto mb-8 sm:mb-12">
         <h2 class="font-display text-2xl sm:text-4xl lg:text-5xl font-normal text-[#263746] leading-tight">
           Let’s build something exceptional together.
         </h2>
-        <p class="mt-3 sm:mt-4 text-xs sm:text-sm text-[#68736C]">
+        <p class="mt-3 sm:mt-4 text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
           Open to full-stack engineering roles, freelance opportunities, and cloud architecture inquiries.
         </p>
       </div>
@@ -2004,25 +2195,25 @@
       <!-- Contact Detail Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-10 editorial-reveal">
 
-        <div class="editorial-card p-4 sm:p-5 text-center">
+        <div class="editorial-card p-4 sm:p-5 text-center bg-white border border-[#DDE2D9] rounded-xl hover:border-[#496D65] transition-colors">
           <i data-lucide="mail" class="w-5 h-5 text-[#496D65] mx-auto mb-2"></i>
-          <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Email Inquiries</span>
-          <button onclick="copyEmailAddress()"
-            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 break-all cursor-pointer block w-full text-center">
+          <span class="text-[10px] font-mono font-bold text-[#89918A] uppercase tracking-wider block">Email Inquiries</span>
+          <button type="button" onclick="copyEmailAddress()"
+            class="text-[11px] sm:text-xs font-semibold text-[#263746] hover:text-[#496D65] mt-1 break-all cursor-pointer block w-full text-center transition-colors">
             jothilingamsivalingamg@gmail.com
           </button>
         </div>
 
-        <div class="editorial-card p-4 sm:p-5 text-center">
+        <div class="editorial-card p-4 sm:p-5 text-center bg-white border border-[#DDE2D9] rounded-xl hover:border-[#496D65] transition-colors">
           <i data-lucide="phone" class="w-5 h-5 text-[#496D65] mx-auto mb-2"></i>
-          <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Direct Line</span>
+          <span class="text-[10px] font-mono font-bold text-[#89918A] uppercase tracking-wider block">Direct Line</span>
           <a href="tel:+918940066871"
-            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block">
+            class="text-[11px] sm:text-xs font-semibold text-[#263746] hover:text-[#496D65] mt-1 block transition-colors">
             +91 89400 66871
           </a>
         </div>
 
-        <div class="editorial-card p-4 sm:p-5 text-center">
+        <div class="editorial-card p-4 sm:p-5 text-center bg-white border border-[#DDE2D9] rounded-xl hover:border-[#496D65] transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-linkedin w-5 h-5 text-[#496D65] mx-auto mb-2">
@@ -2030,15 +2221,14 @@
             <rect x="2" y="9" width="4" height="12"></rect>
             <circle cx="4" cy="4" r="2"></circle>
           </svg>
-          <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Professional
-            Network</span>
+          <span class="text-[10px] font-mono font-bold text-[#89918A] uppercase tracking-wider block">Professional Network</span>
           <a href="https://linkedin.com/in/jothilingam-s" target="_blank" rel="noopener noreferrer"
-            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block truncate">
-            linkedin.com/in/jothilingam-s
+            class="text-[11px] sm:text-xs font-semibold text-[#263746] hover:text-[#496D65] mt-1 block truncate transition-colors">
+            linkedin.com/in/jothilingam-s ↗
           </a>
         </div>
 
-        <div class="editorial-card p-4 sm:p-5 text-center">
+        <div class="editorial-card p-4 sm:p-5 text-center bg-white border border-[#DDE2D9] rounded-xl hover:border-[#496D65] transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-github w-5 h-5 text-[#496D65] mx-auto mb-2">
@@ -2047,55 +2237,55 @@
             </path>
             <path d="M9 18c-4.51 2-5-2-7-2"></path>
           </svg>
-          <span class="text-[10px] font-semibold text-[#89918A] uppercase tracking-wider block">Code & Projects</span>
+          <span class="text-[10px] font-mono font-bold text-[#89918A] uppercase tracking-wider block">Source Repositories</span>
           <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
-            class="text-[11px] sm:text-xs font-medium text-[#263746] hover:text-[#496D65] mt-1 block truncate"
+            class="text-[11px] sm:text-xs font-semibold text-[#263746] hover:text-[#496D65] mt-1 block truncate transition-colors"
             title="JOTHILINGAM-S-CYBROX">
-            github.com/JOTHILINGAM-S-CYBROX
+            github.com/JOTHILINGAM-S-CYBROX ↗
           </a>
         </div>
 
       </div>
 
       <!-- Minimal Contact Form with Gold / Forest Slate Accent -->
-      <div class="editorial-card p-4 sm:p-8 md:p-10 editorial-reveal">
+      <div class="editorial-card p-4 sm:p-8 md:p-10 editorial-reveal bg-white border border-[#DDE2D9] rounded-2xl shadow-sm">
         <form id="contactForm" onsubmit="handleContactFormSubmit(event)" class="space-y-4 sm:space-y-5">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             <div>
-              <label for="contactName" class="block text-xs font-semibold text-[#263746] mb-1.5">Your Name</label>
+              <label for="contactName" class="block font-mono text-[11px] font-bold uppercase tracking-wider text-[#263746] mb-1.5">Your Name</label>
               <input type="text" id="contactName" name="name" required
-                class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-[6px] text-[#263746] focus:outline-none focus:border-[#496D65] transition-colors"
+                class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-lg text-[#263746] focus:outline-none focus:ring-1 focus:ring-[#496D65] focus:border-[#496D65] transition-all"
                 placeholder="e.g. Eleanor Vance" />
             </div>
             <div>
-              <label for="contactEmail" class="block text-xs font-semibold text-[#263746] mb-1.5">Your Email</label>
+              <label for="contactEmail" class="block font-mono text-[11px] font-bold uppercase tracking-wider text-[#263746] mb-1.5">Your Email</label>
               <input type="email" id="contactEmail" name="email" required
-                class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-[6px] text-[#263746] focus:outline-none focus:border-[#496D65] transition-colors"
+                class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-lg text-[#263746] focus:outline-none focus:ring-1 focus:ring-[#496D65] focus:border-[#496D65] transition-all"
                 placeholder="e.g. eleanor@company.com" />
             </div>
           </div>
 
           <div>
-            <label for="contactSubject" class="block text-xs font-semibold text-[#263746] mb-1.5">Subject</label>
+            <label for="contactSubject" class="block font-mono text-[11px] font-bold uppercase tracking-wider text-[#263746] mb-1.5">Subject</label>
             <input type="text" id="contactSubject" name="subject" required
-              class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-[6px] text-[#263746] focus:outline-none focus:border-[#496D65] transition-colors"
-              placeholder="Full-stack Role / Project Inquiry" />
+              class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-lg text-[#263746] focus:outline-none focus:ring-1 focus:ring-[#496D65] focus:border-[#496D65] transition-all"
+              placeholder="Full-Stack Role / Project Inquiry" />
           </div>
 
           <div>
-            <label for="contactMessage" class="block text-xs font-semibold text-[#263746] mb-1.5">Message</label>
+            <label for="contactMessage" class="block font-mono text-[11px] font-bold uppercase tracking-wider text-[#263746] mb-1.5">Message</label>
             <textarea id="contactMessage" name="message" rows="4" required
-              class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-[6px] text-[#263746] focus:outline-none focus:border-[#496D65] transition-colors resize-none"
-              placeholder="Provide a brief overview of your inquiry..."></textarea>
+              class="w-full px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-[#F4F5F0] border border-[#DDE2D9] rounded-lg text-[#263746] focus:outline-none focus:ring-1 focus:ring-[#496D65] focus:border-[#496D65] transition-all resize-none"
+              placeholder="Provide a brief overview of your inquiry or requirements..."></textarea>
           </div>
 
           <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
             <button type="submit" id="contactSubmitBtn"
-              class="w-full sm:w-auto px-7 py-3 rounded-[6px] bg-[#496D65] text-white text-xs font-semibold tracking-wider hover:bg-[#3d5c55] transition-colors inline-flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed text-center">
+              class="w-full sm:w-auto px-7 py-3 rounded-lg bg-[#496D65] text-white text-xs font-semibold tracking-wider hover:bg-[#3D5C55] transition-colors inline-flex items-center justify-center gap-2 cursor-pointer shadow-xs disabled:opacity-60 disabled:cursor-not-allowed text-center">
               <span>Send Message</span>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#C1A66B]"></i>
+              <i data-lucide="send" class="w-3.5 h-3.5 text-white"></i>
             </button>
-            <span class="text-[11px] text-[#89918A] text-center sm:text-left">Direct delivery to
+            <span class="font-mono text-[11px] text-[#89918A] text-center sm:text-left">Direct delivery to
               jothilingamsivalingamg@gmail.com</span>
           </div>
         </form>
@@ -2107,15 +2297,15 @@
   <!-- ======================================================== -->
   <!-- FOOTER                                                   -->
   <!-- ======================================================== -->
-  <footer class="bg-[#F4F5F0] py-6 sm:py-8 border-t border-[#DDE2D9] text-xs text-[#89918A]">
+  <footer class="bg-[#F4F5F0] py-8 sm:py-10 border-t border-[#DDE2D9] text-xs text-[#89918A]">
     <div
       class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
       <div class="flex items-center gap-3">
         <img src="assets/sj.png" alt="SJ Logo"
-          class="w-8 h-8 shrink-0 rounded-full object-contain filter drop-shadow-xs" />
+          class="w-9 h-9 shrink-0 rounded-full object-contain filter drop-shadow-xs" />
         <div>
-          <p class="font-medium text-[#263746]">JOTHILINGAM S · 2026</p>
-          <p class="text-[11px] text-[#89918A]">Coimbatore, Tamil Nadu, India · Full-Stack & Cloud Professional</p>
+          <p class="font-semibold text-[#263746] tracking-wide font-sans">JOTHILINGAM S · 2026</p>
+          <p class="font-mono text-[11px] text-[#89918A]">Coimbatore, Tamil Nadu, India · Full-Stack & Cloud Professional</p>
         </div>
       </div>
       <div
@@ -2126,6 +2316,9 @@
           class="hover:text-[#263746] transition-colors">LinkedIn</a>
         <a href="https://github.com/JOTHILINGAM-S-CYBROX" target="_blank" rel="noopener noreferrer"
           class="hover:text-[#263746] transition-colors">GitHub</a>
+        <a href="#hero" class="text-[#496D65] hover:text-[#263746] transition-colors inline-flex items-center gap-1 font-mono normal-case">
+          <span>Back to Top ↑</span>
+        </a>
       </div>
     </div>
   </footer>
@@ -2615,24 +2808,45 @@
       setTimeout(() => toggleMobileDrawer(true), 200);
     }
 
-    // Active Section Indicator (Scroll Spy)
+    // Active Section Indicator (Scroll Spy) & Floating Pill Scrolled State
+    const navDockContainer = document.getElementById('navDockContainer');
     const navDockLinks = document.querySelectorAll('.nav-dock-link');
-    const observedSections = ['hero', 'about', 'skills', 'projects', 'journey', 'contact']
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link:not([href="#contact"])');
+    const observedSectionIds = ['hero', 'about', 'skills', 'projects', 'journey', 'contact'];
+    const observedSections = observedSectionIds
       .map(id => document.getElementById(id))
       .filter(Boolean);
 
     function updateActiveNav() {
-      const scrollPos = window.scrollY + 200;
-      let currentSectionId = '';
+      const scrollY = window.scrollY || window.pageYOffset || 0;
 
-      for (let i = observedSections.length - 1; i >= 0; i--) {
-        const sec = observedSections[i];
-        if (sec.offsetTop <= scrollPos) {
-          currentSectionId = sec.id;
-          break;
+      // 1. Elevated glassmorphic dock state when scrolled
+      if (navDockContainer) {
+        if (scrollY > 24) {
+          navDockContainer.classList.add('dock-scrolled');
+        } else {
+          navDockContainer.classList.remove('dock-scrolled');
         }
       }
 
+      // 2. Active section detection with bottom-page threshold guarantee
+      const isAtBottom = (window.innerHeight + scrollY) >= (document.documentElement.scrollHeight - 60);
+      let currentSectionId = '';
+
+      if (isAtBottom) {
+        currentSectionId = 'contact';
+      } else {
+        const scrollThreshold = scrollY + 220;
+        for (let i = observedSections.length - 1; i >= 0; i--) {
+          const sec = observedSections[i];
+          if (sec.offsetTop <= scrollThreshold) {
+            currentSectionId = sec.id;
+            break;
+          }
+        }
+      }
+
+      // Update Desktop Floating Dock Links
       navDockLinks.forEach(link => {
         const targetSection = link.getAttribute('data-section');
         const isActive = targetSection === currentSectionId;
@@ -2642,6 +2856,17 @@
         } else {
           link.classList.remove('active-dock');
           link.removeAttribute('aria-current');
+        }
+      });
+
+      // Update Mobile Drawer Links
+      mobileNavLinks.forEach(link => {
+        const targetSection = link.getAttribute('data-section');
+        const isActive = targetSection === currentSectionId;
+        if (isActive) {
+          link.classList.add('bg-[#E3EAE3]', 'text-[#263746]', 'font-bold');
+        } else {
+          link.classList.remove('bg-[#E3EAE3]', 'text-[#263746]', 'font-bold');
         }
       });
     }
@@ -2740,7 +2965,358 @@
         }
       }
     }
+
+    // ========================================================
+    // ARCHITECTURAL RAG CHATBOT CLIENT (Django /api/chat)
+    // ========================================================
+    function toggleChatDrawer(open) {
+      const drawer = document.getElementById('chatbotDrawer');
+      const backdrop = document.getElementById('chatbotBackdrop');
+      const trigger = document.getElementById('chatbotTriggerBtn');
+
+      if (open) {
+        drawer.classList.remove('hidden', 'translate-y-full', 'sm:translate-y-8', 'opacity-0', 'pointer-events-none');
+        drawer.classList.add('translate-y-0', 'opacity-100');
+        backdrop.classList.remove('hidden');
+        setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+        trigger?.setAttribute('aria-expanded', 'true');
+        document.getElementById('chatInput')?.focus();
+      } else {
+        drawer.classList.add('translate-y-full', 'sm:translate-y-8', 'opacity-0', 'pointer-events-none');
+        drawer.classList.remove('translate-y-0', 'opacity-100');
+        backdrop.classList.add('opacity-0');
+        setTimeout(() => {
+          drawer.classList.add('hidden');
+          backdrop.classList.add('hidden');
+        }, 300);
+        trigger?.setAttribute('aria-expanded', 'false');
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Dismiss AI Chat Drawer on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const drawer = document.getElementById('chatbotDrawer');
+        if (drawer && !drawer.classList.contains('hidden') && !drawer.classList.contains('pointer-events-none')) {
+          toggleChatDrawer(false);
+        }
+      }
+    });
+
+    let chatConversationHistory = [];
+
+    function askQuickPrompt(text) {
+      const input = document.getElementById('chatInput');
+      input.value = text;
+      document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+    }
+
+    function clearChatHistory() {
+      chatConversationHistory = [];
+      const messagesContainer = document.getElementById('chatMessages');
+      // Keep initial welcome message and suggestion chips
+      const initialContent = `
+        <div class="flex items-start gap-2.5">
+          <div class="w-6 h-6 rounded-full bg-[#263746] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="sparkles" class="w-3 h-3 text-[#C1A66B]"></i>
+          </div>
+          <div class="max-w-[85%] bg-white border border-[#DDE2D9] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#263746] leading-relaxed shadow-2xs space-y-2">
+            <p>
+              Hello! I am <strong>Architect AI</strong>, Jothilingam's intelligent engineering copilot.
+            </p>
+            <p class="text-[#5F6C65]">
+              Ask me anything about his architecture choices in <strong>CollectEasy</strong>, his <strong>AWS & GCP cloud</strong> deployments, his <strong>current freelance work</strong>, or how to get in touch.
+            </p>
+          </div>
+        </div>
+
+        <div id="quickPromptChips" class="pt-1 flex flex-wrap gap-1.5 pl-8">
+          <button type="button" onclick="askQuickPrompt('Tell me about CollectEasy and its offline architecture')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            💡 CollectEasy Architecture
+          </button>
+          <button type="button" onclick="askQuickPrompt('What is his current freelance work?')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            🚀 Current Freelance Work
+          </button>
+          <button type="button" onclick="askQuickPrompt('What AWS cloud architectures has he built?')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            ☁️ AWS Cloud Experience
+          </button>
+          <button type="button" onclick="askQuickPrompt('Where did he intern and what did he build?')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            💼 El Codamics Internship
+          </button>
+          <button type="button" onclick="askQuickPrompt('How can I contact Jothilingam?')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            📬 Contact & Links
+          </button>
+        </div>
+      `;
+      messagesContainer.innerHTML = initialContent;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function formatMarkdown(text) {
+      if (!text) return '';
+      let escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // Bold: **text**
+      escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Italics: *text*
+      escaped = escaped.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      // Links: [label](url)
+      escaped = escaped.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[#496D65] font-semibold underline underline-offset-2 hover:text-[#263746]">$1</a>');
+      // Bullet list items: - item
+      escaped = escaped.replace(/(?:^|\n)-\s+(.*?)(?=\n|$)/g, '<li class="ml-4 list-disc text-xs leading-relaxed">$1</li>');
+      // Double line breaks
+      escaped = escaped.replace(/\n\n/g, '<div class="h-2"></div>');
+      // Single line breaks (when not adjacent to <li>)
+      escaped = escaped.replace(/([^\>])\n([^\<])/g, '$1<br/>$2');
+
+      return escaped;
+    }
+
+    async function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const query = input.value.trim();
+      if (!query) return;
+
+      const messagesContainer = document.getElementById('chatMessages');
+      const typingIndicator = document.getElementById('chatTypingIndicator');
+      const sendBtn = document.getElementById('chatSendBtn');
+
+      // 1. Append User Message Bubble
+      const userBubble = document.createElement('div');
+      userBubble.className = 'flex items-start justify-end gap-2.5';
+      userBubble.innerHTML = `
+        <div class="max-w-[85%] bg-[#263746] text-white rounded-2xl rounded-tr-xs p-3 text-xs leading-relaxed shadow-2xs">
+          ${query.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+        </div>
+      `;
+      messagesContainer.appendChild(userBubble);
+      input.value = '';
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      // 2. Show Typing Indicator
+      typingIndicator.classList.remove('hidden');
+      sendBtn.disabled = true;
+
+      try {
+        const response = await fetch('/api/chat/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ 
+            message: query,
+            history: chatConversationHistory.slice(-6)
+          })
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (data.answer) {
+          chatConversationHistory.push({ role: 'user', content: query });
+          chatConversationHistory.push({ role: 'model', content: data.answer });
+        }
+
+        // Hide initial quick prompt chips once user starts conversation
+        const chips = document.getElementById('quickPromptChips');
+        if (chips) chips.classList.add('hidden');
+
+        typingIndicator.classList.add('hidden');
+        sendBtn.disabled = false;
+
+        // 3. Append AI Response Bubble with Verified Source Attribution
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'flex items-start gap-2.5';
+        
+        const answerHtml = formatMarkdown(data.answer || 'Thank you for your question. You can reach Jothilingam directly at jothilingamsivalingamg@gmail.com.');
+
+        let sourcesHtml = '';
+        if (data.sources && Array.isArray(data.sources) && data.sources.length > 0 && !data.sources[0].includes('Introduction')) {
+          const chipsHtml = data.sources.slice(0, 2).map(s => {
+            const escaped = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return `<span class="inline-flex items-center gap-1 text-[10px] font-mono text-[#5F6C65] bg-[#F4F5F0] px-2 py-0.5 rounded border border-[#DDE2D9]"><i data-lucide="file-check" class="w-2.5 h-2.5 text-[#496D65]"></i>${escaped}</span>`;
+          }).join(' ');
+          sourcesHtml = `
+            <div class="mt-2.5 pt-2 border-t border-[#DDE2D9]/70 flex flex-col gap-1">
+              <span class="text-[9px] font-mono uppercase tracking-wider text-[#89918A] font-semibold">Verified Source:</span>
+              <div class="flex flex-wrap gap-1">${chipsHtml}</div>
+            </div>
+          `;
+        }
+
+        aiBubble.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-[#263746] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="sparkles" class="w-3 h-3 text-[#C1A66B]"></i>
+          </div>
+          <div class="max-w-[85%] bg-white border border-[#DDE2D9] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#263746] leading-relaxed shadow-2xs">
+            <div>${answerHtml}</div>
+            ${sourcesHtml}
+          </div>
+        `;
+
+        messagesContainer.appendChild(aiBubble);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+
+      } catch (err) {
+        typingIndicator.classList.add('hidden');
+        sendBtn.disabled = false;
+
+        const errorBubble = document.createElement('div');
+        errorBubble.className = 'flex items-start gap-2.5';
+        errorBubble.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-[#263746] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="alert-circle" class="w-3 h-3 text-[#C1A66B]"></i>
+          </div>
+          <div class="max-w-[85%] bg-white border border-red-200 rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#263746] leading-relaxed shadow-2xs">
+            <p>I am temporarily reconnecting. Feel free to re-ask or reach Jothilingam directly at <a href="mailto:jothilingamsivalingamg@gmail.com" class="text-[#496D65] underline font-semibold">jothilingamsivalingamg@gmail.com</a>.</p>
+          </div>
+        `;
+        messagesContainer.appendChild(errorBubble);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+      }
+    }
   </script>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING ARCHITECTURAL CHATBOT LAUNCHER (Django RAG)    -->
+  <!-- ======================================================== -->
+  <aside aria-label="Portfolio AI Assistant" class="fixed bottom-5 right-5 z-40">
+    <button id="chatbotTriggerBtn" type="button" onclick="toggleChatDrawer(true)"
+      class="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#263746] text-white shadow-xl hover:bg-[#1f2d3a] border border-[#C1A66B]/50 hover:border-[#C1A66B] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#496D65]"
+      aria-haspopup="dialog" aria-expanded="false" aria-controls="chatbotDrawer"
+      aria-label="Ask Architect AI Copilot">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#496D65] opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#496D65]"></span>
+      </span>
+      <span class="font-sans text-xs font-semibold tracking-wide">Ask Architect AI</span>
+      <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+      </div>
+    </button>
+  </aside>
+
+  <!-- ======================================================== -->
+  <!-- ARCHITECTURAL CHATBOT DRAWER (Django RAG Engine)         -->
+  <!-- ======================================================== -->
+  <div id="chatbotBackdrop" class="fixed inset-0 z-40 bg-black/30 backdrop-blur-xs hidden transition-opacity opacity-0"
+    onclick="toggleChatDrawer(false)"></div>
+
+  <section id="chatbotDrawer"
+    class="fixed bottom-0 right-0 sm:bottom-6 sm:right-6 z-50 w-full sm:w-[420px] max-w-full h-[85vh] sm:h-[600px] max-h-[85vh] bg-[#F4F5F0] border border-[#DDE2D9] sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform translate-y-full sm:translate-y-8 opacity-0 pointer-events-none hidden"
+    role="dialog" aria-modal="true" aria-labelledby="chatDrawerTitle">
+
+    <!-- Drawer Header -->
+    <header class="p-4 bg-[#263746] text-white border-b-2 border-[#C1A66B] flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-[#3D5C55] border border-[#C1A66B]/50 flex items-center justify-center shrink-0">
+          <i data-lucide="bot" class="w-5 h-5 text-[#C1A66B]"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 id="chatDrawerTitle" class="font-display text-base font-semibold text-white tracking-wide leading-none">
+              Architect AI
+            </h2>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-[#496D65] text-white">COPILOT</span>
+          </div>
+          <p class="font-mono text-[10px] text-[#DDE2D9]/80 mt-1">
+            System Architecture & Engineering Copilot
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button type="button" onclick="clearChatHistory()" class="p-1.5 text-[#DDE2D9] hover:text-white rounded-md hover:bg-white/10 transition-colors"
+          title="Reset Conversation" aria-label="Reset Conversation">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+        </button>
+        <button type="button" onclick="toggleChatDrawer(false)" class="p-1.5 text-[#DDE2D9] hover:text-white rounded-md hover:bg-white/10 transition-colors"
+          title="Close Chat" aria-label="Close Chat">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Chat Messages Stream -->
+    <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3.5 scroll-smooth">
+      
+      <!-- Welcome Message -->
+      <div class="flex items-start gap-2.5">
+        <div class="w-6 h-6 rounded-full bg-[#263746] flex items-center justify-center shrink-0 mt-0.5">
+          <i data-lucide="sparkles" class="w-3 h-3 text-[#C1A66B]"></i>
+        </div>
+        <div class="max-w-[85%] bg-white border border-[#DDE2D9] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#263746] leading-relaxed shadow-2xs space-y-2">
+          <p>
+            Hello! I am <strong>Architect AI</strong>, Jothilingam's intelligent engineering copilot.
+          </p>
+          <p class="text-[#5F6C65]">
+            Ask me anything about his architecture choices in <strong>CollectEasy</strong>, his <strong>AWS & GCP cloud</strong> deployments, his <strong>current freelance work</strong>, or how to get in touch.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div id="quickPromptChips" class="pt-1 flex flex-wrap gap-1.5 pl-8">
+        <button type="button" onclick="askQuickPrompt('Tell me about CollectEasy and its offline architecture')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          💡 CollectEasy Architecture
+        </button>
+        <button type="button" onclick="askQuickPrompt('What is his current freelance work?')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          🚀 Current Freelance Work
+        </button>
+        <button type="button" onclick="askQuickPrompt('What AWS cloud architectures has he built?')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          ☁️ AWS Cloud Experience
+        </button>
+        <button type="button" onclick="askQuickPrompt('Where did he intern and what did he build?')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          💼 El Codamics Internship
+        </button>
+        <button type="button" onclick="askQuickPrompt('How can I contact Jothilingam?')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          📬 Contact & Links
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Typing Indicator (Hidden by default) -->
+    <div id="chatTypingIndicator" class="px-4 pb-2 hidden">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#DDE2D9] text-[11px] text-[#5F6C65] font-mono">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] animate-bounce"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] animate-bounce" style="animation-delay: 150ms;"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] animate-bounce" style="animation-delay: 300ms;"></span>
+        <span>Thinking...</span>
+      </div>
+    </div>
+
+    <!-- Input Footer Form -->
+    <footer class="p-3 bg-white border-t border-[#DDE2D9] shrink-0">
+      <form id="chatForm" onsubmit="handleChatSubmit(event)" class="flex items-center gap-2">
+        <input id="chatInput" type="text" autocomplete="off" placeholder="Ask about projects, stack, cloud, journey..."
+          class="flex-1 bg-[#F4F5F0] border border-[#DDE2D9] rounded-lg px-3 py-2 text-xs text-[#263746] focus:outline-none focus:ring-1 focus:ring-[#496D65] focus:border-[#496D65] transition-all" />
+        <button id="chatSendBtn" type="submit"
+          class="px-3 py-2 rounded-lg bg-[#496D65] text-white hover:bg-[#3D5C55] transition-colors flex items-center justify-center shrink-0 shadow-xs focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          aria-label="Send message">
+          <i data-lucide="send" class="w-4 h-4 text-white"></i>
+        </button>
+      </form>
+    </footer>
+
+  </section>
 </body>
 
 </html>

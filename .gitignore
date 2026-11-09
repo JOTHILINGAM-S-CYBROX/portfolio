@@ -18,3 +18,13 @@ Thumbs.db
 
 # Vercel output
 .vercel/
+
+# Python & Django
+*.pyc
+__pycache__/
+*.sqlite3
+db.sqlite3
+staticfiles/
+test_django_*.py
+capture_django_*.js
+capture_django_*.py

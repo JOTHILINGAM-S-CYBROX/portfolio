@@ -1,0 +1,138 @@
+{
+  "profile": {
+    "name": "Jothilingam S",
+    "title": "Full-Stack Software Engineer & Cloud Architect",
+    "location": "Coimbatore, Tamil Nadu, India",
+    "availability": "Available for select software engineering roles, cloud consulting & freelance contracts",
+    "current_role": "Freelance Full-Stack Developer (May 2026 – Present)",
+    "summary": "Full-stack engineer specializing in end-to-end web architectures, offline-first Progressive Web Apps (PWAs), multi-tier AWS cloud infrastructure, and GCP containerized deployments. Experienced across React, Next.js, Node.js, Express, Python, Django, FastAPI, and relational/NoSQL data systems.",
+    "education": {
+      "degree": "B.Tech in Information Technology",
+      "institution": "Nehru Institute of Engineering and Technology, Coimbatore",
+      "affiliation": "Anna University Affiliated",
+      "timeline": "Nov 2022 – Apr 2026",
+      "cgpa": "7.5 / 10",
+      "status": "Completed Degree"
+    },
+    "contact": {
+      "email": "jothilingamsivalingamg@gmail.com",
+      "phone": "+91 89400 66871",
+      "linkedin": "https://linkedin.com/in/jothilingamsivalingam",
+      "github": "https://github.com/JOTHILINGAM-S-CYBROX"
+    },
+    "languages": ["English (Professional)", "Tamil (Native)"]
+  },
+  "current_status": {
+    "role": "Freelance Full-Stack Developer",
+    "started": "May 2026",
+    "timeline": "May 2026 – Present",
+    "status": "Active Professional Engagement",
+    "description": "Engaged in independent engineering and commercial client product deliveries. Focused on end-to-end web architectures, offline-first PWAs, and resilient cloud deployments.",
+    "deliveries": [
+      "CollectEasy: Offline-first chit fund and field collection PWA platform.",
+      "The Grove Restaurant: Hospitality web application deployed on GCP Cloud Run.",
+      "SPM Crackers: Seasonal retail e-commerce platform with dynamic catalog engine."
+    ]
+  },
+  "experience": [
+    {
+      "role": "Web Developer Intern",
+      "company": "El Codamics",
+      "location": "Coimbatore, Tamil Nadu",
+      "timeline": "Jan 19, 2026 – May 2, 2026",
+      "status": "Completed Internship",
+      "responsibilities": [
+        "Contributed to enterprise CRM architecture, client modules, and enterprise workflows.",
+        "Integrated RESTful APIs and optimized client-side state handling for responsive UI components.",
+        "Collaborated with senior engineers on code reviews, Git version control, and agile sprint delivery."
+      ],
+      "technologies": ["MERN Stack", "Node.js", "Express.js", "REST APIs", "Git Workflow", "CRM Architecture"]
+    }
+  ],
+  "flagship_project": {
+    "name": "CollectEasy",
+    "tagline": "Chit Fund Management & Offline Field Collection Platform",
+    "category": "Fintech & Enterprise Web Application",
+    "status": "Implemented & Deployed Production PWA",
+    "highlights": [
+      "Offline-First Architecture: Engineered with IndexedDB client-side caching so field collection agents can record transactions without network connectivity.",
+      "Idempotent UUID Keys: Employs dynamic UUID keys ensuring zero duplicate financial entries upon reconnection.",
+      "Paise Integer Arithmetic: Calculates currency at the integer paise level to completely prevent floating-point rounding errors.",
+      "3-Tier Topology: Mobile Agent PWA client, Node.js REST services, and transactional persistent database.",
+      "Full case study dialog with architectural topology and technical metrics available in the portfolio."
+    ],
+    "database_architecture": {
+      "client_storage": "IndexedDB (browser-based asynchronous NoSQL object store for offline transaction queues, agent credentials, and offline chit ledger caching)",
+      "backend_database": "Persistent transactional database accessed via Node.js/Express REST microservices"
+    },
+    "architectural_decisions": {
+      "why_indexeddb": "Standard localStorage is synchronous (blocking UI execution) and capped at 5MB. IndexedDB is asynchronous, transactional, and supports substantial structured offline storage necessary for rural field collection agents.",
+      "why_idempotent_uuid": "Intermittent mobile networks frequently cause field agents to retry network submissions; generating dynamic UUID keys on the client before queuing guarantees the backend server deduplicates retries with zero duplicate financial entries.",
+      "why_paise_math": "IEEE-754 floating-point arithmetic introduces rounding imprecision in JavaScript (e.g. 0.1 + 0.2 != 0.3). Handling all monetary operations strictly as integer paise guarantees zero rounding variance and audit-level compliance.",
+      "why_3_tier_topology": "Decouples the offline-capable mobile agent client from the backend microservices, allowing local mutations to be queued asynchronously while protecting the persistent database with schema validation and authentication."
+    },
+    "technologies": ["IndexedDB", "Offline PWA", "Node.js", "Express", "UUID Idempotency", "Paise Integer Math", "Tailwind CSS"]
+  },
+  "commercial_projects": [
+    {
+      "name": "SPM Crackers",
+      "url": "https://spmcrackers.in",
+      "type": "Retail E-Commerce Application & Seasonal Engine",
+      "status": "Implemented & Deployed Live Production Application",
+      "highlights": [
+        "Dynamic product catalog with multi-category product discovery.",
+        "Seasonal high-load order intake and inquiry workflow built to absorb traffic surges.",
+        "Full-stack responsive design optimized for mobile shoppers."
+      ],
+      "technologies": ["Full-Stack JavaScript", "Node.js", "Catalog Engine", "Order Intake", "Responsive UI"]
+    },
+    {
+      "name": "The Grove Restaurant",
+      "url": "https://thegrove.restaurant",
+      "type": "Hospitality Web Application",
+      "status": "Implemented & Deployed Live Production Application",
+      "deployment_platform": "Google Cloud Platform (GCP Cloud Run) containerized deployment",
+      "highlights": [
+        "Interactive culinary menu and dining presentation.",
+        "Engineered with Next.js and deployed on Google Cloud Platform (GCP Cloud Run) for containerized scaling.",
+        "Sub-second page transitions and mobile-first hospitality UI."
+      ],
+      "architectural_decisions": {
+        "why_gcp_cloud_run": "Provides fully managed containerized serverless compute with automatic horizontal scaling during peak reservation hours and automatic scale-down to zero idle instances for cost efficiency."
+      },
+      "technologies": ["Next.js", "React", "GCP Cloud Run", "Tailwind CSS", "Container Deployment"]
+    }
+  ],
+  "cloud_architectures": [
+    {
+      "name": "Scalable AWS Infrastructure",
+      "type": "Cloud Production Architecture",
+      "status": "Designed Cloud Architecture Topology",
+      "highlights": [
+        "Multi-tier compute on Amazon EC2 with static asset offloading to AWS S3.",
+        "Custom isolated VPC with private and public subnets and AWS IAM least-privilege security.",
+        "Amazon RDS transactional database with automated backup retention schedules.",
+        "Route 53 DNS routing and proactive CloudWatch metric alarms."
+      ],
+      "technologies": ["AWS EC2", "AWS S3", "Amazon VPC", "AWS IAM", "Amazon RDS", "Route 53", "CloudWatch"]
+    },
+    {
+      "name": "High Availability AWS Architecture",
+      "type": "Fault-Tolerant Enterprise Architecture",
+      "status": "Designed High-Availability Cloud Topology",
+      "highlights": [
+        "Application Load Balancer (ALB) health-check traffic distribution across Availability Zones.",
+        "EC2 Auto Scaling Groups dynamically absorbing traffic surges across multiple AZs.",
+        "Amazon RDS Multi-AZ synchronous standby replication with zero-downtime automated failover.",
+        "Self-healing compute tier automatically replacing unhealthy instances."
+      ],
+      "technologies": ["ALB", "Auto Scaling Groups", "Multi-AZ RDS", "Self-Healing", "Fault Tolerance", "AWS IAM"]
+    }
+  ],
+  "skills": {
+    "frontend": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Material UI"],
+    "backend": ["Node.js", "Express.js", "Python", "FastAPI", "Flask", "Laravel (PHP)", "REST APIs", "Backend Integrations"],
+    "cloud": ["AWS EC2", "AWS S3", "Amazon VPC", "AWS IAM", "Amazon RDS", "Route 53", "CloudWatch", "GCP Cloud Run"],
+    "data_and_systems": ["MySQL", "PostgreSQL", "MongoDB", "IndexedDB", "Docker", "Git", "LangChain"]
+  }
+}
