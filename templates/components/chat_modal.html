@@ -1,0 +1,125 @@
+<aside aria-label="Portfolio AI Assistant" class="fixed bottom-5 right-5 z-40">
+    <button id="chatbotTriggerBtn" type="button" onclick="toggleChatDrawer(true)"
+      class="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#263746] text-white shadow-xl hover:bg-[#1f2d3a] border border-[#C1A66B]/50 hover:border-[#C1A66B] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#496D65]"
+      aria-haspopup="dialog" aria-expanded="false" aria-controls="chatbotDrawer"
+      aria-label="Ask Architect AI Copilot">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#496D65] opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#496D65]"></span>
+      </span>
+      <span class="font-sans text-xs font-semibold tracking-wide">Ask Architect AI</span>
+      <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+      </div>
+    </button>
+  </aside>
+
+  <!-- ======================================================== -->
+  <!-- ARCHITECTURAL CHATBOT DRAWER (Django RAG Engine)         -->
+  <!-- ======================================================== -->
+  <div id="chatbotBackdrop" class="fixed inset-0 z-40 bg-black/30 backdrop-blur-xs hidden transition-opacity opacity-0"
+    onclick="toggleChatDrawer(false)"></div>
+
+  <section id="chatbotDrawer"
+    class="fixed bottom-0 right-0 sm:bottom-6 sm:right-6 z-50 w-full sm:w-[420px] max-w-full h-[85vh] sm:h-[600px] max-h-[85vh] bg-[#F4F5F0] border border-[#DDE2D9] sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform translate-y-full sm:translate-y-8 opacity-0 pointer-events-none hidden"
+    role="dialog" aria-modal="true" aria-labelledby="chatDrawerTitle">
+
+    <!-- Drawer Header -->
+    <header class="p-4 bg-[#263746] text-white border-b-2 border-[#C1A66B] flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-[#3D5C55] border border-[#C1A66B]/50 flex items-center justify-center shrink-0">
+          <i data-lucide="bot" class="w-5 h-5 text-[#C1A66B]"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 id="chatDrawerTitle" class="font-display text-base font-semibold text-white tracking-wide leading-none">
+              Architect AI
+            </h2>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-[#496D65] text-white">COPILOT</span>
+          </div>
+          <p class="font-mono text-[10px] text-[#DDE2D9]/80 mt-1">
+            System Architecture & Engineering Copilot
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button type="button" onclick="clearChatHistory()" class="p-1.5 text-[#DDE2D9] hover:text-white rounded-md hover:bg-white/10 transition-colors"
+          title="Reset Conversation" aria-label="Reset Conversation">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+        </button>
+        <button type="button" onclick="toggleChatDrawer(false)" class="p-1.5 text-[#DDE2D9] hover:text-white rounded-md hover:bg-white/10 transition-colors"
+          title="Close Chat" aria-label="Close Chat">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Chat Messages Stream -->
+    <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3.5 scroll-smooth">
+      
+      <!-- Welcome Message -->
+      <div class="flex items-start gap-2.5">
+        <div class="w-6 h-6 rounded-full bg-[#263746] flex items-center justify-center shrink-0 mt-0.5">
+          <i data-lucide="sparkles" class="w-3 h-3 text-[#C1A66B]"></i>
+        </div>
+        <div class="max-w-[85%] bg-white border border-[#DDE2D9] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#263746] leading-relaxed shadow-2xs space-y-2">
+          <p>
+            Hello! I am <strong>Architect AI</strong>, Jothilingam's intelligent engineering copilot.
+          </p>
+          <p class="text-[#5F6C65]">
+            Ask me anything about his architecture choices in <strong>CollectEasy</strong>, his <strong>AWS & GCP cloud</strong> deployments, his <strong>current freelance work</strong>, or how to get in touch.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div id="quickPromptChips" class="pt-1 flex flex-wrap gap-1.5 pl-8">
+        <button type="button" onclick="askQuickPrompt('Tell me about CollectEasy and its offline architecture')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          💡 CollectEasy Architecture
+        </button>
+        <button type="button" onclick="askQuickPrompt('What is his current freelance work?')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          🚀 Current Freelance Work
+        </button>
+        <button type="button" onclick="askQuickPrompt('What AWS cloud architectures has he built?')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          ☁️ AWS Cloud Experience
+        </button>
+        <button type="button" onclick="askQuickPrompt('Where did he intern and what did he build?')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          💼 El Codamics Internship
+        </button>
+        <button type="button" onclick="askQuickPrompt('How can I contact Jothilingam?')"
+          class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+          📬 Contact & Links
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Typing Indicator (Hidden by default) -->
+    <div id="chatTypingIndicator" class="px-4 pb-2 hidden">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#DDE2D9] text-[11px] text-[#5F6C65] font-mono">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] animate-bounce"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] animate-bounce" style="animation-delay: 150ms;"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#496D65] animate-bounce" style="animation-delay: 300ms;"></span>
+        <span>Thinking...</span>
+      </div>
+    </div>
+
+    <!-- Input Footer Form -->
+    <footer class="p-3 bg-white border-t border-[#DDE2D9] shrink-0">
+      <form id="chatForm" onsubmit="handleChatSubmit(event)" class="flex items-center gap-2">
+        <input id="chatInput" type="text" autocomplete="off" placeholder="Ask about projects, stack, cloud, journey..."
+          class="flex-1 bg-[#F4F5F0] border border-[#DDE2D9] rounded-lg px-3 py-2 text-xs text-[#263746] focus:outline-none focus:ring-1 focus:ring-[#496D65] focus:border-[#496D65] transition-all" />
+        <button id="chatSendBtn" type="submit"
+          class="px-3 py-2 rounded-lg bg-[#496D65] text-white hover:bg-[#3D5C55] transition-colors flex items-center justify-center shrink-0 shadow-xs focus-visible:ring-2 focus-visible:ring-[#496D65]"
+          aria-label="Send message">
+          <i data-lucide="send" class="w-4 h-4 text-white"></i>
+        </button>
+      </form>
+    </footer>
+
+  </section>

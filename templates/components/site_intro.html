@@ -1,0 +1,66 @@
+<div id="siteIntro"
+    class="fixed inset-0 z-[99999] bg-[#263746] flex flex-col items-center justify-center select-none overflow-hidden cursor-pointer"
+    onclick="dismissIntro()">
+
+    <!-- Ambient background radial glow -->
+    <div
+      class="absolute w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] rounded-full bg-[#496D65]/25 blur-[120px] pointer-events-none">
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-md pointer-events-auto">
+
+      <!-- Monogram Emblem with Concentric Gold Orbit Rings -->
+      <div class="relative mb-7 intro-emblem-wrap">
+
+        <!-- Outer Rotating Dashed Gold Ring -->
+        <div class="absolute -inset-3.5 rounded-full border border-dashed border-[#C1A66B]/40 animate-spin"
+          style="animation-duration: 14s;"></div>
+        <!-- Inner Counter-Rotating Thin Ring -->
+        <div class="absolute -inset-1.5 rounded-full border border-[#C1A66B]/50 animate-spin"
+          style="animation-duration: 9s; animation-direction: reverse;"></div>
+
+        <!-- Emblem Disk with Diagonal Sheen -->
+        <div
+          class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-[#C1A66B] via-[#E3EAE3] to-[#496D65] shadow-[0_0_35px_rgba(193,166,107,0.3)] relative overflow-hidden flex items-center justify-center">
+          <img src="/static/images/sj.png" alt="SJ Monogram Logo"
+            class="w-full h-full object-contain rounded-full bg-white filter drop-shadow-sm" />
+          <div class="intro-shine"></div>
+        </div>
+      </div>
+
+      <!-- Brand Typography -->
+      <div class="space-y-2 intro-text-reveal">
+        <h1 class="font-sans font-bold text-base sm:text-lg uppercase text-white tracking-[0.32em] drop-shadow-xs">
+          JOTHILINGAM S
+        </h1>
+        <div class="flex items-center justify-center gap-2">
+          <span class="w-4 h-px bg-[#C1A66B]"></span>
+          <p class="font-mono text-[9px] sm:text-[10px] font-semibold tracking-[0.25em] text-[#C1A66B] uppercase">
+            DIGITAL CRAFTSMANSHIP · 2026
+          </p>
+          <span class="w-4 h-px bg-[#C1A66B]"></span>
+        </div>
+        <p class="text-[10px] sm:text-[11px] text-[#89918A] tracking-wider uppercase font-medium">
+          Full-Stack Architecture & Cloud Systems
+        </p>
+      </div>
+
+      <!-- Minimal Gold Loading Bar -->
+      <div class="w-36 sm:w-44 h-[2px] bg-[#3a4e5f] rounded-full overflow-hidden mt-6 relative">
+        <div id="introProgress"
+          class="h-full bg-gradient-to-r from-[#C1A66B] via-[#E3EAE3] to-[#C1A66B] w-0 transition-all duration-[1300ms] ease-out">
+        </div>
+      </div>
+
+      <!-- Click to Skip Hint -->
+      <span
+        class="mt-7 text-[10px] font-mono tracking-widest text-[#89918A]/75 hover:text-[#C1A66B] uppercase transition-colors">
+        Click or tap to enter →
+      </span>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING NAVIGATION DOCK                                 -->
+  <!-- ======================================================== -->

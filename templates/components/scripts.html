@@ -1,0 +1,591 @@
+<script>
+    // Project Details Modal Controllers
+    function openProjectModal(projectId) {
+      const modal = document.getElementById('projectModal');
+      const dialogCard = document.getElementById('modalDialogCard');
+      if (!modal) return;
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100', 'pointer-events-auto');
+      if (dialogCard) {
+        dialogCard.classList.remove('scale-95');
+        dialogCard.classList.add('scale-100');
+      }
+      document.body.style.overflow = 'hidden';
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('projectModal');
+      const dialogCard = document.getElementById('modalDialogCard');
+      if (!modal) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.classList.remove('opacity-100', 'pointer-events-auto');
+      if (dialogCard) {
+        dialogCard.classList.add('scale-95');
+        dialogCard.classList.remove('scale-100');
+      }
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeProjectModal();
+      }
+    });
+
+    // Close modal when clicking directly on the backdrop
+    document.addEventListener('click', (e) => {
+      const modal = document.getElementById('projectModal');
+      if (modal && e.target === modal) {
+        closeProjectModal();
+      }
+    });
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Site Intro Monogram Screen Controller
+    let introDismissed = false;
+
+    function dismissIntro() {
+      if (introDismissed) return;
+      introDismissed = true;
+      const intro = document.getElementById('siteIntro');
+      if (!intro) return;
+      intro.classList.add('intro-hidden');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 700);
+    }
+
+    // Trigger progress on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const intro = document.getElementById('siteIntro');
+      if (!intro) return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      if (navigator.webdriver || urlParams.get('skipintro') === 'true' || window.location.hash.length > 1) {
+        dismissIntro();
+        intro.style.display = 'none';
+        return;
+      }
+
+      document.body.style.overflow = 'hidden';
+
+      const progress = document.getElementById('introProgress');
+      if (progress) {
+        setTimeout(() => {
+          progress.style.width = '100%';
+        }, 80);
+      }
+
+      // Auto-transition to main site after monogram sequence (~1.5s)
+      setTimeout(() => {
+        dismissIntro();
+      }, 1500);
+    });
+
+    // Dismiss on Enter, Escape, or Space keypress
+    window.addEventListener('keydown', (e) => {
+      if (!introDismissed && (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter')) {
+        dismissIntro();
+      }
+    });
+
+    // Optional replay function (can be invoked anytime)
+    window.replayIntro = function () {
+      const intro = document.getElementById('siteIntro');
+      const progress = document.getElementById('introProgress');
+      if (!intro) return;
+      introDismissed = false;
+      if (progress) progress.style.width = '0%';
+      intro.style.display = 'flex';
+      intro.classList.remove('intro-hidden');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        if (progress) progress.style.width = '100%';
+      }, 80);
+      setTimeout(() => {
+        dismissIntro();
+      }, 1500);
+    };
+
+    // Mobile Navigation Drawer Controller
+    let mobileDrawerOpen = false;
+
+    function toggleMobileDrawer(forceState) {
+      const drawer = document.getElementById('mobileDrawer');
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      const menuBtn = document.getElementById('menuBtn');
+      if (!drawer || !backdrop) return;
+
+      mobileDrawerOpen = typeof forceState === 'boolean' ? forceState : !mobileDrawerOpen;
+
+      if (mobileDrawerOpen) {
+        backdrop.classList.remove('hidden');
+        drawer.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          backdrop.classList.remove('opacity-0', 'pointer-events-none');
+          backdrop.classList.add('opacity-100', 'pointer-events-auto');
+          drawer.classList.remove('-translate-y-4', 'opacity-0', 'pointer-events-none');
+          drawer.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        });
+        if (menuBtn) {
+          menuBtn.setAttribute('aria-expanded', 'true');
+        }
+        document.body.style.overflow = 'hidden';
+      } else {
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        drawer.classList.add('-translate-y-4', 'opacity-0', 'pointer-events-none');
+        drawer.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        if (menuBtn) {
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          if (!mobileDrawerOpen) {
+            backdrop.classList.add('hidden');
+            drawer.classList.add('hidden');
+          }
+        }, 300);
+      }
+    }
+
+    const menuBtn = document.getElementById('menuBtn');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileDrawer();
+      });
+    }
+
+    // Close mobile drawer on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileDrawerOpen) {
+        toggleMobileDrawer(false);
+      }
+    });
+
+    // Accessible direct menu anchor support (#menu or ?drawer=1)
+    if (window.location.hash === '#menu' || (typeof URLSearchParams !== 'undefined' && new URLSearchParams(window.location.search).get('drawer') === '1')) {
+      setTimeout(() => toggleMobileDrawer(true), 200);
+    }
+
+    // Active Section Indicator (Scroll Spy) & Floating Pill Scrolled State
+    const navDockContainer = document.getElementById('navDockContainer');
+    const navDockLinks = document.querySelectorAll('.nav-dock-link');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link:not([href="#contact"])');
+    const observedSectionIds = ['hero', 'about', 'skills', 'projects', 'journey', 'contact'];
+    const observedSections = observedSectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    function updateActiveNav() {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+
+      // 1. Elevated glassmorphic dock state when scrolled
+      if (navDockContainer) {
+        if (scrollY > 24) {
+          navDockContainer.classList.add('dock-scrolled');
+        } else {
+          navDockContainer.classList.remove('dock-scrolled');
+        }
+      }
+
+      // 2. Active section detection with bottom-page threshold guarantee
+      const isAtBottom = (window.innerHeight + scrollY) >= (document.documentElement.scrollHeight - 60);
+      let currentSectionId = '';
+
+      if (isAtBottom) {
+        currentSectionId = 'contact';
+      } else {
+        const scrollThreshold = scrollY + 220;
+        for (let i = observedSections.length - 1; i >= 0; i--) {
+          const sec = observedSections[i];
+          if (sec.offsetTop <= scrollThreshold) {
+            currentSectionId = sec.id;
+            break;
+          }
+        }
+      }
+
+      // Update Desktop Floating Dock Links
+      navDockLinks.forEach(link => {
+        const targetSection = link.getAttribute('data-section');
+        const isActive = targetSection === currentSectionId;
+        if (isActive) {
+          link.classList.add('active-dock');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active-dock');
+          link.removeAttribute('aria-current');
+        }
+      });
+
+      // Update Mobile Drawer Links
+      mobileNavLinks.forEach(link => {
+        const targetSection = link.getAttribute('data-section');
+        const isActive = targetSection === currentSectionId;
+        if (isActive) {
+          link.classList.add('bg-[#E3EAE3]', 'text-[#263746]', 'font-bold');
+        } else {
+          link.classList.remove('bg-[#E3EAE3]', 'text-[#263746]', 'font-bold');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    // Smart Nav Controller: Auto-hide on scroll down, reveal on scroll up
+    let lastScrollY = window.scrollY || 0;
+    const mainNavHeader = document.getElementById('mainNavHeader');
+
+    function handleSmartNav() {
+      const currentScrollY = window.scrollY || 0;
+      if (currentScrollY <= 80) {
+        if (mainNavHeader) mainNavHeader.style.transform = 'translateY(0)';
+      } else if (currentScrollY > lastScrollY && currentScrollY > 120) {
+        // Scrolling down -> hide navbar smoothly
+        if (mainNavHeader && !mobileDrawerOpen) {
+          mainNavHeader.style.transform = 'translateY(-140%)';
+        }
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up -> reveal navbar smoothly
+        if (mainNavHeader) {
+          mainNavHeader.style.transform = 'translateY(0)';
+        }
+      }
+      lastScrollY = currentScrollY;
+    }
+
+    window.addEventListener('scroll', handleSmartNav, { passive: true });
+
+    // Ensure direct navigation to #hero lands smoothly at top: 0
+    if (window.location.hash === '#hero') {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    window.addEventListener('resize', updateActiveNav, { passive: true });
+    updateActiveNav();
+
+    // Scroll-triggered subtle editorial reveal (IntersectionObserver)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.08
+    });
+
+    document.querySelectorAll('.editorial-reveal').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Email clipboard utility
+    function copyEmailAddress() {
+      const email = 'jothilingamsivalingamg@gmail.com';
+      const tempArea = document.createElement('textarea');
+      tempArea.value = email;
+      tempArea.setAttribute('readonly', '');
+      tempArea.style.position = 'absolute';
+      tempArea.style.left = '-9999px';
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      try {
+        document.execCommand('copy');
+        displayToast('Email copied to clipboard.');
+      } catch (err) {
+        displayToast('Failed to copy email.');
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    function displayToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMessage').textContent = msg;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-16', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2600);
+    }
+
+    // Serverless Contact Form Dispatcher (/api/contact)
+    async function handleContactFormSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = document.getElementById('contactSubmitBtn');
+      const originalContent = submitBtn.innerHTML;
+
+      const payload = {
+        name: document.getElementById('contactName').value.trim(),
+        email: document.getElementById('contactEmail').value.trim(),
+        subject: document.getElementById('contactSubject').value.trim(),
+        message: document.getElementById('contactMessage').value.trim()
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Sending...</span><svg class="animate-spin w-3.5 h-3.5 text-[#C1A66B]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && result.success) {
+          displayToast(result.message || 'Message sent! A confirmation copy has been sent to your email.');
+          form.reset();
+        } else {
+          displayToast(result.message || 'Failed to send message. Please email directly.');
+        }
+      } catch (err) {
+        displayToast('Network error. Deploy to Vercel to test live delivery.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalContent;
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      }
+    }
+
+    // ========================================================
+    // ARCHITECTURAL RAG CHATBOT CLIENT (Django /api/chat)
+    // ========================================================
+    function toggleChatDrawer(open) {
+      const drawer = document.getElementById('chatbotDrawer');
+      const backdrop = document.getElementById('chatbotBackdrop');
+      const trigger = document.getElementById('chatbotTriggerBtn');
+
+      if (open) {
+        drawer.classList.remove('hidden', 'translate-y-full', 'sm:translate-y-8', 'opacity-0', 'pointer-events-none');
+        drawer.classList.add('translate-y-0', 'opacity-100');
+        backdrop.classList.remove('hidden');
+        setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+        trigger?.setAttribute('aria-expanded', 'true');
+        document.getElementById('chatInput')?.focus();
+      } else {
+        drawer.classList.add('translate-y-full', 'sm:translate-y-8', 'opacity-0', 'pointer-events-none');
+        drawer.classList.remove('translate-y-0', 'opacity-100');
+        backdrop.classList.add('opacity-0');
+        setTimeout(() => {
+          drawer.classList.add('hidden');
+          backdrop.classList.add('hidden');
+        }, 300);
+        trigger?.setAttribute('aria-expanded', 'false');
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Dismiss AI Chat Drawer on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const drawer = document.getElementById('chatbotDrawer');
+        if (drawer && !drawer.classList.contains('hidden') && !drawer.classList.contains('pointer-events-none')) {
+          toggleChatDrawer(false);
+        }
+      }
+    });
+
+    let chatConversationHistory = [];
+
+    function askQuickPrompt(text) {
+      const input = document.getElementById('chatInput');
+      input.value = text;
+      document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+    }
+
+    function clearChatHistory() {
+      chatConversationHistory = [];
+      const messagesContainer = document.getElementById('chatMessages');
+      // Keep initial welcome message and suggestion chips
+      const initialContent = `
+        <div class="flex items-start gap-2.5">
+          <div class="w-6 h-6 rounded-full bg-[#263746] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="sparkles" class="w-3 h-3 text-[#C1A66B]"></i>
+          </div>
+          <div class="max-w-[85%] bg-white border border-[#DDE2D9] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#263746] leading-relaxed shadow-2xs space-y-2">
+            <p>
+              Hello! I am <strong>Architect AI</strong>, Jothilingam's intelligent engineering copilot.
+            </p>
+            <p class="text-[#5F6C65]">
+              Ask me anything about his architecture choices in <strong>CollectEasy</strong>, his <strong>AWS & GCP cloud</strong> deployments, his <strong>current freelance work</strong>, or how to get in touch.
+            </p>
+          </div>
+        </div>
+
+        <div id="quickPromptChips" class="pt-1 flex flex-wrap gap-1.5 pl-8">
+          <button type="button" onclick="askQuickPrompt('Tell me about CollectEasy and its offline architecture')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            💡 CollectEasy Architecture
+          </button>
+          <button type="button" onclick="askQuickPrompt('What is his current freelance work?')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            🚀 Current Freelance Work
+          </button>
+          <button type="button" onclick="askQuickPrompt('What AWS cloud architectures has he built?')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            ☁️ AWS Cloud Experience
+          </button>
+          <button type="button" onclick="askQuickPrompt('Where did he intern and what did he build?')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            💼 El Codamics Internship
+          </button>
+          <button type="button" onclick="askQuickPrompt('How can I contact Jothilingam?')"
+            class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white border border-[#DDE2D9] text-[#263746] hover:border-[#496D65] hover:text-[#496D65] transition-colors">
+            📬 Contact & Links
+          </button>
+        </div>
+      `;
+      messagesContainer.innerHTML = initialContent;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function formatMarkdown(text) {
+      if (!text) return '';
+      let escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // Bold: **text**
+      escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Italics: *text*
+      escaped = escaped.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      // Links: [label](url)
+      escaped = escaped.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[#496D65] font-semibold underline underline-offset-2 hover:text-[#263746]">$1</a>');
+      // Bullet list items: - item
+      escaped = escaped.replace(/(?:^|\n)-\s+(.*?)(?=\n|$)/g, '<li class="ml-4 list-disc text-xs leading-relaxed">$1</li>');
+      // Double line breaks
+      escaped = escaped.replace(/\n\n/g, '<div class="h-2"></div>');
+      // Single line breaks (when not adjacent to <li>)
+      escaped = escaped.replace(/([^\>])\n([^\<])/g, '$1<br/>$2');
+
+      return escaped;
+    }
+
+    async function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const query = input.value.trim();
+      if (!query) return;
+
+      const messagesContainer = document.getElementById('chatMessages');
+      const typingIndicator = document.getElementById('chatTypingIndicator');
+      const sendBtn = document.getElementById('chatSendBtn');
+
+      // 1. Append User Message Bubble
+      const userBubble = document.createElement('div');
+      userBubble.className = 'flex items-start justify-end gap-2.5';
+      userBubble.innerHTML = `
+        <div class="max-w-[85%] bg-[#263746] text-white rounded-2xl rounded-tr-xs p-3 text-xs leading-relaxed shadow-2xs">
+          ${query.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+        </div>
+      `;
+      messagesContainer.appendChild(userBubble);
+      input.value = '';
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      // 2. Show Typing Indicator
+      typingIndicator.classList.remove('hidden');
+      sendBtn.disabled = true;
+
+      try {
+        const response = await fetch('/api/chat/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ 
+            message: query,
+            history: chatConversationHistory.slice(-6)
+          })
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (data.answer) {
+          chatConversationHistory.push({ role: 'user', content: query });
+          chatConversationHistory.push({ role: 'model', content: data.answer });
+        }
+
+        // Hide initial quick prompt chips once user starts conversation
+        const chips = document.getElementById('quickPromptChips');
+        if (chips) chips.classList.add('hidden');
+
+        typingIndicator.classList.add('hidden');
+        sendBtn.disabled = false;
+
+        // 3. Append AI Response Bubble with Verified Source Attribution
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'flex items-start gap-2.5';
+        
+        const answerHtml = formatMarkdown(data.answer || 'Thank you for your question. You can reach Jothilingam directly at jothilingamsivalingamg@gmail.com.');
+
+        let sourcesHtml = '';
+        if (data.sources && Array.isArray(data.sources) && data.sources.length > 0 && !data.sources[0].includes('Introduction')) {
+          const chipsHtml = data.sources.slice(0, 2).map(s => {
+            const escaped = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return `<span class="inline-flex items-center gap-1 text-[10px] font-mono text-[#5F6C65] bg-[#F4F5F0] px-2 py-0.5 rounded border border-[#DDE2D9]"><i data-lucide="file-check" class="w-2.5 h-2.5 text-[#496D65]"></i>${escaped}</span>`;
+          }).join(' ');
+          sourcesHtml = `
+            <div class="mt-2.5 pt-2 border-t border-[#DDE2D9]/70 flex flex-col gap-1">
+              <span class="text-[9px] font-mono uppercase tracking-wider text-[#89918A] font-semibold">Verified Source:</span>
+              <div class="flex flex-wrap gap-1">${chipsHtml}</div>
+            </div>
+          `;
+        }
+
+        aiBubble.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-[#263746] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="sparkles" class="w-3 h-3 text-[#C1A66B]"></i>
+          </div>
+          <div class="max-w-[85%] bg-white border border-[#DDE2D9] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#263746] leading-relaxed shadow-2xs">
+            <div>${answerHtml}</div>
+            ${sourcesHtml}
+          </div>
+        `;
+
+        messagesContainer.appendChild(aiBubble);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+
+      } catch (err) {
+        typingIndicator.classList.add('hidden');
+        sendBtn.disabled = false;
+
+        const errorBubble = document.createElement('div');
+        errorBubble.className = 'flex items-start gap-2.5';
+        errorBubble.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-[#263746] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="alert-circle" class="w-3 h-3 text-[#C1A66B]"></i>
+          </div>
+          <div class="max-w-[85%] bg-white border border-red-200 rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#263746] leading-relaxed shadow-2xs">
+            <p>I am temporarily reconnecting. Feel free to re-ask or reach Jothilingam directly at <a href="mailto:jothilingamsivalingamg@gmail.com" class="text-[#496D65] underline font-semibold">jothilingamsivalingamg@gmail.com</a>.</p>
+          </div>
+        `;
+        messagesContainer.appendChild(errorBubble);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+  </script>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING ARCHITECTURAL CHATBOT LAUNCHER (Django RAG)    -->
+  <!-- ======================================================== -->

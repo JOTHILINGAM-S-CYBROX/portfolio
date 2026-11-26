@@ -1,0 +1,542 @@
+<!-- 04. SELECTED WORKS / ASYMMETRIC BENTO SHOWCASE           -->
+  <!-- ======================================================== -->
+  <section id="projects" class="scroll-mt-24 sm:scroll-mt-28 py-16 sm:py-24 md:py-32 bg-[#EAEDE6] border-y border-[#DDE2D9]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Section Eyebrow -->
+      <div
+        class="editorial-reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4 border-b border-[#DDE2D9]">
+        <div class="editorial-section-tag">
+          • 04 / SELECTED WORKS · PRODUCTION SYSTEMS
+        </div>
+        <div class="text-meta font-mono text-[11px] text-[#89918A]">
+          SPEC // FULL-STACK & CLOUD TOPOLOGIES
+        </div>
+      </div>
+
+      <!-- Section Title & Subheading -->
+      <div class="editorial-reveal max-w-2xl mb-10 sm:mb-14 space-y-2">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal text-[#263746] tracking-tight">
+          Featured Engineering Showcases
+        </h2>
+        <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+          Mission-critical financial systems, commercial e-commerce platforms, and resilient multi-tier cloud architectures engineered with atomic data integrity.
+        </p>
+      </div>
+
+      <!-- Asymmetric Bento Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+
+        <!-- ==================================================== -->
+        <!-- 01. COLLECTEASY — FLAGSHIP PRODUCTION (12 Cols Bento)-->
+        <!-- ==================================================== -->
+        <div onclick="openProjectModal('collecteasy')"
+          class="editorial-card p-6 sm:p-8 lg:p-10 editorial-reveal lg:col-span-12 cursor-pointer group hover:border-[#496D65] hover:shadow-xl transition-all duration-300 relative"
+          role="button" tabindex="0" aria-haspopup="dialog"
+          aria-label="View CollectEasy chit fund case study and architecture"
+          onkeydown="if(event.key === 'Enter' || event.key === ' ') { openProjectModal('collecteasy'); event.preventDefault(); }">
+
+          <!-- Gold Accent Flagship Banner Line -->
+          <div
+            class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#C1A66B] via-[#496D65] to-[#C1A66B] opacity-90">
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch pt-2">
+
+            <!-- Left Column: Problem, System Architecture, & Technical Highlights (7 Cols) -->
+            <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+
+              <!-- Eyebrow Row -->
+              <div class="flex items-center justify-between flex-wrap gap-2">
+                <span
+                  class="inline-flex items-center gap-2 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-3 py-1 rounded-full border border-[#DDE2D9]">
+                  <span class="w-2 h-2 rounded-full bg-[#C1A66B] animate-pulse"></span>
+                  FLAGSHIP ARCHITECTURE · PRODUCTION FINTECH
+                </span>
+                <span class="font-mono text-[11px] text-[#89918A]">CASE STUDY // 01 · COIMBATORE, TN</span>
+              </div>
+
+              <!-- Title & Mission Statement -->
+              <div>
+                <h3
+                  class="font-display text-2xl sm:text-3xl lg:text-4xl text-[#263746] font-normal group-hover:text-[#496D65] transition-colors leading-tight">
+                  CollectEasy — Chit Fund Management & Offline Field Collection System
+                </h3>
+                <p class="font-mono text-xs text-[#89918A] mt-1.5 uppercase tracking-wide">
+                  Centralized Operations · Field Agent Mobile App · Idempotent Financial Engine
+                </p>
+                <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed mt-3.5">
+                  Enterprise financial management platform that digitizes chit fund operations, customer KYC, payment collections, and administrative auditing across three integrated modules. Architected for zero data loss in rural and low-connectivity field environments.
+                </p>
+              </div>
+
+              <!-- Three Core Engineering Highlights -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] group-hover:border-[#496D65]/40 transition-colors">
+                  <span class="font-mono text-[10px] text-[#496D65] font-bold block uppercase tracking-wider">01 // OFFLINE-FIRST PWA</span>
+                  <span class="font-sans text-xs font-bold text-[#263746] mt-1 block">IndexedDB Sync</span>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
+                    Field agents record transactions uninterrupted without internet; automated synchronization reconciles ledger records upon reconnection.
+                  </p>
+                </div>
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] group-hover:border-[#496D65]/40 transition-colors">
+                  <span class="font-mono text-[10px] text-[#496D65] font-bold block uppercase tracking-wider">02 // IDEMPOTENCY</span>
+                  <span class="font-sans text-xs font-bold text-[#263746] mt-1 block">UUID Unique Keys</span>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
+                    Client-generated UUID keys prevent duplicate ledger entries during intermittent network reconnects and background sync retries.
+                  </p>
+                </div>
+                <div class="p-3.5 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] group-hover:border-[#496D65]/40 transition-colors">
+                  <span class="font-mono text-[10px] text-[#496D65] font-bold block uppercase tracking-wider">03 // PRECISION MATH</span>
+                  <span class="font-sans text-xs font-bold text-[#263746] mt-1 block">Paise Integer Units</span>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1 leading-normal">
+                    Monetary calculations executed strictly at integer paise units, eliminating IEEE-754 floating-point rounding discrepancies.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Tech Stack Badges -->
+              <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-2">
+                <span class="technical-pill">React 18</span>
+                <span class="technical-pill">TypeScript</span>
+                <span class="technical-pill">Node.js</span>
+                <span class="technical-pill">Express</span>
+                <span class="technical-pill">MySQL 8</span>
+                <span class="technical-pill">IndexedDB</span>
+                <span class="technical-pill">Service Workers</span>
+                <span class="technical-pill">REST API</span>
+              </div>
+
+              <!-- Interactive Case Study Trigger -->
+              <div class="pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+                <span class="font-mono text-[11px] text-[#89918A]">Coimbatore, Tamil Nadu · Production Deployed</span>
+                <span
+                  class="font-semibold text-xs text-[#496D65] group-hover:text-[#263746] inline-flex items-center gap-1.5 transition-colors">
+                  <span>Explore Architecture & Database Schema</span>
+                  <i data-lucide="arrow-right"
+                    class="w-4 h-4 text-[#C1A66B] group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </div>
+
+            </div>
+
+            <!-- Right Column: Interactive System Topology & Module Architecture (5 Cols) -->
+            <div
+              class="lg:col-span-5 flex flex-col justify-between bg-[#F4F5F0] border border-[#DDE2D9] rounded-xl p-5 sm:p-6 group-hover:bg-[#E3EAE3]/40 transition-colors">
+
+              <!-- Blueprint Header -->
+              <div class="flex items-center justify-between pb-3 border-b border-[#DDE2D9]">
+                <span class="text-meta font-mono text-[11px] text-[#89918A]">SYSTEM TOPOLOGY // 3-TIER ARCHITECTURE</span>
+                <span
+                  class="inline-flex items-center gap-1.5 font-mono text-[10px] text-[#496D65] font-semibold bg-[#E3EAE3] px-2.5 py-0.5 rounded-full border border-[#DDE2D9]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#496D65]"></span>
+                  SYSTEM LIVE // MULTI-MODULE
+                </span>
+              </div>
+
+              <!-- Architectural Module Nodes with explicit data-flow indicators -->
+              <div class="my-4 space-y-2.5">
+
+                <!-- Module 01 -->
+                <div
+                  class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase tracking-wide">MODULE 01 · ADMIN PLATFORM</span>
+                    <span class="font-mono text-[10px] text-[#89918A]">DESKTOP WEB</span>
+                  </div>
+                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Central Operations & Reporting Dashboard</h4>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1">
+                    Chit auction balancing, member KYC records, agent collection tracking, and automated ledger balancing.
+                  </p>
+                  <div class="mt-2 text-[10px] font-mono text-[#89918A]">React 18 · TypeScript · Recharts</div>
+                </div>
+
+                <!-- Connector 1 -->
+                <div class="flex items-center justify-center -my-1">
+                  <span class="font-mono text-[9px] uppercase tracking-widest text-[#89918A] bg-white px-2.5 py-0.5 rounded-full border border-[#DDE2D9] shadow-2xs">
+                    ↓ REST API / JWT AUTH
+                  </span>
+                </div>
+
+                <!-- Module 02 -->
+                <div
+                  class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase tracking-wide">MODULE 02 · AGENT APP</span>
+                    <span class="font-mono text-[10px] text-[#C1A66B] font-semibold">OFFLINE-FIRST PWA</span>
+                  </div>
+                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Field Agent Payment Collection Web App</h4>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1">
+                    Instant offline receipt generation, local IndexedDB storage, and background synchronization queue.
+                  </p>
+                  <div class="mt-2 text-[10px] font-mono text-[#89918A]">PWA · IndexedDB · Service Workers</div>
+                </div>
+
+                <!-- Connector 2 -->
+                <div class="flex items-center justify-center -my-1">
+                  <span class="font-mono text-[9px] uppercase tracking-widest text-[#89918A] bg-white px-2.5 py-0.5 rounded-full border border-[#DDE2D9] shadow-2xs">
+                    ↓ ATOMIC BATCH SYNC / IDEMPOTENT UUID
+                  </span>
+                </div>
+
+                <!-- Module 03 -->
+                <div
+                  class="p-3.5 rounded-lg bg-white border border-[#DDE2D9] shadow-xs hover:border-[#496D65] transition-colors">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-[10px] font-bold text-[#496D65] uppercase tracking-wide">MODULE 03 · REST ENGINE</span>
+                    <span class="font-mono text-[10px] text-[#89918A]">BACKEND API</span>
+                  </div>
+                  <h4 class="font-sans text-xs font-bold text-[#263746] mt-1">Idempotent Transaction Processing API</h4>
+                  <p class="font-sans text-[11px] text-[#5F6C65] mt-1">
+                    ACID transaction management, duplicate rejection, paise integer math, and role-based JWT auth.
+                  </p>
+                  <div class="mt-2 text-[10px] font-mono text-[#89918A]">Node.js · Express · MySQL 8</div>
+                </div>
+
+              </div>
+
+              <!-- Blueprint Footer CTA -->
+              <div
+                class="pt-3 border-t border-[#DDE2D9] flex items-center justify-between text-[11px] font-mono text-[#496D65] font-semibold">
+                <span>CLICK CARD TO VIEW CASE STUDY MODAL</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- 02. SPM CRACKERS — E-COMMERCE SYSTEM (6 Cols Bento)  -->
+        <!-- ==================================================== -->
+        <div
+          class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-5">
+
+            <!-- Card Header -->
+            <div class="flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+                01 // E-COMMERCE RETAIL · LIVE CLIENT
+              </span>
+              <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
+                class="font-mono text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1 transition-colors"
+                title="Open SPM Crackers in new tab" aria-label="Visit SPM Crackers live site">
+                <span>spmcrackers.in</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              </a>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+              <h3
+                class="font-display text-2xl sm:text-3xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                SPM Crackers
+              </h3>
+              <p class="font-mono text-xs text-[#89918A] mt-1 uppercase tracking-wide">
+                Retail Web Application & Seasonal E-Commerce Engine
+              </p>
+            </div>
+
+            <!-- Architectural Preview Box -->
+            <div class="p-4 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] space-y-2.5">
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span class="text-[#263746] font-semibold">PRODUCTION WORKFLOW</span>
+                <span>spmcrackers.in</span>
+              </div>
+              <ul class="space-y-1.5 text-xs text-[#5F6C65]">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Dynamic product catalog with multi-category discovery.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Seasonal high-load order intake and inquiry workflow.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Full-stack responsive design optimized for mobile shoppers.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Description -->
+            <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+              Developed and deployed a full-stack retail web application for a fireworks merchant in Tamil Nadu. Features rapid product browsing, categorized inventory presentation, and an order intake dashboard built to handle concentrated seasonal traffic spikes.
+            </p>
+
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-1">
+              <span class="technical-pill">Full-Stack JS</span>
+              <span class="technical-pill">Node.js</span>
+              <span class="technical-pill">Catalog Engine</span>
+              <span class="technical-pill">Order Intake</span>
+              <span class="technical-pill">Responsive UI</span>
+            </div>
+
+          </div>
+
+          <!-- Card Footer -->
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Live Client Production</span>
+            <a href="https://spmcrackers.in" target="_blank" rel="noopener noreferrer"
+              class="font-semibold text-xs text-[#263746] hover:text-[#496D65] inline-flex items-center gap-1.5 transition-colors">
+              <span>Visit Live Application</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- 03. THE GROVE RESTAURANT — GCP CLOUD RUN (6 Cols Bento)-->
+        <!-- ==================================================== -->
+        <div
+          class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-5">
+
+            <!-- Card Header -->
+            <div class="flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+                02 // SERVERLESS HOSPITALITY · GCP CLOUD RUN
+              </span>
+              <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
+                class="font-mono text-xs font-semibold text-[#496D65] hover:text-[#263746] inline-flex items-center gap-1 transition-colors"
+                title="Open The Grove Restaurant in new tab" aria-label="Visit The Grove Restaurant live site">
+                <span>thegrove.restaurant</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+              </a>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+              <h3
+                class="font-display text-2xl sm:text-3xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                The Grove Restaurant
+              </h3>
+              <p class="font-mono text-xs text-[#89918A] mt-1 uppercase tracking-wide">
+                Interactive Dining Menu & Digital Brand Experience
+              </p>
+            </div>
+
+            <!-- Architectural Preview Box -->
+            <div class="p-4 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] space-y-2.5">
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span class="text-[#263746] font-semibold">SERVERLESS ARCHITECTURE</span>
+                <span>thegrove.restaurant</span>
+              </div>
+              <ul class="space-y-1.5 text-xs text-[#5F6C65]">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Server-rendered interactive dining and beverage menu.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Containerized Next.js deployed on GCP Cloud Run.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>High availability auto-scaling with sub-second page delivery.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Description -->
+            <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+              Architected and deployed a modern brand platform for a fine dining restaurant. Built using Next.js for server-rendered page efficiency, packaged in lightweight Docker containers, and hosted on Google Cloud Run for automatic zero-downtime scaling.
+            </p>
+
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-1">
+              <span class="technical-pill">Next.js</span>
+              <span class="technical-pill">React</span>
+              <span class="technical-pill">GCP Cloud Run</span>
+              <span class="technical-pill">Docker</span>
+              <span class="technical-pill">Tailwind CSS</span>
+              <span class="technical-pill">SEO</span>
+            </div>
+
+          </div>
+
+          <!-- Card Footer -->
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Live Client Production</span>
+            <a href="https://thegrove.restaurant" target="_blank" rel="noopener noreferrer"
+              class="font-semibold text-xs text-[#263746] hover:text-[#496D65] inline-flex items-center gap-1.5 transition-colors">
+              <span>Visit Live Application</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-[#C1A66B]"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- 04. PYTHON RAG & AI BACKEND PIPELINE (6 Cols Bento)  -->
+        <!-- ==================================================== -->
+        <div
+          class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-5">
+
+            <!-- Card Header -->
+            <div class="flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                <span class="w-2 h-2 rounded-full bg-[#C1A66B]"></span>
+                03 // AI &amp; BACKEND PIPELINE · PYTHON RAG SYSTEM
+              </span>
+              <span class="font-mono text-[11px] text-[#89918A]">SPEC // PYTHON-AI-BACKEND</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+              <h3
+                class="font-display text-2xl sm:text-3xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                Python RAG &amp; AI Backend Pipeline
+              </h3>
+              <p class="font-mono text-xs text-[#89918A] mt-1 uppercase tracking-wide">
+                Retrieval-Augmented Generation &amp; REST API Architecture
+              </p>
+            </div>
+
+            <!-- Architecture Breakdown Box -->
+            <div class="p-4 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] space-y-2.5">
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span class="text-[#263746] font-semibold">AI BACKEND PIPELINE</span>
+                <span>REST API &amp; RETRIEVAL</span>
+              </div>
+              <ul class="space-y-1.5 text-xs text-[#5F6C65]">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Modular Python &amp; Django/FastAPI service architecture with decoupled retrieval layers.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Dual-core retrieval operations combining BM25 keyword matching and vector search.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>LangChain orchestration &amp; Gemini API integration with strict factual grounding.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>High-throughput REST API endpoints with multi-turn conversation memory.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Description -->
+            <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+              Architected and engineered a production Python RAG backend pipeline. Implemented modular REST API endpoints, contextual conversation session management, and dual-core vector &amp; BM25 data retrieval integrated with the Gemini API to deliver reliable, fact-grounded intelligence over enterprise knowledge bases.
+            </p>
+
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-1">
+              <span class="technical-pill">Python</span>
+              <span class="technical-pill">Django</span>
+              <span class="technical-pill">FastAPI</span>
+              <span class="technical-pill">LangChain</span>
+              <span class="technical-pill">Gemini API</span>
+              <span class="technical-pill">BM25 Retrieval</span>
+              <span class="technical-pill">Vector Search</span>
+              <span class="technical-pill">REST APIs</span>
+            </div>
+
+          </div>
+
+          <!-- Card Footer -->
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">Backend &amp; AI Engineering</span>
+            <span class="font-mono text-xs font-semibold text-[#496D65]">
+              Python · Django · LangChain · Gemini
+            </span>
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- 05. HIGH AVAILABILITY AWS ARCHITECTURE (6 Cols Bento) -->
+        <!-- ==================================================== -->
+        <div
+          class="editorial-card p-6 sm:p-8 flex flex-col justify-between editorial-reveal lg:col-span-6 group hover:border-[#496D65] transition-all">
+          <div class="space-y-5">
+
+            <!-- Card Header -->
+            <div class="flex items-center justify-between">
+              <span
+                class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#C1A66B] bg-[#F4F5F0] px-2.5 py-1 rounded-full border border-[#DDE2D9]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C1A66B]"></span>
+                04 // FAULT TOLERANCE · MULTI-AZ ARCHITECTURE
+              </span>
+              <span class="font-mono text-[11px] text-[#89918A]">SPEC // AWS-INFRA-02</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+              <h3
+                class="font-display text-2xl sm:text-3xl text-[#263746] font-medium group-hover:text-[#496D65] transition-colors">
+                Highly Available Multi-AZ Architecture
+              </h3>
+              <p class="font-mono text-xs text-[#89918A] mt-1 uppercase tracking-wide">
+                Resilient Elastic Cloud Infrastructure
+              </p>
+            </div>
+
+            <!-- Topology Breakdown Box -->
+            <div class="p-4 rounded-lg bg-[#F4F5F0] border border-[#DDE2D9] space-y-2.5">
+              <div class="flex items-center justify-between text-[11px] font-mono text-[#89918A]">
+                <span class="text-[#263746] font-semibold">HIGH AVAILABILITY TOPOLOGY</span>
+                <span>ZERO SINGLE POINT OF FAILURE</span>
+              </div>
+              <ul class="space-y-1.5 text-xs text-[#5F6C65]">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Application Load Balancer (ALB) health-check traffic distribution.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>EC2 Auto Scaling Groups spanning 2+ independent Availability Zones.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Amazon RDS Multi-AZ synchronous replication with automatic failover.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-[#496D65] shrink-0"></i>
+                  <span>Self-healing compute tier automatically replacing failed instances.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Description -->
+            <p class="font-sans text-xs sm:text-sm text-[#5F6C65] leading-relaxed">
+              Designed a fault-tolerant multi-tier cloud topology eliminating single points of failure. Orchestrated elastic traffic routing across Availability Zones, automated dynamic compute scaling to absorb traffic surges, and configured zero-downtime database standby failover.
+            </p>
+
+            <!-- Stack Pills -->
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap pt-1">
+              <span class="technical-pill">ALB</span>
+              <span class="technical-pill">Auto Scaling Groups</span>
+              <span class="technical-pill">Multi-AZ RDS</span>
+              <span class="technical-pill">Self-Healing</span>
+              <span class="technical-pill">Fault Tolerance</span>
+              <span class="technical-pill">AWS IAM</span>
+            </div>
+
+          </div>
+
+          <!-- Card Footer -->
+          <div class="mt-6 pt-4 border-t border-[#DDE2D9] flex items-center justify-between text-xs">
+            <span class="font-mono text-[#89918A] text-[11px]">System Architecture</span>
+            <span class="font-mono text-xs font-semibold text-[#496D65]">
+              ALB · Multi-AZ · Auto Scaling
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->

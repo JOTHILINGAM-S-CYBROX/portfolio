@@ -105,16 +105,16 @@
   ],
   "cloud_architectures": [
     {
-      "name": "Scalable AWS Infrastructure",
-      "type": "Cloud Production Architecture",
-      "status": "Designed Cloud Architecture Topology",
+      "name": "Python RAG & AI Backend Pipeline",
+      "type": "AI Backend & Data Retrieval Pipeline",
+      "status": "Implemented & Production-Engineered Backend Architecture",
       "highlights": [
-        "Multi-tier compute on Amazon EC2 with static asset offloading to AWS S3.",
-        "Custom isolated VPC with private and public subnets and AWS IAM least-privilege security.",
-        "Amazon RDS transactional database with automated backup retention schedules.",
-        "Route 53 DNS routing and proactive CloudWatch metric alarms."
+        "Modular Python & Django/FastAPI service architecture with decoupled retrieval layers.",
+        "Dual-core retrieval operations combining BM25 keyword matching and vector search.",
+        "LangChain orchestration & Gemini API integration with strict factual grounding.",
+        "High-throughput REST API endpoints with multi-turn conversation memory."
       ],
-      "technologies": ["AWS EC2", "AWS S3", "Amazon VPC", "AWS IAM", "Amazon RDS", "Route 53", "CloudWatch"]
+      "technologies": ["Python", "Django", "FastAPI", "LangChain", "Gemini API", "BM25 Retrieval", "Vector Search", "REST APIs"]
     },
     {
       "name": "High Availability AWS Architecture",
@@ -131,7 +131,7 @@
   ],
   "skills": {
     "frontend": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Material UI"],
-    "backend": ["Node.js", "Express.js", "Python", "FastAPI", "Flask", "Laravel (PHP)", "REST APIs", "Backend Integrations"],
+    "backend": ["Python", "Django", "FastAPI", "Flask", "Node.js", "Express.js", "REST APIs", "Backend Integrations"],
     "cloud": ["AWS EC2", "AWS S3", "Amazon VPC", "AWS IAM", "Amazon RDS", "Route 53", "CloudWatch", "GCP Cloud Run"],
     "data_and_systems": ["MySQL", "PostgreSQL", "MongoDB", "IndexedDB", "Docker", "Git", "LangChain"]
   }

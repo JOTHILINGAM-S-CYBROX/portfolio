@@ -17,8 +17,11 @@ urlpatterns = [
     path('api/contact/', contact_api, name='contact_api'),
     path('api/contact', contact_api, name='contact_api_noslash'),
     
-    # Direct asset serving for assets/Jothi.png, assets/sj.png
+    # Direct asset and static serving (with assets alias to static/images)
     re_path(r'^assets/(?P<path>.*)$', serve, {
-        'document_root': os.path.join(settings.BASE_DIR, 'assets'),
+        'document_root': os.path.join(settings.BASE_DIR, 'static', 'images'),
+    }),
+    re_path(r'^static/(?P<path>.*)$', serve, {
+        'document_root': os.path.join(settings.BASE_DIR, 'static'),
     }),
 ]
